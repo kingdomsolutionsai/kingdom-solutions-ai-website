@@ -1,0 +1,84 @@
+# Project TODO
+
+- [x] Basic multi-page site architecture (9 pages)
+- [x] Homepage as revenue-routing hub
+- [x] Capacity Leak Audit™ page with agent form
+- [x] Clarity Pro™ page with intake form
+- [x] Constance™ AI Chief of Staff page
+- [x] Executive AI Strategy page
+- [x] About page with headshot
+- [x] Contact page
+- [x] Strategy Call page with Calendly embed
+- [x] Privacy & Data Boundaries page
+- [x] Premium editorial styling (cream, black, charcoal, gold)
+- [x] Official lion logo (round, no square outline)
+- [x] Tabitha's professional headshot on About and Homepage
+- [x] All Strategy Call CTAs route through /strategy-call
+- [x] Clarity Pro™ routes to intake form (not Calendly)
+- [x] Replace "Time Freedom Reset™" with "Capacity Reset™"
+- [x] Remove founder section box shadow
+- [x] Clarity Pro™ 3-tier pricing (Starter $197, Guided $497, Buildout $1,497)
+- [x] Clarity Pro™ Starter clarification (self-guided, no personal review)
+- [x] Constance™ "A Day With Constance™" section
+- [x] Constance™ "Before/After" comparison section
+- [x] Constance™ "What Happens on the Strategy Call" section
+- [x] Constance™ "Is Constance™ Right for You?" section
+- [x] Constance™ "Requires a Strategy Call" section
+- [x] Strategy Call page updated with detailed agenda
+- [x] Full-stack upgrade (db, server, user)
+- [x] Fix useAuth error after upgrade
+- [x] Connect form submissions to email (tabitha@kingdomsolutionsai.com)
+- [x] Stripe integration for Clarity Pro™ checkout
+- [x] Update email in contact/footer to tabitha@kingdomsolutionsai.com
+- [x] Connect Capacity Leak Audit form to email delivery (tabitha@kingdomsolutionsai.com)
+- [x] Connect Clarity Pro™ intake form to email delivery (tabitha@kingdomsolutionsai.com)
+- [x] Connect Contact form to email delivery (tabitha@kingdomsolutionsai.com)
+- [x] Email subjects labeled by source (Capacity Leak Audit / Clarity Pro / Contact)
+- [x] Keep on-site confirmation messages after submission
+- [x] Connect Clarity Pro™ Starter CTA to Stripe checkout (https://buy.stripe.com/28E3cxapFfC8bMV0NugrS08)
+- [x] Connect Clarity Pro™ Guided CTA to Stripe checkout (https://buy.stripe.com/9B6aEZ7dtblS3gpdAggrS09)
+- [x] Update Clarity Pro™ Buildout CTA to "Apply for Buildout" routing to /strategy-call (no public checkout)
+- [x] Replace "faith-friendly but not churchy" sentence with new strategic copy
+- [x] Add Terms of Service footer link and page
+- [x] Add Refund Policy footer link and page (with Tabitha's exact refund copy)
+- [x] Rename Privacy footer link to "Privacy Policy & Data Boundaries"
+- [x] Add copyright line: © 2026 Kingdom Solutions AI™. All rights reserved.
+- [x] Add LinkedIn icon/link in footer
+- [x] Update LinkedIn footer link to https://www.linkedin.com/company/kingdomsolutionsai (opens in new tab)
+- [x] Add billing questions section to Refund Policy page (no form, just copy + Contact button)
+- [x] Rewrite Terms of Service page with Tabitha's full 20-section legal copy
+- [x] Add round lion logo as favicon across all pages
+- [x] Add SEO meta titles and descriptions to all pages using Kingdom Solutions AI™ brand language
+- [x] Audit all pages for brand visual consistency (gold accents, dividers, typography, spacing)
+- [x] Add subtle brand moments (lion marks at section transitions, gold dividers, signature closers)
+- [x] Audit brand language — remove any prohibited phrases, ensure strategic AI systems language
+- [x] Verify footer completeness (logo, brand statement, all links, copyright)
+- [x] Verify header logo sizing is adequate (not too tiny)
+- [x] Verify footer logo is prominent and branded
+- [x] Add lion mark to homepage hero section (elegant, not oversized)
+- [x] Add lion mark to 2-3 section transitions on homepage
+- [x] Add lion mark near top of Capacity Leak Audit page
+- [x] Add lion mark near top of Clarity Pro page
+- [x] Add lion mark near top of Constance page
+- [x] Add lion mark near top of Executive AI Strategy page
+- [x] Add lion mark near final CTA sections on major pages
+- [x] Remove faded/opacity-reduced logo placements; use logo only in header + footer like luxury brand seal
+- [x] Footer logo on cream circular badge (80px) for visibility on dark charcoal
+- [x] Header logo at 90px desktop (64px mobile) with wordmark text-lg bold
+- [x] Integrate Constance handoff package (approved design, scoped CSS, lion-crown-circle logo)
+- [x] Create sitemap.xml and robots.txt with all 11 public routes
+- [x] Upgrade usePageMeta hook with canonical, OG, and Twitter Card support
+- [x] Add complete SEO metadata (title, description, canonical, OG, Twitter) to all 10 non-Constance pages
+- [x] Fix Constance og:image and twitter:image from relative to absolute production URLs
+- [x] Server-side SEO metadata injection middleware (server/seoMetadata.ts) for crawler visibility
+- [x] Wire server-side injection into vite.ts for both dev and production HTML serving
+- [x] Verify all 11 routes return correct per-route metadata in raw HTML (no JS required)
+- [x] Verify no duplicate metadata tags in raw HTML
+- [x] Verify query strings do not create incorrect canonical URLs
+- [x] Verify unknown routes (404) retain default HTML without metadata injection
+- [x] Verify no manus.space/manus.computer/localhost/relative URLs in metadata tags
+- [x] Return HTTP 404 status code for unknown routes (not matching 11 public routes)
+- [x] Inject noindex, nofollow meta tag into HTML for unknown routes
+- [x] Ensure no canonical URL is injected for unknown routes
+- [x] Preserve visual React 404 page rendering
+- [x] Do not affect valid routes, assets, API endpoints, storage paths, sitemap, robots.txt
