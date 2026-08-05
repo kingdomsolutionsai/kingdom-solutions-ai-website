@@ -8,7 +8,7 @@ export default function Home() {
     title: "Kingdom Solutions AI™ — Strategic AI Systems for High-Capacity Leaders",
     description: "Kingdom Solutions AI™ helps coaches, founders, consultants, and executives build strategic AI systems for clarity, capacity, and intelligent support. Premium advisory by Tabitha Rector.",
     canonicalUrl: "https://kingdomsolutionsai.com/",
-    ogImage: "https://kingdomsolutionsai.com/manus-storage/ksai-logo-transparent-400_82fa1f46.png",
+    ogImage: "https://kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
   const revealRef = useScrollReveal();
 
@@ -18,7 +18,7 @@ export default function Home() {
       <section className="relative min-h-[92vh] flex items-center pt-24">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-20"
-          style={{ backgroundImage: "url(/manus-storage/hero-abstract_83e59dd7.png)" }}
+          style={{ backgroundImage: "url(/assets/hero-abstract_83e59dd7.png)" }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-cream/40 via-cream/75 to-cream" />
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10 relative z-10 py-24 lg:py-36">
@@ -214,7 +214,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="lg:col-span-4 lg:col-start-2 fade-up">
               <img
-                src="/manus-storage/tabitha-headshot_fea7ebce.webp"
+                src="/assets/tabitha-headshot_fea7ebce.webp"
                 alt="Tabitha Rector — Founder, Kingdom Solutions AI™"
                 className="w-full max-w-[320px] mx-auto lg:mx-0"
               />

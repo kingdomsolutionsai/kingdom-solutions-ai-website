@@ -8,7 +8,7 @@ export default function ExecutiveAIStrategy() {
     title: "Executive AI Strategy — Custom AI Systems Advisory | Kingdom Solutions AI™",
     description: "Executive AI Strategy is the premium advisory layer for leaders who need a custom AI systems roadmap, Capacity Reset™ methodology, and deeper implementation planning. Private strategy engagement.",
     canonicalUrl: "https://kingdomsolutionsai.com/executive-ai-strategy",
-    ogImage: "https://kingdomsolutionsai.com/manus-storage/ksai-logo-transparent-400_82fa1f46.png",
+    ogImage: "https://kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
   const revealRef = useScrollReveal();
 

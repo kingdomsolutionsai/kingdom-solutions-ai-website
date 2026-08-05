@@ -10,7 +10,7 @@ export default function ClarityPro() {
     title: "Clarity Pro™ — Strategic Clarity & Content System | Kingdom Solutions AI™",
     description: "Clarity Pro™ helps new coaches, founders, and consultants clarify their niche, build a strong offer, develop their business voice, and create a content strategy. Three tiers from self-guided to full buildout.",
     canonicalUrl: "https://kingdomsolutionsai.com/clarity-pro",
-    ogImage: "https://kingdomsolutionsai.com/manus-storage/clarity-visual_f897fefc.png",
+    ogImage: "https://kingdomsolutionsai.com/assets/clarity-visual_f897fefc.png",
   });
   const revealRef = useScrollReveal();
   const [formData, setFormData] = useState({
@@ -36,14 +36,14 @@ export default function ClarityPro() {
       <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-15"
-          style={{ backgroundImage: "url(/manus-storage/clarity-visual_f897fefc.png)" }}
+          style={{ backgroundImage: "url(/assets/clarity-visual_f897fefc.png)" }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-cream/50 to-cream" />
         <div className="container relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             <div className="lg:col-span-7 fade-up">
               <img
-                src="/manus-storage/ksai-logo-transparent-400_82fa1f46.png"
+                src="/assets/ksai-logo-transparent-400_82fa1f46.png"
                 alt="Kingdom Solutions AI™"
                 className="w-16 h-16 mb-6"
               />

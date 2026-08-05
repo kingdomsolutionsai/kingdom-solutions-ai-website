@@ -41,7 +41,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           {/* Logo — generous breathing room */}
           <Link href="/" className="flex items-center gap-4 group shrink-0 mr-8 lg:mr-14">
             <img
-              src="/manus-storage/ksai-logo-transparent-400_82fa1f46.png"
+              src="/assets/ksai-logo-transparent-400_82fa1f46.png"
               alt="Kingdom Solutions AI™"
               className="w-16 h-16 lg:w-[90px] lg:h-[90px] transition-transform duration-300 group-hover:scale-105"
             />
@@ -132,7 +132,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <div className="flex items-center gap-5 mb-8">
                 <div className="w-[80px] h-[80px] rounded-full bg-cream flex items-center justify-center shrink-0">
                   <img
-                    src="/manus-storage/ksai-logo-transparent-400_82fa1f46.png"
+                    src="/assets/ksai-logo-transparent-400_82fa1f46.png"
                     alt="Kingdom Solutions AI™"
                     className="w-[68px] h-[68px]"
                   />

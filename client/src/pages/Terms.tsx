@@ -6,7 +6,7 @@ export default function Terms() {
     title: "Terms of Service — Kingdom Solutions AI™",
     description: "Terms of Service for Kingdom Solutions AI™ products and advisory services including Clarity Pro™, Constance™, and Executive AI Strategy.",
     canonicalUrl: "https://kingdomsolutionsai.com/terms",
-    ogImage: "https://kingdomsolutionsai.com/manus-storage/ksai-logo-transparent-400_82fa1f46.png",
+    ogImage: "https://kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
   const revealRef = useScrollReveal();
 

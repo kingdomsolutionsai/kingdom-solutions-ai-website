@@ -9,7 +9,7 @@ export default function StrategyCall() {
     title: "Book a Strategy Call — Kingdom Solutions AI™",
     description: "Book a private strategy call with Tabitha Rector to assess your leadership context, operational pressure, and AI systems needs. The first step toward clarity and capacity.",
     canonicalUrl: "https://kingdomsolutionsai.com/strategy-call",
-    ogImage: "https://kingdomsolutionsai.com/manus-storage/ksai-logo-transparent-400_82fa1f46.png",
+    ogImage: "https://kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
   const revealRef = useScrollReveal();
 

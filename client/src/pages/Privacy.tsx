@@ -6,7 +6,7 @@ export default function Privacy() {
     title: "Privacy Policy & Data Boundaries — Kingdom Solutions AI™",
     description: "How Kingdom Solutions AI™ protects your data, respects your boundaries, and maintains ethical AI practices. Clear data handling, no selling, no unauthorized sharing.",
     canonicalUrl: "https://kingdomsolutionsai.com/privacy",
-    ogImage: "https://kingdomsolutionsai.com/manus-storage/ksai-logo-transparent-400_82fa1f46.png",
+    ogImage: "https://kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
   const revealRef = useScrollReveal();
 

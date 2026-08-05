@@ -8,7 +8,7 @@ export default function About() {
     title: "About Tabitha Rector — Kingdom Solutions AI™",
     description: "30 years of leadership, management, and coaching. Tabitha Rector founded Kingdom Solutions AI™ to help high-capacity leaders build strategic AI systems for clarity, capacity, and sustainable growth.",
     canonicalUrl: "https://kingdomsolutionsai.com/about",
-    ogImage: "https://kingdomsolutionsai.com/manus-storage/tabitha-headshot_fea7ebce.webp",
+    ogImage: "https://kingdomsolutionsai.com/assets/tabitha-headshot_fea7ebce.webp",
   });
   const revealRef = useScrollReveal();
 
@@ -34,7 +34,7 @@ export default function About() {
             <div className="lg:col-span-5 lg:col-start-8 fade-up">
               <div className="aspect-[3/4] overflow-hidden">
                 <img
-                  src="/manus-storage/tabitha-headshot_fea7ebce.webp"
+                  src="/assets/tabitha-headshot_fea7ebce.webp"
                   alt="Executive workspace"
                   className="w-full h-full object-cover"
                 />

@@ -10,7 +10,7 @@ export default function Contact() {
     title: "Contact Kingdom Solutions AI™ — Reach Tabitha Rector",
     description: "Contact Kingdom Solutions AI™ for questions about strategic AI systems, Clarity Pro™, Constance™, or Executive AI Strategy. Reach Tabitha Rector directly.",
     canonicalUrl: "https://kingdomsolutionsai.com/contact",
-    ogImage: "https://kingdomsolutionsai.com/manus-storage/ksai-logo-transparent-400_82fa1f46.png",
+    ogImage: "https://kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
   const revealRef = useScrollReveal();
   const [formData, setFormData] = useState({

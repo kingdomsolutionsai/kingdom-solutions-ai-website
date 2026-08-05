@@ -4,7 +4,7 @@ import "@/styles/constance-sales-page.css";
 const CALENDLY_URL =
   "https://calendly.com/tabitha-kingdomsolutionsai/ks-ai-intelligence-systems-strategy-call";
 
-const LOGO_URL = "/manus-storage/constance-lion-crown-circle_b1d9c829.png";
+const LOGO_URL = "/assets/constance-lion-crown-circle_b1d9c829.png";
 
 const Arrow = () => <span aria-hidden="true">↗</span>;
 
@@ -45,7 +45,7 @@ export default function Constance() {
       "og:description": "A strategic AI Chief of Staff system designed to help high-capacity leaders protect their time, strengthen execution, and stop carrying the business alone.",
       "og:url": "https://kingdomsolutionsai.com/constance",
       "og:type": "website",
-      "og:image": "https://kingdomsolutionsai.com/manus-storage/constance-lion-crown-circle_b1d9c829.png",
+      "og:image": "https://kingdomsolutionsai.com/assets/constance-lion-crown-circle_b1d9c829.png",
     };
 
     const createdOgElements: HTMLMetaElement[] = [];
@@ -67,7 +67,7 @@ export default function Constance() {
       "twitter:card": "summary_large_image",
       "twitter:title": "Constance AI Chief of Staff™ | Executive Capacity, Protected",
       "twitter:description": "A strategic AI Chief of Staff system designed to help high-capacity leaders protect their time, strengthen execution, and stop carrying the business alone.",
-      "twitter:image": "https://kingdomsolutionsai.com/manus-storage/constance-lion-crown-circle_b1d9c829.png",
+      "twitter:image": "https://kingdomsolutionsai.com/assets/constance-lion-crown-circle_b1d9c829.png",
     };
 
     const createdTwitterElements: HTMLMetaElement[] = [];

@@ -7,7 +7,7 @@ export default function RefundPolicy() {
     title: "Refund Policy — Kingdom Solutions AI™",
     description: "Refund policy for Kingdom Solutions AI™ products including Clarity Pro™ Starter, Guided, and Buildout tiers. Clear terms for digital access, strategy sessions, and consultative services.",
     canonicalUrl: "https://kingdomsolutionsai.com/refund-policy",
-    ogImage: "https://kingdomsolutionsai.com/manus-storage/ksai-logo-transparent-400_82fa1f46.png",
+    ogImage: "https://kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
   const revealRef = useScrollReveal();
 
