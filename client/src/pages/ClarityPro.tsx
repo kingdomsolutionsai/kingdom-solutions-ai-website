@@ -50,8 +50,8 @@ export default function ClarityPro() {
               <p className="font-body text-lg lg:text-xl text-warm-gray leading-relaxed max-w-xl mb-10">
                 Clarity Pro™ helps new coaches, founders, consultants, corporate escapees, and experienced professionals define their niche, structure their offer, develop their voice, sharpen their messaging, and build a content strategy that attracts.
               </p>
-              <a href="#begin-clarity" className="btn-gold rounded-sm inline-flex items-center gap-2">
-                Begin with Clarity <ArrowRight size={16} />
+              <a href="#pricing" className="btn-gold rounded-sm inline-flex items-center gap-2">
+                See Pricing & Get Started <ArrowRight size={16} />
               </a>
             </div>
           </div>
@@ -295,7 +295,7 @@ export default function ClarityPro() {
       </section>
 
       {/* Choose Your Clarity Pro Path — Pricing Tiers */}
-      <section className="py-20 lg:py-28 bg-cream">
+      <section id="pricing" className="py-20 lg:py-28 bg-cream">
         <div className="container">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16 fade-up">
