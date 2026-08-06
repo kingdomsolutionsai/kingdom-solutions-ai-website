@@ -348,10 +348,10 @@ export default function ClarityPro() {
                 <p className="font-body text-xs text-charcoal-light mb-6">one-time</p>
                 <div className="w-10 h-[1px] bg-gold/40 mb-6" />
                 <p className="font-body text-sm text-charcoal-light leading-relaxed mb-6">
-                  For the coach, founder, or consultant who wants strategic support refining their niche, offer, voice, and content direction.
+                  For the coach, founder, or consultant who wants a live 1:1 session with Tabitha and a written record of the shift in how they position themselves.
                 </p>
                 <ul className="space-y-3 mb-4">
-                  {["Everything in Starter", "One 60-minute Clarity Review Session", "Positioning refinement", "Offer language review", "Voice and messaging feedback", "14 days of light follow-up support"].map((item, i) => (
+                  {["Everything in Starter", "One 60-minute 1:1 Clarity Review with Tabitha", "A written before/after positioning statement (delivered by email)", "A personal voice note follow-up (delivered by email)", "Offer language review", "14 days of light follow-up support"].map((item, i) => (
                     <li key={i} className="flex items-start gap-2">
                       <span className="w-3 h-px bg-gold/50 mt-2.5 shrink-0" />
                       <span className="font-body text-sm text-charcoal-light">{item}</span>
