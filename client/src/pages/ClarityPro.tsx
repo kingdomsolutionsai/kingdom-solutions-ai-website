@@ -42,11 +42,6 @@ export default function ClarityPro() {
         <div className="container relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             <div className="lg:col-span-7 fade-up">
-              <img
-                src="/assets/ksai-logo-transparent-400_82fa1f46.png"
-                alt="Kingdom Solutions AI™"
-                className="w-16 h-16 mb-6"
-              />
               <p className="editorial-label mb-6">AI Business Clarity Strategist</p>
               <h1 className="font-display text-4xl sm:text-5xl lg:text-[3.5rem] font-medium text-charcoal leading-[1.08] mb-8">
                 Turn Your Expertise Into a Business People{" "}
