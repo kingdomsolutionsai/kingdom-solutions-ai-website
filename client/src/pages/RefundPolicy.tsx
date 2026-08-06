@@ -28,9 +28,16 @@ export default function RefundPolicy() {
               </p>
 
               <div>
+                <h2 className="font-display text-xl font-medium text-charcoal mb-4">Definition of Delivery</h2>
+                <p>
+                  For all digital products and services offered by Kingdom Solutions AI™, "delivered" means the moment your access link, GPT instructions, login credentials, or onboarding materials are sent to the email address provided at checkout — regardless of whether you have opened, downloaded, logged in to, or used those materials. Delivery is determined by the timestamp of that email or message, not by your first use of the product.
+                </p>
+              </div>
+
+              <div>
                 <h2 className="font-display text-xl font-medium text-charcoal mb-4">Clarity Pro™ Starter</h2>
                 <p className="mb-4">
-                  Clarity Pro™ Starter is a self-guided digital clarity and content creation experience. Because access and materials are delivered digitally, Starter purchases are generally non-refundable once access instructions or onboarding materials have been delivered.
+                  Clarity Pro™ Starter is a self-guided digital clarity and content creation experience. Because access and materials are delivered digitally, Starter purchases are generally non-refundable once access has been delivered, as defined above.
                 </p>
                 <p>
                   If you believe you purchased in error, please contact us within 24 hours of purchase at{" "}
@@ -74,6 +81,16 @@ export default function RefundPolicy() {
                 <h2 className="font-display text-xl font-medium text-charcoal mb-4">Missed or Rescheduled Sessions</h2>
                 <p>
                   If your offer includes a scheduled session, please provide at least 24 hours' notice if you need to reschedule. Missed sessions without notice may be considered fulfilled.
+                </p>
+              </div>
+
+              <div>
+                <h2 className="font-display text-xl font-medium text-charcoal mb-4">Unauthorized Sharing, Copying, or Resale</h2>
+                <p>
+                  Access to Clarity Pro™ and any associated materials, prompts, frameworks, or AI tools is licensed to the purchasing individual or business only, as set out in our{" "}
+                  <Link href="/terms" className="text-gold hover:text-gold-light transition-colors duration-200">
+                    Terms of Service
+                  </Link>. Sharing, copying, reselling, or otherwise redistributing access without authorization is a violation of those Terms, voids refund eligibility, and may result in access being revoked without refund.
                 </p>
               </div>
 
