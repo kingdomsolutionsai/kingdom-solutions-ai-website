@@ -14,7 +14,7 @@ export default function Terms() {
     <div ref={revealRef}>
       <section className="pt-32 pb-20 lg:pt-40 lg:pb-28 bg-cream">
         <div className="container">
-          <div className="max-w-3xl mx-auto fade-up">
+          <div className="max-w-3xl mx-auto">
             <p className="editorial-label mb-6">Legal</p>
             <h1 className="font-display text-4xl sm:text-5xl font-medium text-charcoal leading-[1.1] mb-6">
               Terms of Service
