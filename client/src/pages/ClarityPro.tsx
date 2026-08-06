@@ -32,22 +32,22 @@ export default function ClarityPro() {
 
   return (
     <div ref={revealRef}>
-      {/* Hero — exploratory, voice-forward */}
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32">
+      {/* Hero — dark, matching Constance's visual system */}
+      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 bg-charcoal">
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-15"
+          className="absolute inset-0 bg-cover bg-center opacity-10"
           style={{ backgroundImage: "url(/assets/clarity-visual_f897fefc.png)" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-cream/50 to-cream" />
+        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/60 to-charcoal" />
         <div className="container relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             <div className="lg:col-span-7 fade-up">
               <p className="editorial-label mb-6">AI Business Clarity Strategist</p>
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-[3.5rem] font-medium text-charcoal leading-[1.08] mb-8">
+              <h1 className="font-display text-4xl sm:text-5xl lg:text-[3.5rem] font-medium text-cream-dark leading-[1.08] mb-8">
                 Turn Your Expertise Into a Business People{" "}
                 <em className="text-gold italic">Understand.</em>
               </h1>
-              <p className="font-body text-lg lg:text-xl text-charcoal-light leading-relaxed max-w-xl mb-10">
+              <p className="font-body text-lg lg:text-xl text-warm-gray leading-relaxed max-w-xl mb-10">
                 Clarity Pro™ helps new coaches, founders, consultants, corporate escapees, and experienced professionals define their niche, structure their offer, develop their voice, sharpen their messaging, and build a content strategy that attracts.
               </p>
               <a href="#begin-clarity" className="btn-gold rounded-sm inline-flex items-center gap-2">
