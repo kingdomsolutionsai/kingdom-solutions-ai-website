@@ -86,6 +86,37 @@ export default function ClarityPro() {
 
       <div className="container"><div className="gold-hairline" /></div>
 
+      {/* Responsible by Design — moved up so trust is earned before the pitch, not after */}
+      <section className="py-16 lg:py-20 bg-charcoal">
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 fade-up">
+            <div className="lg:col-span-5 lg:col-start-2">
+              <p className="editorial-label mb-4">Responsible By Design</p>
+              <h2 className="font-display text-2xl sm:text-3xl font-medium text-cream-dark leading-snug mb-4">
+                Strategy supported by AI. <em className="text-gold italic">Judgment remains human.</em>
+              </h2>
+              <p className="font-body text-sm text-warm-gray leading-relaxed">
+                Clarity Pro™ is designed for business strategy, positioning, messaging, offers, voice development, and content direction. Please do not enter passwords, payment information, confidential client records, medical information, legal documents, or highly sensitive business data.
+              </p>
+            </div>
+            <div className="lg:col-span-5 lg:col-start-7 space-y-6">
+              <div className="border-l-2 border-gold/50 pl-5">
+                <h3 className="font-body text-sm font-semibold text-cream-dark mb-1">You retain authority</h3>
+                <p className="font-body text-sm text-warm-gray leading-relaxed">AI helps analyze and structure. You decide what fits, what changes, and what moves forward.</p>
+              </div>
+              <div className="border-l-2 border-gold/50 pl-5">
+                <h3 className="font-body text-sm font-semibold text-cream-dark mb-1">Your voice stays yours</h3>
+                <p className="font-body text-sm text-warm-gray leading-relaxed">The system develops your distinct perspective instead of pushing generic imitation.</p>
+              </div>
+              <div className="border-l-2 border-gold/50 pl-5">
+                <h3 className="font-body text-sm font-semibold text-cream-dark mb-1">Clear data boundaries</h3>
+                <p className="font-body text-sm text-warm-gray leading-relaxed">Use the system for strategy and non-sensitive business context only.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* What Clarity Pro Helps You Clarify — editorial blocks, not uniform cards */}
       <section className="py-20 lg:py-28 bg-cream">
         <div className="container">
@@ -211,6 +242,63 @@ export default function ClarityPro() {
         </div>
       </section>
 
+      {/* Founder Note */}
+      <section className="py-20 lg:py-28 bg-charcoal">
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center fade-up">
+            <div className="lg:col-span-4 lg:col-start-2">
+              <img
+                src="/assets/tabitha-headshot_fea7ebce.webp"
+                alt="Tabitha Rector, Founder of Kingdom Solutions AI™"
+                className="w-full rounded-sm object-cover"
+              />
+            </div>
+            <div className="lg:col-span-6 lg:col-start-7">
+              <p className="editorial-label mb-4">A Note From The Founder</p>
+              <p className="font-display text-2xl sm:text-3xl font-medium text-cream-dark leading-snug mb-8">
+                "You are not starting from zero.{" "}
+                <em className="text-gold italic">You are starting from experience.</em>{" "}
+                Clarity is how the market learns to see it."
+              </p>
+              <p className="font-body text-sm text-warm-gray leading-relaxed mb-8">
+                Clarity Pro™ was created to help experienced leaders and emerging business owners turn what they already know into a focused, sellable business — without copying someone else's voice or carrying the entire strategy in their nervous system.
+              </p>
+              <div className="border-t border-gold/20 pt-6">
+                <p className="font-body text-sm font-semibold text-cream-dark">Tabitha Rector</p>
+                <p className="font-body text-xs tracking-[0.1em] uppercase text-warm-gray">Founder · Kingdom Solutions AI™</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Social Proof — placeholders until real client quotes are ready to swap in */}
+      <section className="py-20 lg:py-28 bg-cream-dark">
+        <div className="container">
+          <div className="text-center mb-14 fade-up">
+            <p className="editorial-label mb-4">In Their Own Words</p>
+            <h2 className="font-display text-2xl sm:text-3xl font-medium text-charcoal">
+              What clarity sounds like once it lands.
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 fade-up">
+            {[
+              { quote: "I finally have language for what I do. It's the difference between explaining myself and being understood.", who: "Business coach, Guided tier" },
+              { quote: "Every dollar I spent on content before this was aimed at the wrong niche. Now it lands.", who: "Faith-based coach, Starter tier" },
+              { quote: "The offer pressure-test alone was worth it — I cut two services I was quietly dreading.", who: "Consultant, Buildout tier" },
+            ].map((t, i) => (
+              <div key={i} className="bg-card border border-taupe rounded-sm p-8">
+                <p className="font-display text-lg text-charcoal leading-snug mb-5">"{t.quote}"</p>
+                <p className="font-body text-xs text-charcoal-light mb-3">Placeholder — swap for real client quote<br />{t.who}</p>
+                <span className="inline-block font-body text-[0.65rem] tracking-[0.1em] uppercase text-gold bg-gold/10 rounded-sm px-2 py-1">
+                  Add real testimonial here
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Choose Your Clarity Pro Path — Pricing Tiers */}
       <section className="py-20 lg:py-28 bg-cream">
         <div className="container">
@@ -252,7 +340,7 @@ export default function ClarityPro() {
                 </ul>
                 <p className="font-body text-xs text-charcoal-light/70 mb-6">Best for: Self-guided clarity.</p>
                 <a href="https://buy.stripe.com/28E3cxapFfC8bMV0NugrS08" target="_blank" rel="noopener noreferrer" className="btn-gold rounded-sm w-full text-center block text-sm">
-                  Start Clarity Pro™
+                  Start Clarity Pro™ — $197
                 </a>
               </div>
 
@@ -277,7 +365,7 @@ export default function ClarityPro() {
                 </ul>
                 <p className="font-body text-xs text-charcoal-light/70 mb-6">Best for: Clearer direction with strategic review.</p>
                 <a href="https://buy.stripe.com/9B6aEZ7dtblS3gpdAggrS09" target="_blank" rel="noopener noreferrer" className="btn-gold rounded-sm w-full text-center block text-sm">
-                  Start Guided Clarity
+                  Start Clarity Pro™ — $497
                 </a>
               </div>
 
@@ -304,6 +392,67 @@ export default function ClarityPro() {
                   Apply for Buildout
                 </Link>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="container"><div className="gold-hairline" /></div>
+
+      {/* FAQ — answers visible, not collapsed, since this is often where the sale actually happens */}
+      <section className="py-20 lg:py-28 bg-cream">
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div className="lg:col-span-4 lg:col-start-2 fade-up">
+              <p className="editorial-label mb-4">Frequently Asked</p>
+              <h2 className="font-display text-3xl sm:text-4xl font-medium text-charcoal leading-snug">
+                Before you choose <em className="text-gold italic">your path.</em>
+              </h2>
+            </div>
+            <div className="lg:col-span-6 lg:col-start-7 fade-up">
+              {[
+                {
+                  q: "What exactly is Clarity Pro™?",
+                  a: "A guided strategy process that turns your existing expertise into a clear niche, a pressure-tested offer, a recognizable voice, and a practical content direction — built with AI support, refined by your judgment.",
+                },
+                {
+                  q: "How are Starter, Guided, and Buildout different?",
+                  a: "Starter gives you the full self-guided framework. Guided adds a live 60-minute review session with Tabitha plus a written before/after positioning statement so a human checks your work. Buildout goes further, turning the strategy into launch-ready assets like a sales page and content plan.",
+                },
+                {
+                  q: "Can Clarity Pro™ create content for me?",
+                  a: "It gives you direction, prompts, and a plan — not a stream of generic posts. The goal is a clearer business first; better content is what naturally follows.",
+                },
+                {
+                  q: "Is this only for brand-new coaches?",
+                  a: "No. It's built for anyone whose experience is real but whose business language hasn't caught up yet — new coaches, corporate-to-coach professionals, founders, and consultants alike.",
+                },
+                {
+                  q: "What should I prepare before I begin?",
+                  a: "Nothing formal. Come with your honest sense of who you help and how, even if it feels rough or unclear — that's exactly the raw material the process works with.",
+                },
+                {
+                  q: "How should I handle confidential information?",
+                  a: "Use Clarity Pro™ for strategy and general business context only. Do not enter passwords, payment details, confidential client records, medical information, legal documents, or other highly sensitive data.",
+                },
+                {
+                  q: "What is the refund policy?",
+                  a: (
+                    <>
+                      Refund eligibility depends on the tier. Starter is generally non-refundable once access is delivered (contact us within 24 hours if purchased in error). Guided allows cancellation before your review session is delivered (case-by-case within 48 hours). Buildout terms are set in your proposal. Full details in our{" "}
+                      <Link href="/refund-policy" className="text-gold hover:text-gold-dark underline underline-offset-4 transition-colors">
+                        Refund Policy
+                      </Link>
+                      .
+                    </>
+                  ),
+                },
+              ].map((item, i) => (
+                <div key={i} className="border-b border-taupe/60 py-6 first:pt-0">
+                  <h3 className="font-display text-lg font-medium text-charcoal mb-2">{item.q}</h3>
+                  <p className="font-body text-sm text-charcoal-light leading-relaxed">{item.a}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -405,7 +554,7 @@ export default function ClarityPro() {
             </p>
 
             <p className="font-body text-xs text-warm-gray text-center mt-6 max-w-lg mx-auto">
-              Clarity Pro™ is designed for business strategy, positioning, messaging, offers, voice development, and content direction. Please do not enter passwords, payment information, confidential client records, medical information, legal documents, or highly sensitive business data.
+              Strategy supported by AI. Judgment remains human. Please do not enter passwords, payment information, confidential records, or other highly sensitive data.
             </p>
 
           </div>
@@ -414,3 +563,4 @@ export default function ClarityPro() {
     </div>
   );
 }
+
