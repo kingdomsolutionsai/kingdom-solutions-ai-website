@@ -21,7 +21,7 @@ export default function Terms() {
             </h1>
             <div className="w-12 h-px bg-gold/50 mb-10" />
             <p className="font-body text-sm text-charcoal-light mb-12">
-              Last Updated: July 2026
+              Last Updated: August 2026
             </p>
 
             <div className="space-y-10 font-body text-base text-charcoal-light leading-relaxed">
@@ -140,6 +140,9 @@ export default function Terms() {
                 </p>
                 <p className="mt-4">
                   You may not copy, resell, redistribute, reproduce, or package Kingdom Solutions AI™ materials, prompts, frameworks, systems, or content as your own product or service without written permission.
+                </p>
+                <p className="mt-4">
+                  Where a product or service includes digital access — such as a GPT link, login credential, access code, or onboarding material — that access is licensed to the purchasing individual or business only and may not be shared, forwarded, or made available to any other person or entity. Sharing access, or allowing more than one individual to use a single purchased credential, is a material breach of these Terms, voids refund eligibility under our Refund Policy, and may result in immediate suspension or termination of access without refund.
                 </p>
               </div>
 
