@@ -32,26 +32,31 @@ export default function ClarityPro() {
 
   return (
     <div ref={revealRef}>
-      {/* Hero — dark, matching Constance's visual system */}
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 bg-charcoal">
+      {/* Hero — exploratory, voice-forward */}
+      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32">
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-10"
+          className="absolute inset-0 bg-cover bg-center opacity-15"
           style={{ backgroundImage: "url(/assets/clarity-visual_f897fefc.png)" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/60 to-charcoal" />
+        <div className="absolute inset-0 bg-gradient-to-b from-cream/50 to-cream" />
         <div className="container relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             <div className="lg:col-span-7 fade-up">
+              <img
+                src="/assets/ksai-logo-transparent-400_82fa1f46.png"
+                alt="Kingdom Solutions AI™"
+                className="w-16 h-16 mb-6"
+              />
               <p className="editorial-label mb-6">AI Business Clarity Strategist</p>
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-[3.5rem] font-medium text-cream-dark leading-[1.08] mb-8">
+              <h1 className="font-display text-4xl sm:text-5xl lg:text-[3.5rem] font-medium text-charcoal leading-[1.08] mb-8">
                 Turn Your Expertise Into a Business People{" "}
                 <em className="text-gold italic">Understand.</em>
               </h1>
-              <p className="font-body text-lg lg:text-xl text-warm-gray leading-relaxed max-w-xl mb-10">
+              <p className="font-body text-lg lg:text-xl text-charcoal-light leading-relaxed max-w-xl mb-10">
                 Clarity Pro™ helps new coaches, founders, consultants, corporate escapees, and experienced professionals define their niche, structure their offer, develop their voice, sharpen their messaging, and build a content strategy that attracts.
               </p>
-              <a href="#pricing" className="btn-gold rounded-sm inline-flex items-center gap-2">
-                See Pricing & Get Started <ArrowRight size={16} />
+              <a href="#begin-clarity" className="btn-gold rounded-sm inline-flex items-center gap-2">
+                Begin with Clarity <ArrowRight size={16} />
               </a>
             </div>
           </div>
@@ -267,8 +272,35 @@ export default function ClarityPro() {
         </div>
       </section>
 
+      {/* Social Proof — placeholders until real client quotes are ready to swap in */}
+      <section className="py-20 lg:py-28 bg-cream-dark">
+        <div className="container">
+          <div className="text-center mb-14 fade-up">
+            <p className="editorial-label mb-4">In Their Own Words</p>
+            <h2 className="font-display text-2xl sm:text-3xl font-medium text-charcoal">
+              What clarity sounds like once it lands.
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 fade-up">
+            {[
+              { quote: "I finally have language for what I do. It's the difference between explaining myself and being understood.", who: "Business coach, Guided tier" },
+              { quote: "Every dollar I spent on content before this was aimed at the wrong niche. Now it lands.", who: "Faith-based coach, Starter tier" },
+              { quote: "The offer pressure-test alone was worth it — I cut two services I was quietly dreading.", who: "Consultant, Buildout tier" },
+            ].map((t, i) => (
+              <div key={i} className="bg-card border border-taupe rounded-sm p-8">
+                <p className="font-display text-lg text-charcoal leading-snug mb-5">"{t.quote}"</p>
+                <p className="font-body text-xs text-charcoal-light mb-3">Placeholder — swap for real client quote<br />{t.who}</p>
+                <span className="inline-block font-body text-[0.65rem] tracking-[0.1em] uppercase text-gold bg-gold/10 rounded-sm px-2 py-1">
+                  Add real testimonial here
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Choose Your Clarity Pro Path — Pricing Tiers */}
-      <section id="pricing" className="py-20 lg:py-28 bg-cream">
+      <section className="py-20 lg:py-28 bg-cream">
         <div className="container">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16 fade-up">
@@ -321,10 +353,10 @@ export default function ClarityPro() {
                 <p className="font-body text-xs text-charcoal-light mb-6">one-time</p>
                 <div className="w-10 h-[1px] bg-gold/40 mb-6" />
                 <p className="font-body text-sm text-charcoal-light leading-relaxed mb-6">
-                  For the coach, founder, or consultant who wants a live 1:1 session with Tabitha and a written record of the shift in how they position themselves.
+                  For the coach, founder, or consultant who wants strategic support refining their niche, offer, voice, and content direction.
                 </p>
                 <ul className="space-y-3 mb-4">
-                  {["Everything in Starter", "One 60-minute 1:1 Clarity Review with Tabitha", "A written before/after positioning statement (delivered by email)", "A personal voice note follow-up (delivered by email)", "Offer language review", "14 days of light follow-up support"].map((item, i) => (
+                  {["Everything in Starter", "One 60-minute Clarity Review Session", "Positioning refinement", "Offer language review", "Voice and messaging feedback", "14 days of light follow-up support"].map((item, i) => (
                     <li key={i} className="flex items-start gap-2">
                       <span className="w-3 h-px bg-gold/50 mt-2.5 shrink-0" />
                       <span className="font-body text-sm text-charcoal-light">{item}</span>

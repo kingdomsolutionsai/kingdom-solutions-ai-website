@@ -39,7 +39,7 @@ describe("forms.submitCapacityLeakAudit", () => {
       challenge: "Too many meetings",
     });
 
-    expect(result).toEqual({ success: true, notified: true });
+    expect(result).toEqual({ success: true, notified: true, participantNotified: true, filedWithConstance: false });
   });
 
   it("rejects invalid email", async () => {
@@ -81,7 +81,7 @@ describe("forms.submitClarityProIntake", () => {
       background: "Former corporate executive",
     });
 
-    expect(result).toEqual({ success: true, notified: true });
+    expect(result).toEqual({ success: true, notified: true, participantNotified: true });
   });
 
   it("works with minimal fields", async () => {
@@ -93,7 +93,7 @@ describe("forms.submitClarityProIntake", () => {
       email: "sarah@example.com",
     });
 
-    expect(result).toEqual({ success: true, notified: true });
+    expect(result).toEqual({ success: true, notified: true, participantNotified: true });
   });
 });
 
