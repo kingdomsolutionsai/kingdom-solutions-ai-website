@@ -267,33 +267,6 @@ export default function ClarityPro() {
         </div>
       </section>
 
-      {/* Social Proof — placeholders until real client quotes are ready to swap in */}
-      <section className="py-20 lg:py-28 bg-cream-dark">
-        <div className="container">
-          <div className="text-center mb-14 fade-up">
-            <p className="editorial-label mb-4">In Their Own Words</p>
-            <h2 className="font-display text-2xl sm:text-3xl font-medium text-charcoal">
-              What clarity sounds like once it lands.
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 fade-up">
-            {[
-              { quote: "I finally have language for what I do. It's the difference between explaining myself and being understood.", who: "Business coach, Guided tier" },
-              { quote: "Every dollar I spent on content before this was aimed at the wrong niche. Now it lands.", who: "Faith-based coach, Starter tier" },
-              { quote: "The offer pressure-test alone was worth it — I cut two services I was quietly dreading.", who: "Consultant, Buildout tier" },
-            ].map((t, i) => (
-              <div key={i} className="bg-card border border-taupe rounded-sm p-8">
-                <p className="font-display text-lg text-charcoal leading-snug mb-5">"{t.quote}"</p>
-                <p className="font-body text-xs text-charcoal-light mb-3">Placeholder — swap for real client quote<br />{t.who}</p>
-                <span className="inline-block font-body text-[0.65rem] tracking-[0.1em] uppercase text-gold bg-gold/10 rounded-sm px-2 py-1">
-                  Add real testimonial here
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Choose Your Clarity Pro Path — Pricing Tiers */}
       <section id="pricing" className="py-20 lg:py-28 bg-cream">
         <div className="container">
