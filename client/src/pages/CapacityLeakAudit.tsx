@@ -269,10 +269,12 @@ export default function CapacityLeakAudit() {
                   </svg>
                 </div>
                 <h3 className="font-display text-2xl font-medium text-charcoal mb-4">
-                  Your audit is being prepared.
+                  {submitMutation.data?.auditGenerated ? "Your audit is on its way." : "Your audit is being prepared."}
                 </h3>
                 <p className="font-body text-base text-charcoal-light leading-relaxed mb-6">
-                  Over the next 24 hours, you will receive your personalized Capacity Leak Audit™ results and recommended next steps.
+                  {submitMutation.data?.auditGenerated
+                    ? "Your personalized Capacity Leak Audit™ results and recommended next steps have just been sent to your inbox."
+                    : "Over the next 24 hours, you will receive your personalized Capacity Leak Audit™ results and recommended next steps."}
                 </p>
                 <p className="font-body text-sm text-warm-gray">
                   Please check your email for next steps.

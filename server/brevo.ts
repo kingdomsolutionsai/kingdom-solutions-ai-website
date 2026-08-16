@@ -131,9 +131,10 @@ export function formatCapacityLeakAuditEmail(data: {
 }
 
 /**
- * Confirmation email sent to the VISITOR after they submit the Capacity
- * Leak Audit. This did not exist before — visitors only ever notified
- * Tabitha and never heard anything back themselves.
+ * Fallback confirmation email sent to the visitor ONLY when AI generation
+ * isn't configured yet (no LLM_API_KEY / LLM_MODEL in Render). Once those
+ * are set, formatCapacityLeakAuditResultsEmail below is used instead and
+ * this placeholder never fires.
  */
 export function formatCapacityLeakAuditParticipantEmail(data: { firstName: string }): string {
   return `
@@ -146,6 +147,34 @@ export function formatCapacityLeakAuditParticipantEmail(data: { firstName: strin
       <p style="font-size: 15px; color: #2C2C2C; line-height: 1.7; margin-bottom: 20px;">
         You will receive your audit results and recommended next steps within 24 hours.
       </p>
+      <p style="font-size: 14px; color: #8A7D6B; margin-top: 30px; padding-top: 20px; border-top: 1px solid #E8E2D8;">
+        With care,<br><strong>Kingdom Solutions AI™</strong>
+      </p>
+    </div>
+  `;
+}
+
+/**
+ * The REAL results email — the AI-generated, personalized audit itself,
+ * delivered immediately rather than "within 24 hours." This is what
+ * actually makes the free audit self-serve instead of depending on
+ * Tabitha manually writing every response.
+ */
+export function formatCapacityLeakAuditResultsEmail(data: { firstName: string; auditText: string }): string {
+  const paragraphs = data.auditText
+    .split(/\n{2,}/)
+    .map((p) => p.trim())
+    .filter(Boolean)
+    .map((p) => `<p style="font-size: 15px; color: #2C2C2C; line-height: 1.75; margin: 0 0 18px;">${escapeHtml(p)}</p>`)
+    .join("");
+
+  return `
+    <div style="font-family: 'Georgia', serif; max-width: 600px; margin: 0 auto; padding: 40px 30px; background: #FDFBF7; border-top: 3px solid #C5A55A;">
+      <h1 style="font-size: 22px; color: #2C2C2C; margin-bottom: 8px; font-weight: 500;">Your Capacity Leak Audit™ Results</h1>
+      <p style="font-size: 15px; color: #2C2C2C; line-height: 1.7; margin-bottom: 24px;">Hi ${escapeHtml(data.firstName)}, here's where we're seeing capacity leak in what you shared:</p>
+      <div style="background: #ffffff; border-left: 3px solid #C5A55A; border-radius: 4px; padding: 22px 24px; margin-bottom: 24px;">
+        ${paragraphs}
+      </div>
       <p style="font-size: 14px; color: #8A7D6B; margin-top: 30px; padding-top: 20px; border-top: 1px solid #E8E2D8;">
         With care,<br><strong>Kingdom Solutions AI™</strong>
       </p>

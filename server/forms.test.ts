@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 import { appRouter } from "./routers";
 import type { TrpcContext } from "./_core/context";
 import { sendBrevoEmail, formatCapacityLeakAuditEmail, formatClarityProIntakeEmail, formatContactEmail } from "./brevo";
+import { generateCapacityLeakAudit } from "./llm";
 
 // Mock the brevo module for unit tests
 vi.mock("./brevo", async (importOriginal) => {
@@ -11,6 +12,13 @@ vi.mock("./brevo", async (importOriginal) => {
     sendBrevoEmail: vi.fn().mockResolvedValue(true),
   };
 });
+
+// Defaults to rejecting, matching real behavior with no LLM_API_KEY set.
+// Individual tests can override with mockResolvedValueOnce for the
+// AI-generated success path.
+vi.mock("./llm", () => ({
+  generateCapacityLeakAudit: vi.fn().mockRejectedValue(new Error("AI audit generation is not configured yet.")),
+}));
 
 function createPublicContext(): TrpcContext {
   return {
@@ -39,7 +47,41 @@ describe("forms.submitCapacityLeakAudit", () => {
       challenge: "Too many meetings",
     });
 
-    expect(result).toEqual({ success: true, notified: true, participantNotified: true, filedWithConstance: false });
+    // No LLM_API_KEY in the test environment, so this exercises the
+    // graceful-fallback path (placeholder email, not an AI-generated one).
+    expect(result).toEqual({
+      success: true,
+      notified: true,
+      participantNotified: true,
+      filedWithConstance: false,
+      auditGenerated: false,
+    });
+  });
+
+  it("sends the AI-generated results email and reports auditGenerated: true when LLM is configured", async () => {
+    vi.mocked(generateCapacityLeakAudit).mockResolvedValueOnce(
+      "You're likely leaking capacity through follow-up gaps.\n\nConsider a lightweight CRM habit."
+    );
+
+    const ctx = createPublicContext();
+    const caller = appRouter.createCaller(ctx);
+
+    const result = await caller.forms.submitCapacityLeakAudit({
+      firstName: "Jane",
+      lastName: "Doe",
+      email: "jane@example.com",
+      role: "CEO",
+      company: "Acme Inc",
+      challenge: "Too many meetings",
+    });
+
+    expect(result).toEqual({
+      success: true,
+      notified: true,
+      participantNotified: true,
+      filedWithConstance: false,
+      auditGenerated: true,
+    });
   });
 
   it("rejects invalid email", async () => {

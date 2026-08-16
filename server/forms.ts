@@ -4,11 +4,13 @@ import {
   sendBrevoEmail,
   formatCapacityLeakAuditEmail,
   formatCapacityLeakAuditParticipantEmail,
+  formatCapacityLeakAuditResultsEmail,
   formatClarityProIntakeEmail,
   formatClarityProParticipantEmail,
   formatContactEmail,
 } from "./brevo";
 import { buildCapacityLeakAuditNotes, fileLeadWithConstance } from "./constance";
+import { generateCapacityLeakAudit } from "./llm";
 
 const OWNER = { email: "tabitha@kingdomsolutionsai.com", name: "Tabitha Rector" };
 
@@ -34,13 +36,30 @@ export const formsRouter = router({
         replyToName: `${input.firstName} ${input.lastName}`,
       });
 
-      // 2. Confirm to the participant that their submission was received.
-      //    This previously did not happen at all — the visitor got nothing.
-      const participantNotified = await sendBrevoEmail({
-        to: { email: input.email, name: `${input.firstName} ${input.lastName}` },
-        subject: "Your Capacity Leak Audit™ is on its way",
-        htmlContent: formatCapacityLeakAuditParticipantEmail(input),
-      });
+      // 2. Generate and send the real, personalized audit to the participant.
+      //    Falls back to the "24 hours" placeholder only if AI generation
+      //    isn't configured yet (LLM_API_KEY / LLM_MODEL not set in Render) —
+      //    the form keeps working either way, it just upgrades once the key
+      //    is added.
+      let participantNotified: boolean;
+      let auditGenerated: boolean;
+      try {
+        const auditText = await generateCapacityLeakAudit(input);
+        participantNotified = await sendBrevoEmail({
+          to: { email: input.email, name: `${input.firstName} ${input.lastName}` },
+          subject: `${input.firstName}, your Capacity Leak Audit™ results`,
+          htmlContent: formatCapacityLeakAuditResultsEmail({ firstName: input.firstName, auditText }),
+        });
+        auditGenerated = true;
+      } catch (error) {
+        console.warn("[CapacityLeakAudit] Falling back to placeholder email:", error instanceof Error ? error.message : error);
+        participantNotified = await sendBrevoEmail({
+          to: { email: input.email, name: `${input.firstName} ${input.lastName}` },
+          subject: "Your Capacity Leak Audit™ is on its way",
+          htmlContent: formatCapacityLeakAuditParticipantEmail(input),
+        });
+        auditGenerated = false;
+      }
 
       // 3. File the lead into the Notion Pipeline via Constance, reusing the
       //    same webhook the Lead Generator & Qualifier already writes to.
@@ -53,7 +72,7 @@ export const formsRouter = router({
         notes: buildCapacityLeakAuditNotes(input),
       });
 
-      return { success: true, notified, participantNotified, filedWithConstance };
+      return { success: true, notified, participantNotified, filedWithConstance, auditGenerated };
     }),
 
   submitClarityProIntake: publicProcedure
