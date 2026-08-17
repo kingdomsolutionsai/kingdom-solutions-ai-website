@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { trpc } from "@/lib/trpc";
 
 export default function CapacityLeakAudit() {
@@ -28,6 +28,23 @@ export default function CapacityLeakAudit() {
   const submitMutation = trpc.forms.submitCapacityLeakAudit.useMutation({
     onSuccess: () => setSubmitted(true),
   });
+
+  // The Step 1 / Step 2 / confirmation cards are very different heights (the
+  // Step 2 calendar box is tall, the confirmation card is short). Without
+  // this, the browser keeps whatever scroll position it had, which can land
+  // squarely on blank space below the new, shorter card after a step change
+  // — looking like nothing happened even though it worked. Scroll back to
+  // the top of the form section on every step/submit transition so the new
+  // content is always what's in view.
+  const formSectionRef = useRef<HTMLElement>(null);
+  const isFirstRender = useRef(true);
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    formSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [step, submitted]);
 
   const handleStepOneSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -177,7 +194,7 @@ export default function CapacityLeakAudit() {
       </section>
 
       {/* Start Audit Form */}
-      <section id="start-audit" className="py-20 lg:py-28 bg-cream-dark">
+      <section id="start-audit" ref={formSectionRef} className="py-20 lg:py-28 bg-cream-dark">
         <div className="container">
           <div className="max-w-2xl mx-auto">
             {!submitted && step === 1 ? (
