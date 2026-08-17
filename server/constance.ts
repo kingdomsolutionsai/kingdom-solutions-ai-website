@@ -70,10 +70,12 @@ export function buildCapacityLeakAuditNotes(data: {
   role?: string;
   company?: string;
   challenge?: string;
+  calendarText?: string;
 }): string {
   const parts: string[] = [];
   if (data.role) parts.push(`Role: ${data.role}`);
   if (data.company) parts.push(`Company/Ministry: ${data.company}`);
   if (data.challenge) parts.push(`Biggest challenge: ${data.challenge}`);
+  if (data.calendarText) parts.push("Provided a representative week (see submission email for full text)");
   return parts.join(" | ");
 }
