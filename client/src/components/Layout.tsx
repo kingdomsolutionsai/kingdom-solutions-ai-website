@@ -226,13 +226,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 Correspondence
               </h4>
               <div className="flex flex-col gap-3.5">
-                
+                <a
                   href="mailto:tabitha@kingdomsolutionsai.com"
                   className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300"
                 >
                   tabitha@kingdomsolutionsai.com
                 </a>
-                
+                <a
                   href="https://www.linkedin.com/company/kingdomsolutionsai"
                   target="_blank"
                   rel="noopener noreferrer"
