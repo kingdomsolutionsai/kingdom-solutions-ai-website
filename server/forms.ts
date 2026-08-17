@@ -24,6 +24,7 @@ export const formsRouter = router({
         role: z.string().optional(),
         company: z.string().optional(),
         challenge: z.string().optional(),
+        calendarText: z.string().max(8000).optional(),
       })
     )
     .mutation(async ({ input }) => {
