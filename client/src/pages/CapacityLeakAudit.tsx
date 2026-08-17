@@ -13,6 +13,7 @@ export default function CapacityLeakAudit() {
     ogImage: "https://kingdomsolutionsai.com/assets/capacity-audit-visual_7655f585.png",
   });
   const revealRef = useScrollReveal();
+  const [step, setStep] = useState<1 | 2>(1);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -20,6 +21,7 @@ export default function CapacityLeakAudit() {
     role: "",
     company: "",
     challenge: "",
+    calendarText: "",
   });
   const [submitted, setSubmitted] = useState(false);
 
@@ -27,7 +29,12 @@ export default function CapacityLeakAudit() {
     onSuccess: () => setSubmitted(true),
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleStepOneSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setStep(2);
+  };
+
+  const handleFinalSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     submitMutation.mutate(formData);
   };
@@ -173,7 +180,7 @@ export default function CapacityLeakAudit() {
       <section id="start-audit" className="py-20 lg:py-28 bg-cream-dark">
         <div className="container">
           <div className="max-w-2xl mx-auto">
-            {!submitted ? (
+            {!submitted && step === 1 ? (
               <div className="fade-up">
                 <div className="mb-10">
                   <p className="editorial-label mb-4">Step 1 · Tell Us Who You Are</p>
@@ -181,11 +188,11 @@ export default function CapacityLeakAudit() {
                     Begin Your Capacity Leak Audit™
                   </h2>
                   <p className="font-body text-base text-charcoal-light">
-                    Six fields. Your private audit begins immediately.
+                    Six fields, then a quick look at your week. Your private audit begins immediately after.
                   </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="bg-card border border-taupe rounded-sm p-8 lg:p-10 space-y-6">
+                <form onSubmit={handleStepOneSubmit} className="bg-card border border-taupe rounded-sm p-8 lg:p-10 space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
                       <label className="font-body text-sm font-medium text-charcoal mb-2 block">First Name</label>
@@ -254,8 +261,51 @@ export default function CapacityLeakAudit() {
                     />
                   </div>
                   <button type="submit" className="w-full btn-gold rounded-sm">
-                    Start the Capacity Leak Audit™
+                    Continue to Step 2 <ArrowRight size={16} className="inline ml-1" />
                   </button>
+                  <p className="font-body text-xs text-warm-gray text-center">
+                    We respect your inbox. Your information is used only to personalize your audit and send you your results.
+                  </p>
+                </form>
+              </div>
+            ) : !submitted && step === 2 ? (
+              <div className="fade-up">
+                <div className="mb-10">
+                  <p className="editorial-label mb-4">Step 2 · Tell Us About Your Week</p>
+                  <h2 className="font-display text-3xl font-medium text-charcoal mb-3">
+                    Where Is the Time Actually Going, {formData.firstName || "there"}?
+                  </h2>
+                  <p className="font-body text-base text-charcoal-light">
+                    Paste or describe a representative week — meetings, travel, prep, follow-up, the work that never makes it onto the calendar. This is what your audit is actually built from.
+                  </p>
+                </div>
+
+                <form onSubmit={handleFinalSubmit} className="bg-card border border-taupe rounded-sm p-8 lg:p-10 space-y-6">
+                  <div>
+                    <label className="font-body text-sm font-medium text-charcoal mb-2 block">A Representative Week</label>
+                    <textarea
+                      value={formData.calendarText}
+                      onChange={(e) => setFormData({ ...formData, calendarText: e.target.value })}
+                      rows={10}
+                      className="w-full px-4 py-3 bg-cream border border-taupe rounded-sm font-body text-sm text-charcoal focus:border-gold focus:ring-1 focus:ring-gold/30 outline-none transition-colors resize-none"
+                      placeholder={"Example:\nMon 8-9am prep for team call, 9-11 back-to-back meetings, 11-12 inbox, afternoon mostly interruptions...\n\nPaste directly from your calendar, or just describe it in your own words."}
+                    />
+                    <p className="font-body text-xs text-warm-gray mt-2">
+                      Optional, but the more real detail here, the more specific your results will be.
+                    </p>
+                  </div>
+                  <div className="flex gap-4">
+                    <button
+                      type="button"
+                      onClick={() => setStep(1)}
+                      className="px-6 py-3 rounded-sm border border-taupe font-body text-sm text-charcoal hover:bg-cream transition-colors"
+                    >
+                      Back
+                    </button>
+                    <button type="submit" disabled={submitMutation.isPending} className="flex-1 btn-gold rounded-sm disabled:opacity-60">
+                      {submitMutation.isPending ? "Preparing Your Audit…" : "Start the Capacity Leak Audit™"}
+                    </button>
+                  </div>
                   <p className="font-body text-xs text-warm-gray text-center">
                     We respect your inbox. Your information is used only to personalize your audit and send you your results.
                   </p>
