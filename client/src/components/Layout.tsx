@@ -12,7 +12,7 @@ const navLinks = [
 ];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -26,6 +26,25 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     setMobileOpen(false);
     window.scrollTo(0, 0);
   }, [location]);
+
+  // The header's "Take the Audit" CTA needs to land on the actual audit form
+  // (#start-audit), not just the top of the page — and it needs to work even
+  // when the visitor is already on /capacity-leak-audit (e.g. scrolled down
+  // after finishing it), where a plain route Link is a no-op because the
+  // route never changes. Handling the scroll here explicitly, instead of
+  // relying on the browser's native hash-jump, makes it work in both cases.
+  const goToAudit = () => {
+    setMobileOpen(false);
+    const scrollToForm = () => {
+      document.getElementById("start-audit")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+    if (location === "/capacity-leak-audit") {
+      scrollToForm();
+    } else {
+      setLocation("/capacity-leak-audit");
+      window.setTimeout(scrollToForm, 100);
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -73,12 +92,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
 
           {/* CTA Button - Desktop — premium, distinguished */}
-          <Link
-            href="/capacity-leak-audit"
+          <button
+            type="button"
+            onClick={goToAudit}
             className="hidden xl:inline-flex items-center gap-2 ml-8 lg:ml-12 shrink-0 bg-charcoal text-cream-dark font-body text-[0.72rem] font-medium tracking-[0.1em] uppercase px-7 py-3.5 transition-all duration-300 hover:bg-charcoal/90 active:scale-[0.97]"
           >
             Take the Audit
-          </Link>
+          </button>
 
           {/* Mobile Menu Toggle */}
           <button
@@ -108,12 +128,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </Link>
               ))}
               <div className="pt-4 mt-2 border-t border-taupe">
-                <Link
-                  href="/capacity-leak-audit"
-                  className="bg-charcoal text-cream-dark font-body text-[0.72rem] font-medium tracking-[0.1em] uppercase px-7 py-3.5 inline-block text-center transition-all duration-300 hover:bg-charcoal/90"
+                <button
+                  type="button"
+                  onClick={goToAudit}
+                  className="w-full bg-charcoal text-cream-dark font-body text-[0.72rem] font-medium tracking-[0.1em] uppercase px-7 py-3.5 inline-block text-center transition-all duration-300 hover:bg-charcoal/90"
                 >
                   Take the Audit
-                </Link>
+                </button>
               </div>
             </div>
           </div>
@@ -205,13 +226,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 Correspondence
               </h4>
               <div className="flex flex-col gap-3.5">
-                <a
+                
                   href="mailto:tabitha@kingdomsolutionsai.com"
                   className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300"
                 >
                   tabitha@kingdomsolutionsai.com
                 </a>
-                <a
+                
                   href="https://www.linkedin.com/company/kingdomsolutionsai"
                   target="_blank"
                   rel="noopener noreferrer"
