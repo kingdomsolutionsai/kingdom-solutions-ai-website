@@ -1,12 +1,17 @@
 import { Link, useLocation } from "wouter";
-import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Menu, X, ChevronDown } from "lucide-react";
 
-const navLinks = [
+// Offers, ordered as the ladder — this is what lives inside "Services".
+const serviceLinks = [
   { href: "/capacity-leak-audit", label: "Capacity Leak Audit™" },
   { href: "/clarity-pro", label: "Clarity Pro™" },
   { href: "/constance", label: "Constance™" },
   { href: "/executive-ai-strategy", label: "Executive AI Strategy" },
+];
+
+// Top-level nav after "Start Here" and the Services dropdown.
+const simpleLinks = [
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
@@ -15,6 +20,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const [location, setLocation] = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const servicesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -24,8 +31,20 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     setMobileOpen(false);
+    setServicesOpen(false);
     window.scrollTo(0, 0);
   }, [location]);
+
+  // Close the desktop Services dropdown when clicking outside it.
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) {
+        setServicesOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
 
   // The header's "Take the Audit" CTA needs to land on the actual audit form
   // (#start-audit), not just the top of the page — and it needs to work even
@@ -45,6 +64,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       window.setTimeout(scrollToForm, 100);
     }
   };
+
+  const isServiceActive = serviceLinks.some((l) => l.href === location);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -74,9 +95,62 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </div>
           </Link>
 
-          {/* Desktop Navigation — even spacing, refined type */}
+          {/* Desktop Navigation — Start Here · Services ▾ · About · Contact */}
           <div className="hidden xl:flex items-center gap-7 2xl:gap-9">
-            {navLinks.map((link) => (
+            {/* Start Here */}
+            <button
+              type="button"
+              onClick={goToAudit}
+              className={`font-body text-[0.8rem] tracking-[0.02em] transition-colors duration-300 whitespace-nowrap ${
+                location === "/capacity-leak-audit"
+                  ? "text-gold font-medium"
+                  : "text-charcoal/70 hover:text-charcoal"
+              }`}
+            >
+              Start Here
+            </button>
+
+            {/* Services dropdown */}
+            <div className="relative" ref={servicesRef}>
+              <button
+                type="button"
+                onClick={() => setServicesOpen((v) => !v)}
+                className={`font-body text-[0.8rem] tracking-[0.02em] transition-colors duration-300 whitespace-nowrap inline-flex items-center gap-1 ${
+                  isServiceActive
+                    ? "text-gold font-medium"
+                    : "text-charcoal/70 hover:text-charcoal"
+                }`}
+                aria-expanded={servicesOpen}
+                aria-haspopup="true"
+              >
+                Services
+                <ChevronDown
+                  size={14}
+                  className={`transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`}
+                  aria-hidden="true"
+                />
+              </button>
+              {servicesOpen && (
+                <div className="absolute left-1/2 -translate-x-1/2 top-full mt-4 min-w-[260px] bg-cream/98 backdrop-blur-xl border border-gold/15 shadow-[0_8px_30px_rgba(0,0,0,0.08)] py-2 z-50">
+                  {serviceLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className={`block font-body text-[0.82rem] tracking-[0.02em] px-5 py-3 transition-colors duration-200 whitespace-nowrap ${
+                        location === link.href
+                          ? "text-gold font-medium bg-gold/5"
+                          : "text-charcoal/75 hover:text-charcoal hover:bg-gold/5"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* About · Contact */}
+            {simpleLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -114,7 +188,41 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         {mobileOpen && (
           <div className="xl:hidden bg-cream/98 backdrop-blur-xl border-t border-gold/10">
             <div className="max-w-[1400px] mx-auto px-6 py-8 flex flex-col gap-5">
-              {navLinks.map((link) => (
+              {/* Start Here */}
+              <button
+                type="button"
+                onClick={goToAudit}
+                className={`font-body text-base py-1 text-left transition-colors duration-200 ${
+                  location === "/capacity-leak-audit"
+                    ? "text-gold font-medium"
+                    : "text-charcoal/70 hover:text-charcoal"
+                }`}
+              >
+                Start Here
+              </button>
+
+              {/* Services group — shown as a labeled cluster on mobile */}
+              <div className="flex flex-col gap-3">
+                <span className="font-body text-[0.65rem] font-medium tracking-[0.18em] uppercase text-gold/80">
+                  Services
+                </span>
+                {serviceLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`font-body text-base py-1 pl-3 transition-colors duration-200 ${
+                      location === link.href
+                        ? "text-gold font-medium"
+                        : "text-charcoal/70 hover:text-charcoal"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+
+              {/* About · Contact */}
+              {simpleLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
@@ -127,6 +235,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   {link.label}
                 </Link>
               ))}
+
               <div className="pt-4 mt-2 border-t border-taupe">
                 <button
                   type="button"
