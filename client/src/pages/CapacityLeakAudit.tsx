@@ -1,19 +1,97 @@
 import { Link } from "wouter";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useState } from "react";
 import { usePageMeta } from "@/hooks/usePageMeta";
-import { ArrowRight } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
 import { trpc } from "@/lib/trpc";
+
+/**
+ * Capacity Leak Audit™ — auto-routing diagnostic
+ * Flow: intro → 6 scored questions → contact capture → result (auto-routed).
+ * Lead still submits through the EXISTING trpc.forms.submitCapacityLeakAudit
+ * mutation (same input shape), so no server/router change is required.
+ * The audit result is packed into the `challenge` field so it shows in Notion.
+ */
+
+type LeakKey = "clarity" | "pipeline" | "ops";
+type Route = "clarity" | "ops" | "call";
+
+const QUESTIONS: { leak: LeakKey; q: string; a: [string, number][] }[] = [
+  {
+    leak: "clarity",
+    q: "When someone asks what you do, how clearly can you answer?",
+    a: [["Crystal clear, every time", 0], ["Mostly, but it wanders", 1], ["It depends on the day", 2], ["I ramble and lose them", 3]],
+  },
+  {
+    leak: "pipeline",
+    q: "Do you know your best-fit prospects right now, ranked by who's ready?",
+    a: [["Yes — I can see them clearly", 0], ["A few come to mind", 1], ["Only vaguely", 2], ["No idea who's warm", 3]],
+  },
+  {
+    leak: "ops",
+    q: "How much of your week goes to inbox, scheduling, and admin?",
+    a: [["Very little", 0], ["Some of it", 1], ["A lot of it", 2], ["Most of my week", 3]],
+  },
+  {
+    leak: "clarity",
+    q: "Could a stranger read your content and know exactly who you serve and what you sell?",
+    a: [["Yes, unmistakably", 0], ["Roughly", 1], ["Not really", 2], ["No — it's scattered", 3]],
+  },
+  {
+    leak: "pipeline",
+    q: "How often do good opportunities go cold before you follow up?",
+    a: [["Rarely", 0], ["Sometimes", 1], ["Often", 2], ["Constantly", 3]],
+  },
+  {
+    leak: "ops",
+    q: "If you stepped away for a week, would follow-up and operations keep running?",
+    a: [["Yes, smoothly", 0], ["Mostly", 1], ["Barely", 2], ["No — it would stop", 3]],
+  },
+];
+
+const DOORS: Record<Route, { name: string; desc: string; cta: string; href: string }> = {
+  clarity: {
+    name: "Clarity Pro™",
+    desc: "Turn your experience into one clear, sellable direction — the client you serve, the problem you solve, and the words that make people say yes.",
+    cta: "Begin Clarity Pro™",
+    href: "/clarity-pro",
+  },
+  ops: {
+    name: "Constance™",
+    desc: "Your Human-Authorized AI Chief of Staff takes the inbox, follow-up, and admin off your plate — every action approval-gated, so you stay in authority.",
+    cta: "Meet Constance™",
+    href: "/constance",
+  },
+  call: {
+    name: "Book a call with Tabitha",
+    desc: "Your leaks span more than one area — a short conversation is the fastest way to find what to fix first. No pitch; honest diagnosis.",
+    cta: "Book a call",
+    href: "/strategy-call",
+  },
+};
+
+const LEAK_NAMES: Record<LeakKey, string> = {
+  clarity: "Clarity Leak",
+  pipeline: "Pipeline Leak",
+  ops: "Operations Leak",
+};
+
+function levelLabel(v: number) {
+  return v <= 1 ? "Minor" : v <= 3 ? "Moderate" : v <= 4 ? "Significant" : "Major";
+}
 
 export default function CapacityLeakAudit() {
   usePageMeta({
     title: "Capacity Leak Audit™ — Find Where Your Business Is Leaking | Kingdom Solutions AI™",
-    description: "The Capacity Leak Audit™ helps leaders identify where time, clarity, focus, follow-up, or revenue is leaking — so you can build the right system next. Free strategic diagnostic from Kingdom Solutions AI™.",
+    description:
+      "The Capacity Leak Audit™ pinpoints whether your time, leads, or revenue is leaking through clarity, pipeline, or operations — and routes you to the right next step. Free strategic diagnostic from Kingdom Solutions AI™.",
     canonicalUrl: "https://kingdomsolutionsai.com/capacity-leak-audit",
     ogImage: "https://kingdomsolutionsai.com/assets/capacity-audit-visual_7655f585.png",
   });
-  const revealRef = useScrollReveal();
-  const [step, setStep] = useState<1 | 2>(1);
+
+  type Step = "intro" | number | "capture" | "result";
+  const [step, setStep] = useState<Step>("intro");
+  const [answers, setAnswers] = useState<({ leak: LeakKey; pts: number } | null)[]>(
+    Array(QUESTIONS.length).fill(null)
+  );
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -21,342 +99,288 @@ export default function CapacityLeakAudit() {
     role: "",
     company: "",
     challenge: "",
-    calendarText: "",
   });
-  const [submitted, setSubmitted] = useState(false);
+
+  // computed result
+  const scores = { clarity: 0, pipeline: 0, ops: 0 } as Record<LeakKey, number>;
+  answers.forEach((a) => { if (a) scores[a.leak] += a.pts; });
+  const ranked = (Object.entries(scores) as [LeakKey, number][]).sort((a, b) => b[1] - a[1]);
+  const top = ranked[0];
+  const second = ranked[1];
+  const mixed = top[1] - second[1] <= 1 && top[1] >= 3;
+  const severe = scores.clarity >= 4 && scores.ops >= 4;
+  let route: Route;
+  if (top[0] === "pipeline" || mixed || severe) route = "call";
+  else if (top[0] === "clarity") route = "clarity";
+  else route = "ops";
 
   const submitMutation = trpc.forms.submitCapacityLeakAudit.useMutation({
-    onSuccess: () => setSubmitted(true),
+    onSuccess: () => setStep("result"),
+    onError: () => setStep("result"), // never trap the user on a webhook hiccup
   });
 
-  // The Step 1 / Step 2 / confirmation cards are very different heights (the
-  // Step 2 calendar box is tall, the confirmation card is short). Without
-  // this, the browser keeps whatever scroll position it had, which can land
-  // squarely on blank space below the new, shorter card after a step change
-  // — looking like nothing happened even though it worked. Scroll back to
-  // the top of the form section on every step/submit transition so the new
-  // content is always what's in view.
-  const formSectionRef = useRef<HTMLElement>(null);
-  const isFirstRender = useRef(true);
-  useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-    formSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, [step, submitted]);
+  function answer(qi: number, leak: LeakKey, pts: number) {
+    const next = [...answers];
+    next[qi] = { leak, pts };
+    setAnswers(next);
+    if (qi < QUESTIONS.length - 1) setStep(qi + 1);
+    else setStep("capture");
+  }
 
-  const handleStepOneSubmit = (e: React.FormEvent) => {
+  function submitLead(e: React.FormEvent) {
     e.preventDefault();
-    setStep(2);
-  };
+    const summary =
+      `AUTO-AUDIT RESULT → recommended: ${DOORS[route].name}. ` +
+      `Scores — Clarity ${scores.clarity}/6 (${levelLabel(scores.clarity)}), ` +
+      `Pipeline ${scores.pipeline}/6 (${levelLabel(scores.pipeline)}), ` +
+      `Operations ${scores.ops}/6 (${levelLabel(scores.ops)}).`;
+    submitMutation.mutate({ ...formData, challenge: summary });
+  }
 
-  const handleFinalSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    submitMutation.mutate(formData);
-  };
+  const pct = (v: number) => Math.round((v / 6) * 100);
+  const otherKeys = (["clarity", "ops", "call"] as Route[]).filter((k) => k !== route);
 
   return (
-    <div ref={revealRef}>
-      {/* Hero — diagnostic document feel */}
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-15"
-          style={{ backgroundImage: "url(/assets/capacity-audit-visual_7655f585.png)" }}
+    <div className="cla-root">
+      <style>{claStyles}</style>
+
+      <div className="cla-wrap">
+        <img
+          className="cla-crest"
+          src="/assets/ksai-lion-crown-white-disc.png"
+          alt="Kingdom Solutions AI™"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-cream/50 to-cream" />
-        <div className="container relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <div className="lg:col-span-7 fade-up">
-              <img
-                src="/assets/ksai-logo-transparent-400_82fa1f46.png"
-                alt="Kingdom Solutions AI™"
-                className="w-16 h-16 mb-6"
-              />
-              <div className="flex items-center gap-3 mb-6">
-                <p className="editorial-label">Executive Diagnostic</p>
-                <span className="w-6 h-px bg-gold/50" />
-                <p className="editorial-label">No Login Required</p>
-              </div>
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-medium text-charcoal leading-[1.08] mb-8">
-                Find Where Your Business Is Leaking{" "}
-                <em className="text-gold italic">Capacity.</em>
-              </h1>
-              <p className="font-body text-lg lg:text-xl text-charcoal-light leading-relaxed max-w-xl mb-10">
-                The Capacity Leak Audit™ helps you identify where time, follow-up, focus, clarity, and revenue are quietly slipping through the cracks — so you can choose the right system to fix it.
-              </p>
-              <a href="#start-audit" className="btn-gold rounded-sm inline-flex items-center gap-2">
-                Take the Capacity Leak Audit™ <ArrowRight size={16} />
-              </a>
-            </div>
+        <div className="cla-wordmark">Kingdom Solutions <b>AI™</b></div>
+
+        {step !== "result" && (
+          <>
+            <div className="cla-eyebrow">Capacity Leak Audit™</div>
+            <h1 className="cla-h1">
+              {step === "capture"
+                ? "One last step to see your Leak Report."
+                : "Find where your time, leads, and revenue are leaking."}
+            </h1>
+            <p className="cla-lede">
+              {step === "capture"
+                ? "Where should we send your results? Your report and recommended next step appear on the next screen."
+                : "Six quick questions. You'll see your leak across three areas — and your clearest next step."}
+            </p>
+          </>
+        )}
+
+        {/* progress */}
+        {step !== "result" && (
+          <div className="cla-prog">
+            <span
+              style={{
+                width:
+                  step === "intro"
+                    ? "0%"
+                    : step === "capture"
+                    ? "100%"
+                    : `${((step as number) / QUESTIONS.length) * 100}%`,
+              }}
+            />
           </div>
-        </div>
-      </section>
+        )}
 
-      {/* Diagnostic Intro — asymmetric two-column */}
-      <section className="py-20 lg:py-28 bg-cream">
-        <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-            <div className="lg:col-span-5 lg:col-start-2 fade-up">
-              <p className="font-display text-2xl sm:text-3xl font-medium text-charcoal leading-snug">
-                You are not overwhelmed because you lack discipline.
-              </p>
-            </div>
-            <div className="lg:col-span-5 lg:col-start-7 fade-up">
-              <p className="font-body text-base text-charcoal-light leading-relaxed mb-6">
-                You are overwhelmed because too much of the business still depends on you remembering, tracking, deciding, following up, preparing, and holding everything together.
-              </p>
-              <p className="font-body text-base text-charcoal-light leading-relaxed mb-8">
-                The Capacity Leak Audit™ is designed to help you see where the breakdown is happening:
-              </p>
-              <div className="space-y-3 pl-5 border-l border-gold/30">
-                {["Is it clarity?", "Is it capacity?", "Is it follow-up?", "Is it your calendar?", "Is it your offer?", "Is it operational visibility?"].map((q, i) => (
-                  <p key={i} className="font-body text-sm text-charcoal italic">{q}</p>
-                ))}
-              </div>
-              <p className="font-body text-base text-charcoal-light leading-relaxed mt-8">
-                Before you add another tool, course, hire, or content plan, you need to know where the leak is.
-              </p>
-            </div>
+        {/* INTRO */}
+        {step === "intro" && (
+          <div className="cla-center">
+            <button className="cla-cta" onClick={() => setStep(0)}>
+              Start the audit →
+            </button>
+            <p className="cla-fine">Free · takes about 90 seconds · no charge to see your result</p>
           </div>
-        </div>
-      </section>
+        )}
 
-      {/* What the Audit Reveals — document-style blocks, not uniform cards */}
-      <section className="py-20 lg:py-28 bg-cream-dark">
-        <div className="container">
-          <div className="max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-14">
-              <div className="lg:col-span-5 fade-up">
-                <p className="editorial-label mb-4">Diagnostic Framework</p>
-                <h2 className="font-display text-3xl sm:text-4xl font-medium text-charcoal">
-                  What the Audit Helps Reveal
-                </h2>
-              </div>
+        {/* QUESTIONS */}
+        {typeof step === "number" && (
+          <div className="cla-q">
+            <div className="cla-qcount">Question {step + 1} of {QUESTIONS.length}</div>
+            <div className="cla-qtext">{QUESTIONS[step].q}</div>
+            <div className="cla-opts">
+              {QUESTIONS[step].a.map(([label, pts], idx) => (
+                <button
+                  key={idx}
+                  className="cla-opt"
+                  onClick={() => answer(step, QUESTIONS[step].leak, pts)}
+                >
+                  {label}
+                </button>
+              ))}
             </div>
+            {step > 0 && (
+              <button className="cla-back" onClick={() => setStep((step as number) - 1)}>
+                ← Back
+              </button>
+            )}
+          </div>
+        )}
 
-            {/* Staggered diagnostic blocks */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10 fade-up">
-              {[
-                { num: "01", title: "Clarity Leaks", desc: "Unclear niche, unclear offer, unclear messaging, inconsistent content, or a business voice that does not yet sound distinct." },
-                { num: "02", title: "Capacity Leaks", desc: "Overloaded calendar, too many decisions, scattered priorities, and a business that still depends too heavily on the leader." },
-                { num: "03", title: "Follow-Up Leaks", desc: "Dropped leads, delayed responses, inconsistent CRM updates, or revenue opportunities going cold." },
-                { num: "04", title: "Operational Leaks", desc: "Inbox chaos, meeting prep gaps, lack of visibility, disconnected systems, or repeatable work still being carried manually." },
-                { num: "05", title: "Revenue Leaks", desc: "Missed opportunities caused by unclear offers, weak follow-up, slow response time, or lack of systemized next steps." },
-              ].map((card) => (
-                <div key={card.num} className="flex gap-5">
-                  <span className="font-display text-2xl font-light text-gold/30 shrink-0 w-8">{card.num}</span>
-                  <div>
-                    <h3 className="font-display text-lg font-medium text-charcoal mb-2">{card.title}</h3>
-                    <p className="font-body text-sm text-charcoal-light leading-relaxed">{card.desc}</p>
+        {/* CAPTURE */}
+        {step === "capture" && (
+          <form className="cla-form" onSubmit={submitLead}>
+            <div className="cla-grid2">
+              <input required placeholder="First name" value={formData.firstName}
+                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })} />
+              <input required placeholder="Last name" value={formData.lastName}
+                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })} />
+            </div>
+            <input required type="email" placeholder="Email" value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
+            <div className="cla-grid2">
+              <input placeholder="Role (optional)" value={formData.role}
+                onChange={(e) => setFormData({ ...formData, role: e.target.value })} />
+              <input placeholder="Company / ministry (optional)" value={formData.company}
+                onChange={(e) => setFormData({ ...formData, company: e.target.value })} />
+            </div>
+            <button className="cla-cta cla-full" type="submit" disabled={submitMutation.isPending}>
+              {submitMutation.isPending ? "Preparing your report…" : "See my Leak Report →"}
+            </button>
+            <button type="button" className="cla-back" onClick={() => setStep(QUESTIONS.length - 1)}>
+              ← Back
+            </button>
+          </form>
+        )}
+
+        {/* RESULT */}
+        {step === "result" && (
+          <div className="cla-result">
+            <div className="cla-verdict-label">Your primary leak</div>
+            <div className="cla-verdict">
+              {route === "call" ? (
+                <>Leaks in <b>more than one area</b></>
+              ) : (
+                <>The <b>{LEAK_NAMES[top[0]]}</b></>
+              )}
+            </div>
+            <p className="cla-verdict-sub">
+              {route === "call"
+                ? "You're losing capacity in several places at once — which is common, and exactly why a short conversation beats a self-serve fix here."
+                : route === "clarity"
+                ? "Your biggest leak is in how clearly you're positioned — who you serve and how you say it. That's the first thing to fix."
+                : "Your biggest leak is operational — the doing is eating the hours that should go to leading and selling."}
+            </p>
+
+            <div className="cla-bars">
+              <h3>Your leak breakdown</h3>
+              {(["clarity", "pipeline", "ops"] as LeakKey[]).map((k) => (
+                <div className="cla-bar" key={k}>
+                  <div className="cla-bar-top">
+                    <span>{LEAK_NAMES[k]}</span>
+                    <span className="cla-lv">{levelLabel(scores[k])}</span>
+                  </div>
+                  <div className="cla-track">
+                    <div
+                      className="cla-fill"
+                      style={{
+                        width: `${pct(scores[k])}%`,
+                        background: k === "clarity" ? "var(--gold)" : k === "pipeline" ? "#7FA8D8" : "var(--green)",
+                      }}
+                    />
                   </div>
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Gold hairline */}
-      <div className="container"><div className="gold-hairline" /></div>
-
-      {/* What Happens After — routing section */}
-      <section className="py-20 lg:py-28 bg-cream">
-        <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            <div className="lg:col-span-4 lg:col-start-2 fade-up">
-              <h2 className="font-display text-3xl sm:text-4xl font-medium text-charcoal">
-                What Happens After the Audit
-              </h2>
-              <p className="font-body text-base text-charcoal-light leading-relaxed mt-4">
-                The audit helps route you into the right next step.
-              </p>
+            <div className="cla-rec">
+              <span className="cla-flag">Recommended for you</span>
+              <h2>{DOORS[route].name}</h2>
+              <p>{DOORS[route].desc}</p>
+              <Link href={DOORS[route].href} className="cla-cta">{DOORS[route].cta} →</Link>
             </div>
-            <div className="lg:col-span-5 lg:col-start-7 space-y-6 fade-up">
-              <div className="pl-6 border-l border-gold/40">
-                <p className="font-body text-base text-charcoal-light leading-relaxed">
-                  If your biggest leak is <strong className="text-charcoal">clarity</strong>, <Link href="/clarity-pro" className="text-gold hover:text-gold-dark underline underline-offset-4">Clarity Pro™</Link> may be the right fit.
-                </p>
-              </div>
-              <div className="pl-6 border-l border-charcoal/15">
-                <p className="font-body text-base text-charcoal-light leading-relaxed">
-                  If your biggest leak is <strong className="text-charcoal">operational capacity</strong>, <Link href="/constance" className="text-gold hover:text-gold-dark underline underline-offset-4">Constance™</Link> may be the right fit.
-                </p>
-              </div>
-              <div className="pl-6 border-l border-charcoal/15">
-                <p className="font-body text-base text-charcoal-light leading-relaxed">
-                  If your business has <strong className="text-charcoal">multiple systems breaking at once</strong>, <Link href="/executive-ai-strategy" className="text-gold hover:text-gold-dark underline underline-offset-4">Executive AI Strategy</Link> may be the right fit.
-                </p>
-              </div>
+
+            <div className="cla-peruse">Or explore the other doors</div>
+            <div className="cla-others">
+              {otherKeys.map((k) => (
+                <Link key={k} href={DOORS[k].href} className="cla-door">
+                  <span>
+                    <span className="cla-dn">{DOORS[k].name}</span>
+                    <span className="cla-dd">
+                      {k === "clarity" ? "For a clarity leak" : k === "ops" ? "For an operations leak" : "Not sure? Talk it through"}
+                    </span>
+                  </span>
+                  <span className="cla-arrow">→</span>
+                </Link>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
+        )}
 
-      {/* Start Audit Form */}
-      <section id="start-audit" ref={formSectionRef} className="py-20 lg:py-28 bg-cream-dark">
-        <div className="container">
-          <div className="max-w-2xl mx-auto">
-            {!submitted && step === 1 ? (
-              <div className="fade-up">
-                <div className="mb-10">
-                  <p className="editorial-label mb-4">Step 1 · Tell Us Who You Are</p>
-                  <h2 className="font-display text-3xl font-medium text-charcoal mb-3">
-                    Begin Your Capacity Leak Audit™
-                  </h2>
-                  <p className="font-body text-base text-charcoal-light">
-                    Six fields, then a quick look at your week. Your private audit begins immediately after.
-                  </p>
-                </div>
-
-                <form onSubmit={handleStepOneSubmit} className="bg-card border border-taupe rounded-sm p-8 lg:p-10 space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                      <label className="font-body text-sm font-medium text-charcoal mb-2 block">First Name</label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.firstName}
-                        onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                        className="w-full px-4 py-3 bg-cream border border-taupe rounded-sm font-body text-sm text-charcoal focus:border-gold focus:ring-1 focus:ring-gold/30 outline-none transition-colors"
-                        placeholder="Your first name"
-                      />
-                    </div>
-                    <div>
-                      <label className="font-body text-sm font-medium text-charcoal mb-2 block">Last Name</label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.lastName}
-                        onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                        className="w-full px-4 py-3 bg-cream border border-taupe rounded-sm font-body text-sm text-charcoal focus:border-gold focus:ring-1 focus:ring-gold/30 outline-none transition-colors"
-                        placeholder="Your last name"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="font-body text-sm font-medium text-charcoal mb-2 block">Email</label>
-                    <input
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 bg-cream border border-taupe rounded-sm font-body text-sm text-charcoal focus:border-gold focus:ring-1 focus:ring-gold/30 outline-none transition-colors"
-                      placeholder="your@email.com"
-                    />
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                      <label className="font-body text-sm font-medium text-charcoal mb-2 block">Role</label>
-                      <input
-                        type="text"
-                        value={formData.role}
-                        onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                        className="w-full px-4 py-3 bg-cream border border-taupe rounded-sm font-body text-sm text-charcoal focus:border-gold focus:ring-1 focus:ring-gold/30 outline-none transition-colors"
-                        placeholder="Founder, Coach, Executive..."
-                      />
-                    </div>
-                    <div>
-                      <label className="font-body text-sm font-medium text-charcoal mb-2 block">Company or Ministry Name</label>
-                      <input
-                        type="text"
-                        value={formData.company}
-                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                        className="w-full px-4 py-3 bg-cream border border-taupe rounded-sm font-body text-sm text-charcoal focus:border-gold focus:ring-1 focus:ring-gold/30 outline-none transition-colors"
-                        placeholder="Your organization"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="font-body text-sm font-medium text-charcoal mb-2 block">Biggest Capacity Challenge Right Now</label>
-                    <textarea
-                      value={formData.challenge}
-                      onChange={(e) => setFormData({ ...formData, challenge: e.target.value })}
-                      rows={4}
-                      className="w-full px-4 py-3 bg-cream border border-taupe rounded-sm font-body text-sm text-charcoal focus:border-gold focus:ring-1 focus:ring-gold/30 outline-none transition-colors resize-none"
-                      placeholder="Where is your capacity leaking? What never seems to get done?"
-                    />
-                  </div>
-                  <button type="submit" className="w-full btn-gold rounded-sm">
-                    Continue to Step 2 <ArrowRight size={16} className="inline ml-1" />
-                  </button>
-                  <p className="font-body text-xs text-warm-gray text-center">
-                    We respect your inbox. Your information is used only to personalize your audit and send you your results.
-                  </p>
-                </form>
-              </div>
-            ) : !submitted && step === 2 ? (
-              <div className="fade-up">
-                <div className="mb-10">
-                  <p className="editorial-label mb-4">Step 2 · Tell Us About Your Week</p>
-                  <h2 className="font-display text-3xl font-medium text-charcoal mb-3">
-                    Where Is the Time Actually Going, {formData.firstName || "there"}?
-                  </h2>
-                  <p className="font-body text-base text-charcoal-light">
-                    Paste or describe a representative week — meetings, travel, prep, follow-up, the work that never makes it onto the calendar. This is what your audit is actually built from.
-                  </p>
-                </div>
-
-                <form onSubmit={handleFinalSubmit} className="bg-card border border-taupe rounded-sm p-8 lg:p-10 space-y-6">
-                  <div>
-                    <label className="font-body text-sm font-medium text-charcoal mb-2 block">A Representative Week</label>
-                    <textarea
-                      value={formData.calendarText}
-                      onChange={(e) => setFormData({ ...formData, calendarText: e.target.value })}
-                      rows={10}
-                      className="w-full px-4 py-3 bg-cream border border-taupe rounded-sm font-body text-sm text-charcoal focus:border-gold focus:ring-1 focus:ring-gold/30 outline-none transition-colors resize-none"
-                      placeholder={"Example:\nMon 8-9am prep for team call, 9-11 back-to-back meetings, 11-12 inbox, afternoon mostly interruptions...\n\nPaste directly from your calendar, or just describe it in your own words."}
-                    />
-                    <p className="font-body text-xs text-warm-gray mt-2">
-                      Optional, but the more real detail here, the more specific your results will be.
-                    </p>
-                  </div>
-                  <div className="flex gap-4">
-                    <button
-                      type="button"
-                      onClick={() => setStep(1)}
-                      className="px-6 py-3 rounded-sm border border-taupe font-body text-sm text-charcoal hover:bg-cream transition-colors"
-                    >
-                      Back
-                    </button>
-                    <button type="submit" disabled={submitMutation.isPending} className="flex-1 btn-gold rounded-sm disabled:opacity-60">
-                      {submitMutation.isPending ? "Preparing Your Audit…" : "Start the Capacity Leak Audit™"}
-                    </button>
-                  </div>
-                  <p className="font-body text-xs text-warm-gray text-center">
-                    We respect your inbox. Your information is used only to personalize your audit and send you your results.
-                  </p>
-                </form>
-              </div>
-            ) : (
-              <div className="fade-up text-center bg-card border border-taupe rounded-sm p-12">
-                <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mx-auto mb-6">
-                  <svg className="w-6 h-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <h3 className="font-display text-2xl font-medium text-charcoal mb-4">
-                  {submitMutation.data?.auditGenerated ? "Your audit is on its way." : "Your audit is being prepared."}
-                </h3>
-                <p className="font-body text-base text-charcoal-light leading-relaxed mb-6">
-                  {submitMutation.data?.auditGenerated
-                    ? "Your personalized Capacity Leak Audit™ results and recommended next steps have just been sent to your inbox."
-                    : "Over the next 24 hours, you will receive your personalized Capacity Leak Audit™ results and recommended next steps."}
-                </p>
-                <p className="font-body text-sm text-warm-gray">
-                  Please check your email for next steps.
-                </p>
-              </div>
-            )}
-
-            {/* Privacy Note */}
-            <p className="font-body text-xs text-warm-gray text-center mt-8 max-w-lg mx-auto">
-              The Capacity Leak Audit™ is designed to assess business clarity, capacity, and operational pressure. Do not enter passwords, payment details, confidential client files, legal documents, medical records, or unnecessary sensitive information.
-            </p>
-
-          </div>
-        </div>
-      </section>
+        <footer className="cla-footer">
+          <div className="cla-foot-name">Kingdom Solutions <b>AI™</b></div>
+          <div className="cla-foot-tag">Clarity · Alignment · Leverage · Legacy</div>
+        </footer>
+      </div>
     </div>
   );
 }
+
+const claStyles = `
+.cla-root{
+  --ink:#0E1522;--ink-2:#16213A;--ink-3:#1E2C49;
+  --gold:#C9A24B;--gold-soft:#E4C878;--green:#37C08A;
+  --cream:#F3EEE3;--dim:#AFB3BE;--line:rgba(201,162,75,0.26);
+  --serif:Georgia,'Times New Roman',serif;--mono:'IBM Plex Mono',ui-monospace,monospace;--sans:'Inter',system-ui,sans-serif;
+  background:radial-gradient(1100px 560px at 80% -10%,rgba(201,162,75,0.09),transparent 60%),radial-gradient(800px 500px at 6% 110%,rgba(55,192,138,0.05),transparent 60%),var(--ink);
+  color:var(--cream);font-family:var(--sans);line-height:1.55;min-height:100vh;padding:0 20px;
+}
+.cla-wrap{max-width:680px;margin:0 auto;padding:56px 0 80px}
+.cla-crest{width:140px;height:140px;display:block;margin:0 auto 10px;border-radius:50%;background:#fff;object-fit:cover;box-shadow:0 4px 18px rgba(0,0,0,.35);border:1px solid rgba(201,162,75,.5)}
+.cla-wordmark{font-family:var(--serif);font-size:1.35rem;letter-spacing:.02em;color:var(--cream);text-align:center;margin-bottom:14px}
+.cla-wordmark b{color:var(--gold);font-weight:400}
+.cla-eyebrow{font-family:var(--mono);font-size:16px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:16px}
+.cla-h1{font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.14;text-align:center;margin:0 0 14px}
+.cla-lede{color:var(--dim);text-align:center;max-width:520px;margin:0 auto 30px;font-size:1.02rem}
+.cla-prog{height:3px;background:rgba(201,162,75,0.15);border-radius:3px;margin-bottom:34px;overflow:hidden}
+.cla-prog span{display:block;height:100%;background:var(--gold);transition:width .4s ease}
+.cla-center{text-align:center}
+.cla-fine{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--dim);margin-top:16px}
+.cla-cta{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);font-weight:600;background:var(--gold);padding:13px 24px;border-radius:8px;text-decoration:none;border:none;cursor:pointer;transition:transform .2s,background .2s}
+.cla-cta:hover{background:var(--gold-soft);transform:translateY(-1px)}
+.cla-cta:disabled{opacity:.6;cursor:default;transform:none}
+.cla-cta.cla-full{width:100%;justify-content:center;margin-top:6px}
+.cla-q{animation:cla-fade .35s ease}
+@keyframes cla-fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.cla-qcount{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px}
+.cla-qtext{font-family:var(--serif);font-size:clamp(1.35rem,3.6vw,1.7rem);line-height:1.25;margin-bottom:22px}
+.cla-opts{display:flex;flex-direction:column;gap:11px}
+.cla-opt{text-align:left;background:var(--ink-2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;color:var(--cream);font-family:var(--sans);font-size:1rem;cursor:pointer;transition:border-color .2s,background .2s,transform .15s}
+.cla-opt:hover{border-color:var(--gold);background:var(--ink-3);transform:translateY(-1px)}
+.cla-back{margin-top:22px;background:none;border:none;color:var(--dim);font-family:var(--mono);font-size:12px;letter-spacing:.06em;cursor:pointer;text-transform:uppercase}
+.cla-back:hover{color:var(--gold)}
+.cla-form{display:flex;flex-direction:column;gap:12px;animation:cla-fade .35s ease}
+.cla-grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:520px){.cla-grid2{grid-template-columns:1fr}}
+.cla-form input{background:var(--ink-2);border:1px solid var(--line);border-radius:10px;padding:14px 16px;color:var(--cream);font-family:var(--sans);font-size:1rem}
+.cla-form input:focus{outline:2px solid var(--green);outline-offset:1px;border-color:var(--gold)}
+.cla-form input::placeholder{color:var(--dim)}
+.cla-result{animation:cla-fade .45s ease}
+.cla-verdict-label{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);text-align:center;margin-bottom:12px}
+.cla-verdict{font-family:var(--serif);font-size:clamp(1.6rem,4.5vw,2.2rem);text-align:center;line-height:1.2;margin-bottom:8px}
+.cla-verdict b{color:var(--gold-soft);font-weight:400}
+.cla-verdict-sub{text-align:center;color:var(--dim);max-width:500px;margin:0 auto 30px}
+.cla-bars{background:var(--ink-2);border:1px solid var(--line);border-radius:14px;padding:22px 22px 8px;margin-bottom:30px}
+.cla-bars h3{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:16px}
+.cla-bar{margin-bottom:16px}
+.cla-bar-top{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:6px}
+.cla-bar-top .cla-lv{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--dim)}
+.cla-track{height:8px;background:rgba(255,255,255,0.06);border-radius:5px;overflow:hidden}
+.cla-fill{height:100%;border-radius:5px;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.cla-rec{border:1px solid rgba(201,162,75,0.5);background:linear-gradient(180deg,rgba(201,162,75,0.10),transparent);border-radius:16px;padding:26px 24px;margin-bottom:16px;position:relative}
+.cla-flag{position:absolute;top:-11px;left:22px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);background:var(--gold);padding:4px 10px;border-radius:6px}
+.cla-rec h2{font-family:var(--serif);font-weight:400;font-size:1.6rem;margin:6px 0 8px}
+.cla-rec p{color:var(--dim);font-size:.98rem;margin-bottom:18px}
+.cla-peruse{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);text-align:center;margin:26px 0 14px}
+.cla-others{display:flex;flex-direction:column;gap:11px}
+.cla-door{display:flex;justify-content:space-between;align-items:center;gap:14px;background:var(--ink-2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;text-decoration:none;color:var(--cream);transition:border-color .2s,background .2s}
+.cla-door:hover{border-color:var(--gold);background:var(--ink-3)}
+.cla-dn{font-family:var(--serif);font-size:1.1rem;display:block}
+.cla-dd{font-size:.85rem;color:var(--dim);margin-top:2px;display:block}
+.cla-arrow{color:var(--gold);font-family:var(--mono);flex-shrink:0}
+.cla-footer{text-align:center;padding:44px 0 8px;margin-top:36px;border-top:1px solid var(--line)}
+.cla-foot-name{font-family:var(--serif);font-size:1.1rem;letter-spacing:.02em;color:var(--cream);margin-bottom:6px}
+.cla-foot-name b{color:var(--gold);font-weight:400}
+.cla-foot-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
+`;
