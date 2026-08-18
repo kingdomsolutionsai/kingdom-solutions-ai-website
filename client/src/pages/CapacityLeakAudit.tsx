@@ -326,7 +326,7 @@ const claStyles = `
   background:radial-gradient(1100px 560px at 80% -10%,rgba(201,162,75,0.09),transparent 60%),radial-gradient(800px 500px at 6% 110%,rgba(55,192,138,0.05),transparent 60%),var(--ink);
   color:var(--cream);font-family:var(--sans);line-height:1.55;min-height:100vh;padding:0 20px;
 }
-.cla-wrap{max-width:680px;margin:0 auto;padding:56px 0 80px}
+.cla-wrap{max-width:680px;margin:0 auto;padding:130px 0 80px}
 .cla-crest{width:140px;height:140px;display:block;margin:0 auto 10px;border-radius:50%;background:#fff;object-fit:cover;box-shadow:0 4px 18px rgba(0,0,0,.35);border:1px solid rgba(201,162,75,.5)}
 .cla-wordmark{font-family:var(--serif);font-size:1.35rem;letter-spacing:.02em;color:var(--cream);text-align:center;margin-bottom:14px}
 .cla-wordmark b{color:var(--gold);font-weight:400}
