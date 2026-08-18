@@ -8,7 +8,7 @@ import { trpc } from "@/lib/trpc";
 export default function ClarityPro() {
   usePageMeta({
     title: "Clarity Pro™ — Strategic Clarity & Content System | Kingdom Solutions AI™",
-    description: "Clarity Pro™ helps new coaches, founders, and consultants clarify their niche, build a strong offer, develop their business voice, and create a content strategy. Three tiers from self-guided to full buildout.",
+    description: "Clarity Pro™ helps new coaches, founders, and consultants clarify their niche, offer, voice, and messaging in one focused 1:1 session with Tabitha — so the market finally understands what you do.",
     canonicalUrl: "https://kingdomsolutionsai.com/clarity-pro",
     ogImage: "https://kingdomsolutionsai.com/assets/clarity-visual_f897fefc.png",
   });
@@ -53,9 +53,9 @@ export default function ClarityPro() {
                 <em className="text-gold italic">Understand.</em>
               </h1>
               <p className="font-body text-lg lg:text-xl text-charcoal-light leading-relaxed max-w-xl mb-10">
-                Clarity Pro™ helps new coaches, founders, consultants, corporate escapees, and experienced professionals define their niche, structure their offer, develop their voice, sharpen their messaging, and build a content strategy that attracts.
+                Clarity Pro™ helps new coaches, founders, consultants, corporate escapees, and experienced professionals define their niche, structure their offer, develop their voice, and sharpen their messaging — in one focused session with a human who checks your work.
               </p>
-              <a href="#begin-clarity" className="btn-gold rounded-sm inline-flex items-center gap-2">
+              <a href="#pricing" className="btn-gold rounded-sm inline-flex items-center gap-2">
                 Begin with Clarity <ArrowRight size={16} />
               </a>
             </div>
@@ -137,7 +137,7 @@ export default function ClarityPro() {
                 { num: "02", title: "Your Offer", desc: "Structure your expertise into a clear, compelling offer that people understand and want to buy — not a vague menu of services." },
                 { num: "03", title: "Your Voice", desc: "Develop a distinct business voice that sounds like you — not like everyone else in your industry or a generic template." },
                 { num: "04", title: "Your Messaging", desc: "Articulate what you do in language that resonates with your ideal audience and differentiates you from the noise." },
-                { num: "05", title: "Your Content Strategy", desc: "Build a content approach that establishes authority and attracts clients without burning you out or requiring you to post constantly." },
+                { num: "05", title: "Your Content Direction", desc: "Leave with a clear sense of what to say, where to say it, and who you are saying it to — so content stops feeling like guesswork." },
               ].map((item) => (
                 <div key={item.num} className="flex gap-5">
                   <span className="font-display text-2xl font-light text-gold/30 shrink-0 w-8">{item.num}</span>
@@ -206,7 +206,7 @@ export default function ClarityPro() {
                   "A structured offer that people understand and want to buy",
                   "Messaging that differentiates you from others in your space",
                   "A business voice that sounds like you — not like a template",
-                  "A content strategy that builds authority without burning you out",
+                  "A clear content direction that builds authority without burning you out",
                   "Clarity on what to say, where to say it, and who you are saying it to",
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
@@ -283,9 +283,9 @@ export default function ClarityPro() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 fade-up">
             {[
-              { quote: "I finally have language for what I do. It's the difference between explaining myself and being understood.", who: "Business coach, Guided tier" },
-              { quote: "Every dollar I spent on content before this was aimed at the wrong niche. Now it lands.", who: "Faith-based coach, Starter tier" },
-              { quote: "The offer pressure-test alone was worth it — I cut two services I was quietly dreading.", who: "Consultant, Buildout tier" },
+              { quote: "I finally have language for what I do. It's the difference between explaining myself and being understood.", who: "Business coach" },
+              { quote: "Every dollar I spent on content before this was aimed at the wrong niche. Now it lands.", who: "Faith-based coach" },
+              { quote: "The offer pressure-test alone was worth it — I cut two services I was quietly dreading.", who: "Consultant" },
             ].map((t, i) => (
               <div key={i} className="bg-card border border-taupe rounded-sm p-8">
                 <p className="font-display text-lg text-charcoal leading-snug mb-5">"{t.quote}"</p>
@@ -299,99 +299,63 @@ export default function ClarityPro() {
         </div>
       </section>
 
-      {/* Choose Your Clarity Pro Path — Pricing Tiers */}
-      <section className="py-20 lg:py-28 bg-cream">
+      {/* The Offer — single Clarity Pro engagement */}
+      <section id="pricing" className="py-20 lg:py-28 bg-cream">
         <div className="container">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-16 fade-up">
-              <p className="editorial-label mb-4">Choose Your Path</p>
+          <div className="max-w-2xl mx-auto">
+            <div className="text-center mb-14 fade-up">
+              <p className="editorial-label mb-4">The Engagement</p>
               <h2 className="font-display text-3xl sm:text-4xl font-medium text-charcoal mb-4">
-                Choose Your Clarity Pro™ Path
+                One focused session. One clear direction.
               </h2>
-              <p className="font-body text-base text-charcoal-light max-w-2xl mx-auto">
-                Whether you are starting with a business idea, refining your first offer, or preparing to become more visible, Clarity Pro™ gives you a clear path forward.
+              <p className="font-body text-base text-charcoal-light max-w-xl mx-auto">
+                Clarity Pro™ is a private, guided engagement with Tabitha — no course to grind through, no group to hide in. You leave with your niche, offer, voice, and messaging clarified, and it in writing.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 border border-taupe/60 fade-up">
-              {/* Starter */}
-              <div className="p-8 lg:p-10 border-b lg:border-b-0 lg:border-r border-taupe/60">
-                <p className="font-body text-[0.7rem] tracking-[0.16em] uppercase text-charcoal-light font-medium mb-3">Self-Guided</p>
-                <h3 className="font-display text-2xl font-medium text-charcoal mb-2">Clarity Pro™ Starter</h3>
-                <p className="font-display text-3xl font-medium text-gold mb-1">$197</p>
-                <p className="font-body text-xs text-charcoal-light mb-6">one-time</p>
-                <div className="w-10 h-[1px] bg-gold/40 mb-6" />
-                <p className="font-body text-sm text-charcoal-light leading-relaxed mb-4">
-                  For the new coach or founder who wants to clarify the foundation before creating more content.
-                </p>
-                <p className="font-body text-sm text-charcoal-light leading-relaxed mb-4">
-                  Clarity Pro™ Starter gives you a self-guided clarity and content creation experience. You can clarify your niche, pressure-test your offer, define your business voice, and generate strategic content ideas, posts, emails, and weekly content direction using the Clarity Pro™ system.
-                </p>
-                <p className="font-body text-xs text-charcoal-light/60 italic leading-relaxed mb-6 border-l-2 border-gold/30 pl-3">
-                  This tier does not include personal review, private coaching, or custom strategy feedback from Kingdom Solutions AI™.
-                </p>
-                <ul className="space-y-3 mb-8">
-                  {["Niche clarity guidance", "Offer pressure-testing", "Messaging prompts", "Business voice direction", "Content strategy prompts", "Weekly content planning support", "Clear next-step framework"].map((item, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <span className="w-3 h-px bg-gold/50 mt-2.5 shrink-0" />
-                      <span className="font-body text-sm text-charcoal-light">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <p className="font-body text-xs text-charcoal-light/70 mb-6">Best for: Self-guided clarity.</p>
-                <a href="https://buy.stripe.com/28E3cxapFfC8bMV0NugrS08" target="_blank" rel="noopener noreferrer" className="btn-gold rounded-sm w-full text-center block text-sm">
-                  Start Clarity Pro™ — $197
-                </a>
-              </div>
-
-              {/* Guided — Most Popular */}
-              <div className="p-8 lg:p-10 border-b lg:border-b-0 lg:border-r border-taupe/60 relative bg-cream-dark/30">
-                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gold" />
-                <p className="font-body text-[0.7rem] tracking-[0.16em] uppercase text-gold font-semibold mb-3">Most Popular</p>
-                <h3 className="font-display text-2xl font-medium text-charcoal mb-2">Clarity Pro™ Guided</h3>
-                <p className="font-display text-3xl font-medium text-gold mb-1">$497</p>
-                <p className="font-body text-xs text-charcoal-light mb-6">one-time</p>
+            <div className="border border-taupe/60 bg-cream-dark/30 relative fade-up">
+              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gold" />
+              <div className="p-8 lg:p-12">
+                <h3 className="font-display text-2xl font-medium text-charcoal mb-2">Clarity Pro™</h3>
+                <p className="font-display text-4xl font-medium text-gold mb-1">$497</p>
+                <p className="font-body text-xs text-charcoal-light mb-6">one-time · private 1:1 with Tabitha</p>
                 <div className="w-10 h-[1px] bg-gold/40 mb-6" />
                 <p className="font-body text-sm text-charcoal-light leading-relaxed mb-6">
-                  For the coach, founder, or consultant who wants strategic support refining their niche, offer, voice, and content direction.
+                  For the coach, founder, or consultant ready to turn experience into one clear, sellable direction — and to walk away with it documented, not just discussed.
                 </p>
-                <ul className="space-y-3 mb-4">
-                  {["Everything in Starter", "One 60-minute Clarity Review Session", "Positioning refinement", "Offer language review", "Voice and messaging feedback", "14 days of light follow-up support"].map((item, i) => (
+                <p className="font-body text-[0.7rem] tracking-[0.16em] uppercase text-gold font-semibold mb-4">What's included</p>
+                <ul className="space-y-3 mb-8">
+                  {[
+                    "A 60-minute 1:1 Clarity Review with Tabitha",
+                    "A written before/after positioning statement, delivered by email",
+                    "A personal voice note walking through your direction, delivered by email",
+                    "Live feedback on your offer, voice, and messaging in the session",
+                    "14 days of light follow-up support after your session",
+                  ].map((item, i) => (
                     <li key={i} className="flex items-start gap-2">
                       <span className="w-3 h-px bg-gold/50 mt-2.5 shrink-0" />
                       <span className="font-body text-sm text-charcoal-light">{item}</span>
                     </li>
                   ))}
                 </ul>
-                <p className="font-body text-xs text-charcoal-light/70 mb-6">Best for: Clearer direction with strategic review.</p>
                 <a href="https://buy.stripe.com/9B6aEZ7dtblS3gpdAggrS09" target="_blank" rel="noopener noreferrer" className="btn-gold rounded-sm w-full text-center block text-sm">
                   Start Clarity Pro™ — $497
                 </a>
-              </div>
-
-              {/* Buildout */}
-              <div className="p-8 lg:p-10">
-                <p className="font-body text-[0.7rem] tracking-[0.16em] uppercase text-charcoal-light font-medium mb-3">Full Buildout</p>
-                <h3 className="font-display text-2xl font-medium text-charcoal mb-2">Clarity Pro™ Buildout</h3>
-                <p className="font-display text-3xl font-medium text-gold mb-1">$1,497</p>
-                <p className="font-body text-xs text-charcoal-light mb-6">one-time</p>
-                <div className="w-10 h-[1px] bg-gold/40 mb-6" />
-                <p className="font-body text-sm text-charcoal-light leading-relaxed mb-6">
-                  For the founder, coach, or consultant who wants help turning clarity into launch-ready business and content assets.
+                <p className="font-body text-xs text-charcoal-light text-center mt-4">
+                  Not ready to buy? <a href="#begin-clarity" className="text-gold hover:text-gold-dark underline underline-offset-4 transition-colors">Tell us where you are first</a>.
                 </p>
-                <ul className="space-y-3 mb-4">
-                  {["Everything in Guided", "Full offer refinement", "Buyer messaging framework", "Business voice profile", "30-day content plan", "Sales page direction", "Lead magnet outline", "Email nurture sequence direction", "Authority campaign direction", "Two strategy sessions"].map((item, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <span className="w-3 h-px bg-gold/50 mt-2.5 shrink-0" />
-                      <span className="font-body text-sm text-charcoal-light">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <p className="font-body text-xs text-charcoal-light/70 mb-6">Best for: Turning clarity into a stronger market presence.</p>
-                <Link href="/strategy-call" className="btn-gold rounded-sm w-full text-center block text-sm">
-                  Apply for Buildout
-                </Link>
               </div>
+            </div>
+
+            {/* Upgrade path — where "I want the full build" goes now */}
+            <div className="mt-8 text-center fade-up">
+              <p className="font-body text-sm text-charcoal-light leading-relaxed">
+                Want the full build-out — sales page, content plan, and launch-ready assets? That's{" "}
+                <Link href="/executive-ai-strategy" className="text-gold hover:text-gold-dark underline underline-offset-4 transition-colors">
+                  Executive AI Strategy
+                </Link>
+                .
+              </p>
             </div>
           </div>
         </div>
@@ -406,30 +370,42 @@ export default function ClarityPro() {
             <div className="lg:col-span-4 lg:col-start-2 fade-up">
               <p className="editorial-label mb-4">Frequently Asked</p>
               <h2 className="font-display text-3xl sm:text-4xl font-medium text-charcoal leading-snug">
-                Before you choose <em className="text-gold italic">your path.</em>
+                Before you <em className="text-gold italic">begin.</em>
               </h2>
             </div>
             <div className="lg:col-span-6 lg:col-start-7 fade-up">
               {[
                 {
                   q: "What exactly is Clarity Pro™?",
-                  a: "A guided strategy process that turns your existing expertise into a clear niche, a pressure-tested offer, a recognizable voice, and a practical content direction — built with AI support, refined by your judgment.",
+                  a: "A guided 1:1 process that turns your existing expertise into a clear niche, a pressure-tested offer, a recognizable voice, and a practical content direction — built with AI support, refined by your judgment, and delivered to you in writing.",
                 },
                 {
-                  q: "How are Starter, Guided, and Buildout different?",
-                  a: "Starter gives you the full self-guided framework. Guided adds a live 60-minute review session with Tabitha plus a written before/after positioning statement so a human checks your work. Buildout goes further, turning the strategy into launch-ready assets like a sales page and content plan.",
+                  q: "Is Clarity Pro™ one-on-one?",
+                  a: "Yes. It's a private 60-minute Clarity Review with Tabitha, followed by a written before/after positioning statement and a personal voice note — not a course, and not a group program.",
                 },
                 {
                   q: "Can Clarity Pro™ create content for me?",
-                  a: "It gives you direction, prompts, and a plan — not a stream of generic posts. The goal is a clearer business first; better content is what naturally follows.",
+                  a: "It gives you direction and a clear plan — not a stream of generic posts. The goal is a clearer business first; better content is what naturally follows.",
                 },
                 {
                   q: "Is this only for brand-new coaches?",
                   a: "No. It's built for anyone whose experience is real but whose business language hasn't caught up yet — new coaches, corporate-to-coach professionals, founders, and consultants alike.",
                 },
                 {
-                  q: "What should I prepare before I begin?",
-                  a: "Nothing formal. Come with your honest sense of who you help and how, even if it feels rough or unclear — that's exactly the raw material the process works with.",
+                  q: "What should I prepare before we begin?",
+                  a: "Nothing formal. Come with your honest sense of who you help and how, even if it feels rough or unclear — that's exactly the raw material the session works with.",
+                },
+                {
+                  q: "What if I need the full build-out, not just clarity?",
+                  a: (
+                    <>
+                      Clarity Pro™ is the clarity engagement. If you want that clarity turned into launch-ready assets — a sales page, content plan, and campaign direction — that's handled through{" "}
+                      <Link href="/executive-ai-strategy" className="text-gold hover:text-gold-dark underline underline-offset-4 transition-colors">
+                        Executive AI Strategy
+                      </Link>
+                      .
+                    </>
+                  ),
                 },
                 {
                   q: "How should I handle confidential information?",
@@ -439,7 +415,7 @@ export default function ClarityPro() {
                   q: "What is the refund policy?",
                   a: (
                     <>
-                      Refund eligibility depends on the tier. Starter is generally non-refundable once access is delivered (contact us within 24 hours if purchased in error). Guided allows cancellation before your review session is delivered (case-by-case within 48 hours). Buildout terms are set in your proposal. Full details in our{" "}
+                      Clarity Pro™ allows cancellation before your Clarity Review session is delivered (handled case-by-case within 48 hours of purchase). Full details are in our{" "}
                       <Link href="/refund-policy" className="text-gold hover:text-gold-dark underline underline-offset-4 transition-colors">
                         Refund Policy
                       </Link>
@@ -511,7 +487,7 @@ export default function ClarityPro() {
                       <option value="offer">Offer Clarity — I need to structure what I sell</option>
                       <option value="voice">Voice Clarity — I need to sound like me</option>
                       <option value="messaging">Messaging Clarity — I need people to understand what I do</option>
-                      <option value="content">Content Strategy — I need a plan that builds authority</option>
+                      <option value="content">Content Direction — I need a plan that builds authority</option>
                       <option value="all">All of the above — I need the full foundation</option>
                     </select>
                   </div>
