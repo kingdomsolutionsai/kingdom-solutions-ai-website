@@ -2,6 +2,18 @@ import { Link, useLocation } from "wouter";
 import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 
+// The live webinar registration site (external).
+const WEBINAR_URL = "https://whatentrepreneursneedtoknow.com";
+
+// "For Entrepreneurs" lane — emerging-entrepreneur resources.
+// Only live destinations are listed. Add these as they come to exist:
+//   { href: "/entrepreneur-assessment", label: "Entrepreneur Assessment" },  // coming
+//   { href: "/assets/handbook.pdf", label: "Handbook (Free)", external: true }, // once hosted on-site
+//   { href: "/fast-track-toolkit", label: "Fast Track Toolkit" },  // coming
+const entrepreneurLinks = [
+  { href: WEBINAR_URL, label: "The Webinar", external: true },
+];
+
 // Offers, ordered as the ladder — this is what lives inside "Services".
 const serviceLinks = [
   { href: "/capacity-leak-audit", label: "Capacity Leak Audit™" },
@@ -10,7 +22,7 @@ const serviceLinks = [
   { href: "/executive-ai-strategy", label: "Executive AI Strategy" },
 ];
 
-// Top-level nav after "Start Here" and the Services dropdown.
+// Top-level nav after the dropdowns.
 const simpleLinks = [
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
@@ -21,7 +33,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [entOpen, setEntOpen] = useState(false);
   const servicesRef = useRef<HTMLDivElement>(null);
+  const entRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -32,6 +46,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     setMobileOpen(false);
     setServicesOpen(false);
+    setEntOpen(false);
     window.scrollTo(0, 0);
   }, [location]);
 
@@ -40,6 +55,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     const handleClick = (e: MouseEvent) => {
       if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) {
         setServicesOpen(false);
+      }
+      if (entRef.current && !entRef.current.contains(e.target as Node)) {
+        setEntOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClick);
@@ -109,6 +127,53 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             >
               Start Here
             </button>
+
+            {/* For Entrepreneurs dropdown */}
+            <div className="relative" ref={entRef}>
+              <button
+                type="button"
+                onClick={() => setEntOpen((v) => !v)}
+                className="font-body text-[0.8rem] tracking-[0.02em] transition-colors duration-300 whitespace-nowrap inline-flex items-center gap-1 text-charcoal/70 hover:text-charcoal"
+                aria-expanded={entOpen}
+                aria-haspopup="true"
+              >
+                For Entrepreneurs
+                <ChevronDown
+                  size={14}
+                  className={`transition-transform duration-300 ${entOpen ? "rotate-180" : ""}`}
+                  aria-hidden="true"
+                />
+              </button>
+              {entOpen && (
+                <div className="absolute left-1/2 -translate-x-1/2 top-full mt-4 min-w-[220px] bg-cream/98 backdrop-blur-xl border border-gold/15 shadow-[0_8px_30px_rgba(0,0,0,0.08)] py-2 z-50">
+                  {entrepreneurLinks.map((link) =>
+                    link.external ? (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block font-body text-[0.82rem] tracking-[0.02em] px-5 py-3 transition-colors duration-200 whitespace-nowrap text-charcoal/75 hover:text-charcoal hover:bg-gold/5"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className={`block font-body text-[0.82rem] tracking-[0.02em] px-5 py-3 transition-colors duration-200 whitespace-nowrap ${
+                          location === link.href
+                            ? "text-gold font-medium bg-gold/5"
+                            : "text-charcoal/75 hover:text-charcoal hover:bg-gold/5"
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    )
+                  )}
+                </div>
+              )}
+            </div>
 
             {/* Services dropdown */}
             <div className="relative" ref={servicesRef}>
@@ -200,6 +265,38 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               >
                 Start Here
               </button>
+
+              {/* For Entrepreneurs group */}
+              <div className="flex flex-col gap-3">
+                <span className="font-body text-[0.65rem] font-medium tracking-[0.18em] uppercase text-gold/80">
+                  For Entrepreneurs
+                </span>
+                {entrepreneurLinks.map((link) =>
+                  link.external ? (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-body text-base py-1 pl-3 transition-colors duration-200 text-charcoal/70 hover:text-charcoal"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className={`font-body text-base py-1 pl-3 transition-colors duration-200 ${
+                        location === link.href
+                          ? "text-gold font-medium"
+                          : "text-charcoal/70 hover:text-charcoal"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  )
+                )}
+              </div>
 
               {/* Services group — shown as a labeled cluster on mobile */}
               <div className="flex flex-col gap-3">
