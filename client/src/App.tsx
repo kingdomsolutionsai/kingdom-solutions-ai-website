@@ -26,6 +26,7 @@ function Router() {
         <Route path="/clarity-pro" component={ClarityPro} />
         <Route path="/constance" component={Constance} />
         <Route path="/executive-ai-strategy" component={ExecutiveAIStrategy} />
+        <Route path="/handbook" component={Handbook} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
         <Route path="/strategy-call" component={StrategyCall} />
