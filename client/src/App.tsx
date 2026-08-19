@@ -9,6 +9,7 @@ import CapacityLeakAudit from "./pages/CapacityLeakAudit";
 import ClarityPro from "./pages/ClarityPro";
 import Constance from "./pages/Constance";
 import ExecutiveAIStrategy from "./pages/ExecutiveAIStrategy";
+import Handbook from "@/pages/Handbook";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import StrategyCall from "./pages/StrategyCall";
