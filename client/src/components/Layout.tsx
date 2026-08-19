@@ -6,13 +6,12 @@ import { Menu, X, ChevronDown } from "lucide-react";
 const WEBINAR_URL = "https://whatentrepreneursneedtoknow.com";
 
 // "For Entrepreneurs" lane — emerging-entrepreneur resources.
-// Only live destinations are listed. Add these as they come to exist:
-//   { href: "/entrepreneur-assessment", label: "Entrepreneur Assessment" },  // coming
-//   // { href: "/assets/handbook.pdf", label: "Handbook (Free)", external: true },
-//   { href: "/fast-track-toolkit", label: "Fast Track Toolkit" },  // coming
+// Ordered so the Assessment (the lane's front door) sits first.
+// The Handbook line is ready to activate once the PDF is hosted on-site.
 const entrepreneurLinks = [
-  { href: WEBINAR_URL, label: "The Webinar", external: true },
+  { href: "/entrepreneur-assessment", label: "Entrepreneur Assessment" },
   { href: "/handbook", label: "Handbook (Free)" },
+  { href: WEBINAR_URL, label: "The Webinar", external: true },
 ];
 
 // Offers, ordered as the ladder — this is what lives inside "Services".
