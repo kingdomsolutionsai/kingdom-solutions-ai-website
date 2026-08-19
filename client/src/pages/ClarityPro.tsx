@@ -418,7 +418,13 @@ export default function ClarityPro() {
               <li>Your niche, offer, and message are already crystal clear.</li>
               <li>You want done-for-you content instead of clarity underneath it.</li>
               <li>You want someone else to decide your niche and voice for you.</li>
-              <li>You need the full build-out—that is Executive AI Strategy.</li>
+              <li>
+                You need the full build-out—that is{" "}
+                <Link to="/executive-ai-strategy" style={{ color: "var(--c-gold-dark)", textDecoration: "underline", textUnderlineOffset: "3px" }}>
+                  Executive AI Strategy
+                </Link>
+                .
+              </li>
             </ul>
           </article>
         </div>
@@ -469,7 +475,11 @@ export default function ClarityPro() {
             <p>
               Clarity Pro™ is the clarity engagement. If you want that clarity
               turned into launch-ready assets—a sales page, content plan, and
-              campaign direction—that is handled through Executive AI Strategy.
+              campaign direction—that is handled through{" "}
+              <Link to="/executive-ai-strategy" style={{ color: "var(--c-gold-dark)", textDecoration: "underline", textUnderlineOffset: "3px" }}>
+                Executive AI Strategy
+              </Link>
+              .
             </p>
           </details>
           <details>
