@@ -8,10 +8,11 @@ const WEBINAR_URL = "https://whatentrepreneursneedtoknow.com";
 // "For Entrepreneurs" lane — emerging-entrepreneur resources.
 // Only live destinations are listed. Add these as they come to exist:
 //   { href: "/entrepreneur-assessment", label: "Entrepreneur Assessment" },  // coming
-//   { href: "/assets/handbook.pdf", label: "Handbook (Free)", external: true }, // once hosted on-site
+//   // { href: "/assets/handbook.pdf", label: "Handbook (Free)", external: true },
 //   { href: "/fast-track-toolkit", label: "Fast Track Toolkit" },  // coming
 const entrepreneurLinks = [
   { href: WEBINAR_URL, label: "The Webinar", external: true },
+  { href: "/handbook", label: "Handbook (Free)" },
 ];
 
 // Offers, ordered as the ladder — this is what lives inside "Services".
