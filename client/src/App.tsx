@@ -10,6 +10,7 @@ import ClarityPro from "./pages/ClarityPro";
 import Constance from "./pages/Constance";
 import ExecutiveAIStrategy from "./pages/ExecutiveAIStrategy";
 import Handbook from "@/pages/Handbook";
+import EntrepreneurAssessment from "@/pages/EntrepreneurAssessment";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import StrategyCall from "./pages/StrategyCall";
@@ -28,6 +29,7 @@ function Router() {
         <Route path="/constance" component={Constance} />
         <Route path="/executive-ai-strategy" component={ExecutiveAIStrategy} />
         <Route path="/handbook" component={Handbook} />
+        <Route path="/entrepreneur-assessment" component={EntrepreneurAssessment} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
         <Route path="/strategy-call" component={StrategyCall} />
@@ -40,7 +42,6 @@ function Router() {
     </Layout>
   );
 }
-
 function App() {
   return (
     <ErrorBoundary>
@@ -53,5 +54,4 @@ function App() {
     </ErrorBoundary>
   );
 }
-
 export default App;
