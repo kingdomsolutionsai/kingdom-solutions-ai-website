@@ -154,11 +154,38 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Clarifying line */}
-          <p className="font-body text-sm text-charcoal-light/80 mt-10 text-center fade-up">
-            Not sure where to begin? <Link href="/capacity-leak-audit" className="text-gold hover:text-gold-light underline underline-offset-4 decoration-gold/30">Take the Capacity Leak Audit™</Link>. Already know what you need? Go directly to <Link href="/clarity-pro" className="text-gold hover:text-gold-light underline underline-offset-4 decoration-gold/30">Clarity Pro™</Link> or <Link href="/constance" className="text-gold hover:text-gold-light underline underline-offset-4 decoration-gold/30">Constance™</Link>.
-          </p>
-        </div>
+      {/* Clarifying line */}
+<p className="font-body text-sm text-charcoal-light/80 mt-10 text-center fade-up">
+  New to entrepreneurship or unsure where to begin?{" "}
+  <Link
+    href="/entrepreneur-assessment"
+    className="text-gold hover:text-gold-light underline underline-offset-4 decoration-gold/30"
+  >
+    Take the Entrepreneur Assessment
+  </Link>
+  . Already running a business but feeling stretched thin?{" "}
+  <Link
+    href="/capacity-leak-audit"
+    className="text-gold hover:text-gold-light underline underline-offset-4 decoration-gold/30"
+  >
+    Take the Capacity Leak Audit™
+  </Link>
+  . Know what you need? Explore{" "}
+  <Link
+    href="/clarity-pro"
+    className="text-gold hover:text-gold-light underline underline-offset-4 decoration-gold/30"
+  >
+    Clarity Pro™
+  </Link>{" "}
+  or{" "}
+  <Link
+    href="/constance"
+    className="text-gold hover:text-gold-light underline underline-offset-4 decoration-gold/30"
+  >
+    Constance™
+  </Link>
+  .
+</p>    
       </section>
 
       {/* Gold divider — before Executive AI Strategy */}
