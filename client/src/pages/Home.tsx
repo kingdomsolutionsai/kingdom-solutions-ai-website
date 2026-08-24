@@ -154,10 +154,59 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Clarifying line */}
-          <p className="font-body text-sm text-charcoal-light/80 mt-10 text-center fade-up">
-            New to entrepreneurship or unsure where to begin? <Link href="/entrepreneur-assessment" className="text-gold hover:text-gold-light underline underline-offset-4 decoration-gold/30">Take the Entrepreneur Assessment</Link>. Already running a business but feeling stretched thin? <Link href="/capacity-leak-audit" className="text-gold hover:text-gold-light underline underline-offset-4 decoration-gold/30">Take the Capacity Leak Audit™</Link>. Know what you need? Explore <Link href="/clarity-pro" className="text-gold hover:text-gold-light underline underline-offset-4 decoration-gold/30">Clarity Pro™</Link> or <Link href="/constance" className="text-gold hover:text-gold-light underline underline-offset-4 decoration-gold/30">Constance™</Link>.
-          </p>
+          {/* Clear, visible guidance for choosing the right next step */}
+          <div className="mt-12 border border-gold/20 bg-cream-dark/35 px-6 py-8 sm:px-10 sm:py-10 text-center fade-up">
+            <p className="font-body text-[0.72rem] tracking-[0.16em] uppercase text-gold font-semibold mb-6">
+              Find Your Next Step
+            </p>
+
+            <div className="space-y-5">
+              <p className="font-body text-base sm:text-lg text-charcoal leading-relaxed">
+                <span className="font-semibold">
+                  New to entrepreneurship or unsure where to begin?
+                </span>{" "}
+                <Link
+                  href="/entrepreneur-assessment"
+                  className="font-semibold text-gold hover:text-gold-light underline underline-offset-4 decoration-gold/40 transition-colors duration-300"
+                >
+                  Take the Entrepreneur Assessment
+                </Link>
+                .
+              </p>
+
+              <p className="font-body text-base sm:text-lg text-charcoal leading-relaxed">
+                <span className="font-semibold">
+                  Already running a business but feeling stretched thin?
+                </span>{" "}
+                <Link
+                  href="/capacity-leak-audit"
+                  className="font-semibold text-gold hover:text-gold-light underline underline-offset-4 decoration-gold/40 transition-colors duration-300"
+                >
+                  Take the Capacity Leak Audit™
+                </Link>
+                .
+              </p>
+
+              <p className="font-body text-base sm:text-lg text-charcoal leading-relaxed">
+                <span className="font-semibold">Know what you need?</span>{" "}
+                Explore{" "}
+                <Link
+                  href="/clarity-pro"
+                  className="font-semibold text-gold hover:text-gold-light underline underline-offset-4 decoration-gold/40 transition-colors duration-300"
+                >
+                  Clarity Pro™
+                </Link>{" "}
+                or{" "}
+                <Link
+                  href="/constance"
+                  className="font-semibold text-gold hover:text-gold-light underline underline-offset-4 decoration-gold/40 transition-colors duration-300"
+                >
+                  Constance™
+                </Link>
+                .
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
