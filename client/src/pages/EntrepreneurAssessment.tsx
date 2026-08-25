@@ -110,17 +110,21 @@ export default function EntrepreneurAssessment() {
     else { setI(i + 1); }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const r = calc();
-    setResult(r);
-    submitMutation.mutate({
-      firstName: form.firstName,
-      email: form.email,
-      resultStage: r,
-      recommendedStep: NEXT_LINKS[r].label,
-    });
-  };
+ const handleSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
+  const r = calc();
+  setResult(r);
+  submitMutation.mutate({
+    firstName: form.firstName,
+    email: form.email,
+    resultStage: r,
+    recommendedStep: NEXT_LINKS[r].label,
+    headline: RESULTS[r].headline,
+    summary: RESULTS[r].summary,
+    focus: RESULTS[r].focus,
+    notYet: RESULTS[r].notYet,
+  });
+};
 
   const goNext = () => {
     if (!result) return;
