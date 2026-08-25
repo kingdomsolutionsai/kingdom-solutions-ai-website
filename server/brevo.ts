@@ -189,11 +189,24 @@ export function formatAssessmentResultsEmail(data: {
   firstName: string;
   resultStage: string;
   recommendedStep: string;
+  headline: string;
+  summary: string;
+  focus: string[];
+  notYet: string;
 }): string {
+  const focusItems = data.focus
+    .map((f, idx) => `<p style="margin: 0 0 10px;"><strong>${idx + 1}.</strong> ${escapeHtml(f)}</p>`)
+    .join("");
   return emailWrapper(`
-    <h2>${escapeHtml(data.firstName)}, your next step is ${escapeHtml(data.resultStage)}.</h2>
-    <p>Thanks for completing The Entrepreneur Next Step™ Assessment. Based on your answers, your current priority stage is <strong>${escapeHtml(data.resultStage)}</strong>.</p>
-    <p>Recommended next step: <strong>${escapeHtml(data.recommendedStep)}</strong></p>
-    <p style="margin-top: 20px;">You can revisit your full personalized results, including what to focus on next and what you can set aside for now, any time at <a href="https://kingdomsolutionsai.com/entrepreneur-assessment">kingdomsolutionsai.com/entrepreneur-assessment</a>.</p>
+    <p style="text-transform: uppercase; letter-spacing: 0.08em; font-size: 12px; color: #8c6927; margin-bottom: 6px;">Your Assessment Result</p>
+    <h1 style="font-size: 32px; margin: 0 0 20px;">${escapeHtml(data.resultStage)}.</h1>
+    <h2 style="font-size: 20px; margin: 0 0 12px;">${escapeHtml(data.headline)}</h2>
+    <p style="margin: 0 0 20px;">${escapeHtml(data.summary)}</p>
+    <h3 style="font-size: 16px; margin: 24px 0 10px;">Focus on these three things</h3>
+    ${focusItems}
+    <p style="text-transform: uppercase; letter-spacing: 0.08em; font-size: 12px; color: #8c6927; margin: 24px 0 6px;">What you can stop worrying about</p>
+    <p style="border-left: 3px solid #cda34b; padding-left: 14px; margin: 0 0 24px;">${escapeHtml(data.notYet)}</p>
+    <p style="margin-top: 20px;">Recommended next step: <strong>${escapeHtml(data.recommendedStep)}</strong></p>
+    <p style="margin-top: 20px; font-size: 13px; color: #666;">Want to explore a different scenario? You're welcome to retake the assessment any time at <a href="https://kingdomsolutionsai.com/entrepreneur-assessment">kingdomsolutionsai.com/entrepreneur-assessment</a>.</p>
   `);
 }
