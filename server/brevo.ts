@@ -170,3 +170,30 @@ export function formatContactEmail(data: {
     <p><strong>Message:</strong><br/>${escapeHtml(data.message)}</p>
   `);
 }
+export function formatAssessmentEmail(data: {
+  firstName: string;
+  email: string;
+  resultStage: string;
+  recommendedStep: string;
+}): string {
+  return emailWrapper(`
+    <h2>New Entrepreneur Next Step™ Assessment Completed</h2>
+    <p><strong>Name:</strong> ${escapeHtml(data.firstName)}</p>
+    <p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
+    <p><strong>Result Stage:</strong> ${escapeHtml(data.resultStage)}</p>
+    <p><strong>Recommended Next Step:</strong> ${escapeHtml(data.recommendedStep)}</p>
+  `);
+}
+
+export function formatAssessmentResultsEmail(data: {
+  firstName: string;
+  resultStage: string;
+  recommendedStep: string;
+}): string {
+  return emailWrapper(`
+    <h2>${escapeHtml(data.firstName)}, your next step is ${escapeHtml(data.resultStage)}.</h2>
+    <p>Thanks for completing The Entrepreneur Next Step™ Assessment. Based on your answers, your current priority stage is <strong>${escapeHtml(data.resultStage)}</strong>.</p>
+    <p>Recommended next step: <strong>${escapeHtml(data.recommendedStep)}</strong></p>
+    <p style="margin-top: 20px;">You can revisit your full personalized results, including what to focus on next and what you can set aside for now, any time at <a href="https://kingdomsolutionsai.com/entrepreneur-assessment">kingdomsolutionsai.com/entrepreneur-assessment</a>.</p>
+  `);
+}
