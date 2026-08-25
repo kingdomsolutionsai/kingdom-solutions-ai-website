@@ -246,7 +246,7 @@ export default function EntrepreneurAssessment() {
            {/* CONFIRMATION */}
       {screen === "result" && (
         <section className="pt-28 pb-24 lg:pt-32">
-          <div className="container max-w-xl text-center fade-up">
+          <div className="container max-w-xl text-center">
             <p className="editorial-label mb-4">You're All Set</p>
             <h2 className="font-display text-3xl sm:text-4xl font-medium text-charcoal leading-tight mb-6">
               Thanks, {form.firstName}! Your results are on the way.
