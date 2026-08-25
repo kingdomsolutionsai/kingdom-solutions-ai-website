@@ -207,14 +207,18 @@ export const formsRouter = router({
   // Constance, segmented by which stage the assessment identified.
   // ---------------------------------------------------------------------------
   submitAssessmentRequest: publicProcedure
-    .input(
+       .input(
       z.object({
         firstName: z.string().min(1),
         email: z.string().email(),
         resultStage: z.enum(["Clarify", "Validate", "Establish", "Offer", "Sell", "Systemize", "Grow"]),
         recommendedStep: z.string().min(1),
+        headline: z.string().min(1),
+        summary: z.string().min(1),
+        focus: z.array(z.string()).min(1),
+        notYet: z.string().min(1),
       })
-    )
+    ) 
     .mutation(async ({ input }) => {
       const notified = await sendBrevoEmail({
         to: OWNER,
