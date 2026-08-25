@@ -126,12 +126,7 @@ export default function EntrepreneurAssessment() {
   });
 };
 
-  const goNext = () => {
-    if (!result) return;
-    const link = NEXT_LINKS[result];
-    if (link.external) window.open(link.href, "_blank", "noopener,noreferrer");
-    else window.location.href = link.href;
-  };
+  
 
   const StageStrip = ({ active }: { active?: Stage }) => (
     <div className="grid grid-cols-2 md:grid-cols-7 gap-px bg-taupe border border-taupe mt-7">
@@ -248,59 +243,26 @@ export default function EntrepreneurAssessment() {
         </section>
       )}
 
-      {/* RESULT */}
-      {screen === "result" && result && (
+           {/* CONFIRMATION */}
+      {screen === "result" && (
         <section className="pt-28 pb-24 lg:pt-32">
-          <div className="container max-w-3xl fade-up">
-            <p className="editorial-label mb-3">Your Assessment Result</p>
-            <p className="font-body text-charcoal-light mb-4">{form.firstName}, your next step is</p>
-            <div className="bg-charcoal rounded-sm px-8 py-10 mb-8">
-              <h1 className="font-display text-6xl lg:text-8xl font-medium text-cream-dark leading-none">
-                {result}<span className="text-gold">.</span>
-              </h1>
-            </div>
-            <h2 className="font-display text-2xl sm:text-3xl font-medium text-charcoal leading-snug mb-4">
-              {RESULTS[result].headline}
+          <div className="container max-w-xl text-center fade-up">
+            <p className="editorial-label mb-4">You're All Set</p>
+            <h2 className="font-display text-3xl sm:text-4xl font-medium text-charcoal leading-tight mb-6">
+              Thanks, {form.firstName}! Your results are on the way.
             </h2>
-            <p className="font-body text-base text-charcoal-light leading-relaxed max-w-2xl mb-8">
-              {RESULTS[result].summary}
+            <p className="font-body text-base text-charcoal-light leading-relaxed mb-10">
+              Check your inbox at <strong>{form.email}</strong> for your personalized Entrepreneur Next Step™ result — it should arrive within a few minutes. If you don't see it, check your spam or promotions folder.
             </p>
-
-            <StageStrip active={result} />
-
-            <h3 className="font-display text-2xl font-medium text-charcoal mt-14 mb-6">Focus on these three things</h3>
-            <div className="grid gap-5">
-              {RESULTS[result].focus.map((f, idx) => (
-                <div key={idx} className="flex gap-4">
-                  <b className="font-display text-gold text-lg shrink-0">0{idx + 1}</b>
-                  <span className="font-body text-charcoal-light leading-relaxed">{f}</span>
-                </div>
-              ))}
-            </div>
-
-            <p className="editorial-label mt-12 mb-3">What you can stop worrying about</p>
-            <div className="border-l-2 border-gold pl-5 py-4 bg-card font-body text-charcoal-light leading-relaxed">
-              {RESULTS[result].notYet}
-            </div>
-
-            <div className="flex gap-3 flex-wrap mt-10">
-              <button onClick={goNext} className="bg-charcoal text-cream-dark font-body text-[0.72rem] font-medium tracking-[0.1em] uppercase px-7 py-3.5 rounded-sm hover:bg-charcoal/90 transition-colors active:scale-[0.98] inline-flex items-center gap-2">
-                {NEXT_LINKS[result].label} <ArrowRight size={16} />
-              </button>
-              <button
-                onClick={() => { setScreen("landing"); setI(0); setAnswers({}); setResult(null); setForm({ firstName: "", email: "" }); window.scrollTo(0, 0); }}
-                className="rounded-sm inline-flex items-center gap-2 border border-gold text-charcoal font-body text-[0.72rem] font-medium tracking-[0.1em] uppercase px-6 py-3.5 hover:bg-gold/5 transition-colors"
-              >
-                <RotateCcw size={15} /> Retake
-              </button>
-            </div>
-
-            <p className="font-body text-xs text-warm-gray leading-relaxed mt-12 max-w-2xl">
-              This assessment is educational and is not legal, tax, financial, or business advice. It identifies a likely current priority based on your answers.
-            </p>
+            <button
+              onClick={() => { setScreen("landing"); setI(0); setAnswers({}); setResult(null); setForm({ firstName: "", email: "" }); window.scrollTo(0, 0); }}
+              className="rounded-sm inline-flex items-center gap-2 border border-gold text-charcoal font-body text-[0.72rem] font-medium tracking-[0.1em] uppercase px-6 py-3.5 hover:bg-gold/5 transition-colors"
+            >
+              <RotateCcw size={15} /> Take It Again
+            </button>
           </div>
         </section>
-      )}
+      )}   
     </div>
   );
 }
