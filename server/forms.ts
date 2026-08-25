@@ -8,6 +8,8 @@ import {
   formatClarityProIntakeEmail,
   formatClarityProParticipantEmail,
   formatContactEmail,
+  formatAssessmentEmail,
+  formatAssessmentResultsEmail,
 } from "./brevo";
 import { buildCapacityLeakAuditNotes, fileLeadWithConstance } from "./constance";
 import { generateCapacityLeakAudit } from "./llm";
@@ -196,6 +198,43 @@ export const formsRouter = router({
         notes: "Requested the free Entrepreneur Handbook via the /handbook landing page.",
       });
 
+            return { success: true, notified, participantNotified, filedWithConstance };
+    }),
+  // ---------------------------------------------------------------------------
+  // Entrepreneur Next Step™ Assessment — client scores the 15-question quiz
+  // itself and sends us the result. We notify Tabitha, email the visitor a
+  // recap of their result, and file the lead into the Notion Pipeline via
+  // Constance, segmented by which stage the assessment identified.
+  // ---------------------------------------------------------------------------
+  submitAssessmentRequest: publicProcedure
+    .input(
+      z.object({
+        firstName: z.string().min(1),
+        email: z.string().email(),
+        resultStage: z.enum(["Clarify", "Validate", "Establish", "Offer", "Sell", "Systemize", "Grow"]),
+        recommendedStep: z.string().min(1),
+      })
+    )
+    .mutation(async ({ input }) => {
+      const notified = await sendBrevoEmail({
+        to: OWNER,
+        subject: `New Entrepreneur Assessment — ${input.firstName} (${input.resultStage})`,
+        htmlContent: formatAssessmentEmail(input),
+        replyToEmail: input.email,
+        replyToName: input.firstName,
+      });
+      const participantNotified = await sendBrevoEmail({
+        to: { email: input.email, name: input.firstName },
+        subject: `${input.firstName}, your Entrepreneur Next Step™ result`,
+        htmlContent: formatAssessmentResultsEmail(input),
+      });
+      const filedWithConstance = await fileLeadWithConstance({
+        name: input.firstName,
+        email: input.email,
+        source: "Entrepreneur Assessment",
+        stage: "New Lead",
+        notes: `Assessment result: ${input.resultStage}. Recommended next step: ${input.recommendedStep}.`,
+      });
       return { success: true, notified, participantNotified, filedWithConstance };
     }),
 });
