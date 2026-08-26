@@ -184,7 +184,7 @@ const ROUTE_METADATA: Record<string, PageMeta> = {
     twitterDescription: "Terms of Service for Kingdom Solutions AI™ products and advisory services.",
     twitterImage: `${BASE_URL}/assets/ksai-logo-transparent-400_82fa1f46.png`,
   },
-  "/refund-policy": {
+   "/refund-policy": {
     title: "Refund Policy — Kingdom Solutions AI™",
     description: "Refund policy for Kingdom Solutions AI™ products including Clarity Pro™ Starter, Guided, and Buildout tiers. Clear terms for digital access, strategy sessions, and consultative services.",
     canonicalUrl: `${BASE_URL}/refund-policy`,
@@ -198,8 +198,49 @@ const ROUTE_METADATA: Record<string, PageMeta> = {
     twitterDescription: "Refund policy for Kingdom Solutions AI™ products including Clarity Pro™ Starter, Guided, and Buildout tiers.",
     twitterImage: `${BASE_URL}/assets/ksai-logo-transparent-400_82fa1f46.png`,
   },
+  "/handbook": {
+    title: "Free Handbook — Legal, Tax & Compliance Basics for New Entrepreneurs | Kingdom Solutions AI™",
+    description: "Get the free Kingdom Solutions AI™ Handbook — a clear, practical guide to the legal, tax, and compliance basics every new business owner needs to get right from day one.",
+    canonicalUrl: `${BASE_URL}/handbook`,
+    ogTitle: "Free Handbook — Legal, Tax & Compliance Basics for New Entrepreneurs",
+    ogDescription: "A clear, practical guide to the legal, tax, and compliance basics every new business owner needs to get right from day one.",
+    ogUrl: `${BASE_URL}/handbook`,
+    ogType: "website",
+    ogImage: `${BASE_URL}/assets/ksai-logo-transparent-400_82fa1f46.png`,
+    twitterCard: "summary_large_image",
+    twitterTitle: "Free Handbook — Legal, Tax & Compliance Basics for New Entrepreneurs",
+    twitterDescription: "A clear, practical guide to the legal, tax, and compliance basics every new business owner needs to get right from day one.",
+    twitterImage: `${BASE_URL}/assets/ksai-logo-transparent-400_82fa1f46.png`,
+  },
+  "/entrepreneur-assessment": {
+    title: "Entrepreneur Next Step™ Assessment — Find Your Stage | Kingdom Solutions AI™",
+    description: "Take the free Entrepreneur Next Step™ Assessment — a two-minute diagnostic that shows you exactly what stage your business is in and the single next step that matters most.",
+    canonicalUrl: `${BASE_URL}/entrepreneur-assessment`,
+    ogTitle: "Entrepreneur Next Step™ Assessment — Find Your Stage",
+    ogDescription: "A two-minute diagnostic that shows you exactly what stage your business is in and the single next step that matters most.",
+    ogUrl: `${BASE_URL}/entrepreneur-assessment`,
+    ogType: "website",
+    ogImage: `${BASE_URL}/assets/ksai-logo-transparent-400_82fa1f46.png`,
+    twitterCard: "summary_large_image",
+    twitterTitle: "Entrepreneur Next Step™ Assessment — Find Your Stage",
+    twitterDescription: "A two-minute diagnostic that shows you exactly what stage your business is in and the single next step that matters most.",
+    twitterImage: `${BASE_URL}/assets/ksai-logo-transparent-400_82fa1f46.png`,
+  },
+  "/victors-circle-leadership-academy": {
+    title: "Victor's Circle Leadership Academy™ — Christ-Centered Leadership for Women | Kingdom Solutions AI™",
+    description: "Victor's Circle Leadership Academy™ is a Christ-centered leadership formation program for Christian women entrepreneurs. Now accepting applications for the January cohort.",
+    canonicalUrl: `${BASE_URL}/victors-circle-leadership-academy`,
+    ogTitle: "Victor's Circle Leadership Academy™ — Christ-Centered Leadership for Women",
+    ogDescription: "A Christ-centered leadership formation program for Christian women entrepreneurs. Now accepting applications for the January cohort.",
+    ogUrl: `${BASE_URL}/victors-circle-leadership-academy`,
+    ogType: "website",
+    ogImage: `${BASE_URL}/assets/ksai-logo-transparent-400_82fa1f46.png`,
+    twitterCard: "summary_large_image",
+    twitterTitle: "Victor's Circle Leadership Academy™ — Christ-Centered Leadership for Women",
+    twitterDescription: "A Christ-centered leadership formation program for Christian women entrepreneurs. Now accepting applications for the January cohort.",
+    twitterImage: `${BASE_URL}/assets/ksai-logo-transparent-400_82fa1f46.png`,
+  },
 };
-
 /** The set of known public routes that should return HTTP 200 */
 export const KNOWN_PUBLIC_ROUTES = new Set(Object.keys(ROUTE_METADATA));
 
