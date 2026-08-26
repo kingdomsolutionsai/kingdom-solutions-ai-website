@@ -101,6 +101,18 @@ export default function VictorsCircleLeadershipAcademy() {
           <p className="font-body text-xs text-charcoal-light/70 uppercase tracking-[0.08em] mt-5">
             Now accepting applications · Limited seats
           </p>
+          <p className="font-body text-sm text-charcoal-light/80 mt-4">
+            Not sure yet?{" "}
+            <a
+              href="https://calendly.com/tabitha-kingdomsolutionsai/victors-circle-leadership-academy-inquiry-call"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-gold/50 hover:text-gold transition-colors"
+            >
+              Book an Inquiry Call
+            </a>{" "}
+            to talk it through first.
+          </p>
         </div>
       </section>
 
@@ -180,6 +192,18 @@ export default function VictorsCircleLeadershipAcademy() {
             <p className="font-body text-sm text-cream/70 leading-relaxed">
               Applications are reviewed personally. We'll follow up by email with next steps and
               enrollment details.
+            </p>
+            <p className="font-body text-sm text-cream/60 leading-relaxed mt-3">
+              Not ready to apply?{" "}
+              <a
+                href="https://calendly.com/tabitha-kingdomsolutionsai/victors-circle-leadership-academy-inquiry-call"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline decoration-gold/50 hover:text-gold transition-colors"
+              >
+                Book an Inquiry Call
+              </a>{" "}
+              instead.
             </p>
           </div>
 
