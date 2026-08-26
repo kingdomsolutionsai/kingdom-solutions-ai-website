@@ -2,7 +2,6 @@ import { Link } from "wouter";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { ArrowRight } from "lucide-react";
-
 export default function Home() {
   usePageMeta({
     title: "Kingdom Solutions AI™ — Strategic AI Systems for High-Capacity Leaders",
@@ -11,7 +10,6 @@ export default function Home() {
     ogImage: "https://kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
   const revealRef = useScrollReveal();
-
   return (
     <div ref={revealRef}>
       {/* Hero Section — premium executive invitation */}
@@ -45,12 +43,10 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* Gold Divider */}
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <div className="gold-hairline" />
       </div>
-
       {/* Section 2 — "Your business was never meant..." — powerful context line */}
       <section className="py-24 lg:py-32 bg-cream">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
@@ -67,12 +63,10 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* Gold divider — before Pathways */}
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <div className="gold-hairline" />
       </div>
-
       {/* Section 3 — Premium Advisory Pathways */}
       <section id="pathways" className="py-28 lg:py-40 bg-cream scroll-mt-24">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
@@ -90,7 +84,6 @@ export default function Home() {
               </p>
             </div>
           </div>
-
           {/* Three premium advisory pathway panels */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 border border-taupe/60 fade-up">
             {/* Pathway 1 — Clarity Pro */}
@@ -112,7 +105,6 @@ export default function Home() {
                 Explore Clarity Pro™ <ArrowRight size={14} />
               </Link>
             </div>
-
             {/* Pathway 2 — Constance */}
             <div className="group p-10 lg:p-12 border-b lg:border-b-0 lg:border-r border-taupe/60 transition-colors duration-500 hover:bg-cream-dark/40">
               <p className="font-body text-[0.7rem] tracking-[0.16em] uppercase text-gold font-medium mb-8">
@@ -132,7 +124,6 @@ export default function Home() {
                 Meet Constance™ <ArrowRight size={14} />
               </Link>
             </div>
-
             {/* Pathway 3 — Capacity Leak Audit */}
             <div className="group p-10 lg:p-12 transition-colors duration-500 hover:bg-cream-dark/40">
               <p className="font-body text-[0.7rem] tracking-[0.16em] uppercase text-gold font-medium mb-8">
@@ -153,13 +144,11 @@ export default function Home() {
               </Link>
             </div>
           </div>
-
           {/* Clear, visible guidance for choosing the right next step */}
           <div className="mt-12 border border-gold/20 bg-cream-dark/35 px-6 py-8 sm:px-10 sm:py-10 text-center fade-up">
             <p className="font-body text-[0.72rem] tracking-[0.16em] uppercase text-gold font-semibold mb-6">
               Find Your Next Step
             </p>
-
             <div className="space-y-5">
               <p className="font-body text-base sm:text-lg text-charcoal leading-relaxed">
                 <span className="font-semibold">
@@ -173,7 +162,6 @@ export default function Home() {
                 </Link>
                 .
               </p>
-
               <p className="font-body text-base sm:text-lg text-charcoal leading-relaxed">
                 <span className="font-semibold">
                   Already running a business but feeling stretched thin?
@@ -186,7 +174,6 @@ export default function Home() {
                 </Link>
                 .
               </p>
-
               <p className="font-body text-base sm:text-lg text-charcoal leading-relaxed">
                 <span className="font-semibold">Know what you need?</span>{" "}
                 Explore{" "}
@@ -208,7 +195,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-           </section>
+      </section>
       {/* Gold divider — before Victor's Circle */}
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <div className="gold-hairline" />
@@ -223,16 +210,19 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
               <div className="lg:col-span-7">
                 <p className="font-body text-[0.7rem] tracking-[0.16em] uppercase text-gold font-medium mb-6">
-                  For Women Entrepreneurs
+                  For Christian Women in Leadership
                 </p>
-                <h2 className="font-display text-3xl sm:text-4xl lg:text-[2.5rem] font-medium text-charcoal leading-[1.15] mb-6">
+                <h2 className="font-display text-3xl sm:text-4xl lg:text-[2.5rem] font-medium text-charcoal leading-[1.15] mb-4">
                   Victor's Circle Leadership Academy™
                 </h2>
+                <p className="font-display italic text-lg text-gold mb-6">
+                  Grow in wisdom. Lead with peace. Rise with strength.
+                </p>
                 <p className="font-body text-lg text-charcoal-light leading-relaxed mb-6">
-                  A Christ-centered leadership formation program for Christian women called to lead — in their business, their home, and their calling.
+                  A Christ-centered formation space for women who carry influence, responsibility, and the weight of leadership — at home, at work, in ministry, and in their communities.
                 </p>
                 <p className="font-body text-base text-charcoal-light/80 leading-relaxed mb-10">
-                  This is where clarity, capacity, and conviction come together. Now accepting applications for the January cohort.
+                  A 30-day reset that quiets anxiety, restores clarity, and equips you to lead with steady confidence. Now accepting applications for the January cohort.
                 </p>
                 <div className="flex flex-col sm:flex-row items-start gap-5">
                   <Link
@@ -253,11 +243,11 @@ export default function Home() {
                 <div className="space-y-8 border-l border-gold/30 pl-8">
                   <div>
                     <p className="font-body text-[0.65rem] tracking-[0.16em] uppercase text-gold/70 mb-1.5">Who It's For</p>
-                    <p className="font-body text-sm text-charcoal-light">Christian women entrepreneurs called to lead</p>
+                    <p className="font-body text-sm text-charcoal-light">Christian women carrying influence and leadership</p>
                   </div>
                   <div>
                     <p className="font-body text-[0.65rem] tracking-[0.16em] uppercase text-gold/70 mb-1.5">Format</p>
-                    <p className="font-body text-sm text-charcoal-light">Cohort-based, application required</p>
+                    <p className="font-body text-sm text-charcoal-light">30-day cohort, application required</p>
                   </div>
                   <div>
                     <p className="font-body text-[0.65rem] tracking-[0.16em] uppercase text-gold/70 mb-1.5">Next Cohort</p>
@@ -268,18 +258,11 @@ export default function Home() {
             </div>
           </div>
         </div>
-      
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-        <div className="gold-hairline" />
-      </div>
-      </section>
-      {/* Gold divider — before Victor's Circle */}
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-        <div className="gold-hairline" />
-      </div>
-     
       </section>
       {/* Gold divider — before Executive AI Strategy */}
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
+        <div className="gold-hairline" />
+      </div>
       {/* Section 4 — Executive AI Strategy — dark, authoritative */}
       <section className="py-28 lg:py-36 bg-charcoal">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
@@ -321,7 +304,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* Section 5 — Founder Trust — subtle, not personality-heavy */}
       <section className="py-24 lg:py-32 bg-cream">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
@@ -354,12 +336,10 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* Gold divider — before final CTA */}
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <div className="gold-hairline" />
       </div>
-
       {/* Section 6 — Final CTA — refined, invitational */}
       <section className="py-28 lg:py-36 bg-cream">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
@@ -379,7 +359,6 @@ export default function Home() {
                 Book a Strategy Call <ArrowRight size={14} />
               </Link>
             </div>
-
           </div>
         </div>
       </section>
