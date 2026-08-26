@@ -5,43 +5,49 @@ import { trpc } from "@/lib/trpc";
 /**
  * Victor's Circle Leadership Academy™
  * Premier / flagship program page. Christ-centered leadership formation
- * for Christian women entrepreneurs. Paid cohort — applications only.
- *
- * NOTE TO TABITHA: The copy below (pillars, program details, cohort dates)
- * is a starting draft written to match the site's tone and layout. Please
- * swap in your real curriculum language, price, dates, and any testimonials
- * from your existing revivedspirit.com page before this goes live. Search
- * for "PLACEHOLDER" comments below to find what to review first.
+ * for Christian women in leadership. Paid cohort — applications only.
+ * Content pulled from revivedspirit.com/product/victors-circle-leadership-academy
+ * and reframed for a January-cohort application (per Tabitha's direction).
  */
 
-const PILLARS = [
+const WEEKS = [
   {
-    n: "01",
-    title: "Identity & Calling",
-    desc: "Anchoring your leadership in who God says you are, not in your title, your revenue, or your reach — so your decisions come from a settled place, not a scramble.",
+    n: "Week 1",
+    title: "Grounded",
+    desc: "Calm your nervous system and reset your daily rhythm — the foundation everything else is built on.",
   },
   {
-    n: "02",
-    title: "Wisdom & Discernment",
-    desc: "Learning to hear God clearly in the decisions that actually matter — hiring, pricing, partnerships, timing — instead of leading purely on instinct or industry noise.",
+    n: "Week 2",
+    title: "Clear",
+    desc: "Replace spiraling thoughts with Scripture-anchored clarity, so your decisions come from a settled place.",
   },
   {
-    n: "03",
-    title: "Leadership Capacity",
-    desc: "Building the internal steadiness and practical skill to lead a team, a household, and a growing business without burning out or losing yourself in the process.",
+    n: "Week 3",
+    title: "Confident",
+    desc: "Practice real leadership tools that strengthen your voice and your boundaries.",
   },
   {
-    n: "04",
-    title: "Kingdom Impact",
-    desc: "Connecting your work to something larger than your own success — building a business and a life that leave a legacy, not just a bank balance.",
+    n: "Week 4",
+    title: "Strong",
+    desc: "Build the rhythms that sustain peace long after the 30 days are over.",
   },
+];
+
+const INCLUSIONS = [
+  "4 live group Zoom check-ins per month",
+  "4 monthly 1:1 coaching sessions with Tabitha (30 minutes each)",
+  "Direct community chat access to Tabitha",
+  "Pop-up \"Quick Lives\" — short, powerful live sessions",
+  "Fearless Faith Video Course (3 hours, lifetime access)",
+  "Fearless Faith Workbook — reflection prompts and journaling space",
+  "Private community access",
 ];
 
 export default function VictorsCircleLeadershipAcademy() {
   usePageMeta({
     title: "Victor's Circle Leadership Academy™ — Christ-Centered Leadership for Women | Kingdom Solutions AI™",
     description:
-      "Victor's Circle Leadership Academy™ is a Christ-centered leadership formation program for Christian women entrepreneurs. Now accepting applications for the January cohort.",
+      "Victor's Circle Leadership Academy™ is a Christ-centered leadership formation program for Christian women in leadership. Now accepting applications for the January cohort.",
     canonicalUrl: "https://kingdomsolutionsai.com/victors-circle-leadership-academy",
     ogImage: "https://kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
@@ -71,14 +77,18 @@ export default function VictorsCircleLeadershipAcademy() {
       {/* HERO */}
       <section className="pt-28 pb-16 lg:pt-36 border-b border-gold/20">
         <div className="container max-w-3xl text-center">
-          <p className="editorial-label mb-4">Premier Program · For Women Entrepreneurs</p>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-medium text-charcoal leading-tight mb-6">
+          <p className="editorial-label mb-4">Premier Program · For Christian Women in Leadership</p>
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-medium text-charcoal leading-tight mb-4">
             Victor's Circle Leadership Academy&trade;
           </h1>
-          <p className="font-body text-lg sm:text-xl text-charcoal-light leading-relaxed max-w-2xl mx-auto mb-10">
-            A Christ-centered leadership formation program for Christian women called to lead —
-            in their business, their home, and their calling. This is where clarity, capacity,
-            and conviction come together.
+          <p className="font-display italic text-xl sm:text-2xl text-gold mb-8">
+            Grow in wisdom. Lead with peace. Rise with strength.
+          </p>
+          <p className="font-body text-lg text-charcoal-light leading-relaxed max-w-2xl mx-auto mb-10">
+            A Christ-centered formation space for women who carry influence, responsibility, and
+            the weight of leadership — at home, at work, in ministry, and in their communities. A
+            30-day reset that quiets anxiety, restores clarity, and equips you to lead with steady
+            confidence.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
@@ -94,57 +104,67 @@ export default function VictorsCircleLeadershipAcademy() {
         </div>
       </section>
 
-      {/* WHAT IT IS */}
+      {/* WHO IT'S FOR */}
       <section className="py-20 lg:py-24">
         <div className="container max-w-2xl text-center">
-          <p className="editorial-label mb-4">This Isn't Another Business Program</p>
-          <h2 className="font-display text-3xl sm:text-4xl font-medium text-charcoal leading-tight mb-6">
-            Leadership formation, not just tactics.
+          <p className="editorial-label mb-4">Is This You?</p>
+          <h2 className="font-display text-3xl sm:text-4xl font-medium text-charcoal leading-tight mb-10">
+            You don't have to call yourself a "leader" to belong here.
           </h2>
-          <p className="font-body text-base text-charcoal-light leading-relaxed">
-            {/* PLACEHOLDER: replace with your own language from revivedspirit.com */}
-            Most programs hand you strategy. Victor's Circle builds the woman who can carry it.
-            Over the course of the cohort, you'll be formed in your identity, sharpened in your
-            discernment, and equipped to lead — so the growth in your business is matched by
-            growth in you.
-          </p>
+          <div className="space-y-5 text-left">
+            {[
+              "You feel overwhelmed by pressure, expectations, or constant decision-making.",
+              "You want to lead with peace instead of anxiety or second-guessing.",
+              "You desire deeper clarity, confidence, and spiritual grounding.",
+              "You're navigating transition, growth, or a new chapter.",
+              "You long for a safe, faith-rooted community of women who understand your world.",
+            ].map((line, i) => (
+              <p key={i} className="font-body text-base text-charcoal-light leading-relaxed pl-6 border-l-2 border-gold/40">
+                {line}
+              </p>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* PILLARS */}
+      {/* CURRICULUM */}
       <section className="py-20 lg:py-24 bg-cream/40 border-y border-gold/20">
         <div className="container max-w-4xl">
-          <p className="editorial-label text-center mb-4">The Four Pillars</p>
+          <p className="editorial-label text-center mb-4">The Four-Week Journey</p>
           <h2 className="font-display text-3xl sm:text-4xl font-medium text-charcoal leading-tight text-center mb-14">
-            What you'll walk through.
+            Grounded. Clear. Confident. Strong.
           </h2>
           <div className="grid sm:grid-cols-2 gap-8">
-            {PILLARS.map((p) => (
-              <div key={p.n} className="border border-gold/30 rounded-sm p-7 bg-white/60">
-                <span className="font-display text-3xl text-gold">{p.n}</span>
-                <h3 className="font-display text-xl font-medium text-charcoal mt-3 mb-2">
-                  {p.title}
+            {WEEKS.map((w) => (
+              <div key={w.n} className="border border-gold/30 rounded-sm p-7 bg-white/60">
+                <span className="editorial-label !mb-0 text-gold">{w.n}</span>
+                <h3 className="font-display text-xl font-medium text-charcoal mt-2 mb-2">
+                  {w.title}
                 </h3>
-                <p className="font-body text-sm text-charcoal-light leading-relaxed">{p.desc}</p>
+                <p className="font-body text-sm text-charcoal-light leading-relaxed">{w.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* WHO IT'S FOR */}
+      {/* WHAT'S INCLUDED */}
       <section className="py-20 lg:py-24">
-        <div className="container max-w-2xl text-center">
-          <p className="editorial-label mb-4">Who This Is For</p>
-          <h2 className="font-display text-3xl sm:text-4xl font-medium text-charcoal leading-tight mb-6">
-            Christian women entrepreneurs ready to lead differently.
+        <div className="container max-w-2xl">
+          <p className="editorial-label text-center mb-4">What's Included</p>
+          <h2 className="font-display text-3xl sm:text-4xl font-medium text-charcoal leading-tight text-center mb-12">
+            A complete support system for the 30 days — and beyond.
           </h2>
-          <p className="font-body text-base text-charcoal-light leading-relaxed">
-            {/* PLACEHOLDER: replace with your real audience description */}
-            Victor's Circle is built for the woman already leading a business, a team, or a
-            calling — who wants her leadership to be shaped by her faith, not separated from it.
-            If you're ready to grow as a leader, not just grow your revenue, you're in the right
-            place.
+          <div className="border border-gold/30 rounded-sm divide-y divide-gold/20 bg-white/60">
+            {INCLUSIONS.map((item, i) => (
+              <div key={i} className="flex items-start gap-4 px-6 py-4">
+                <span className="text-gold font-display text-lg leading-none mt-0.5">✦</span>
+                <span className="font-body text-sm text-charcoal leading-relaxed">{item}</span>
+              </div>
+            ))}
+          </div>
+          <p className="font-body text-xs text-charcoal-light/70 uppercase tracking-[0.08em] text-center mt-6">
+            A package valued at over $3,000
           </p>
         </div>
       </section>
@@ -210,7 +230,7 @@ export default function VictorsCircleLeadershipAcademy() {
                 />
                 <input
                   required
-                  placeholder="Current role / business"
+                  placeholder="Current role / life season"
                   value={form.currentRole}
                   onChange={(e) => setForm({ ...form, currentRole: e.target.value })}
                   className="rounded-sm bg-cream/5 border border-cream/20 px-4 py-3 text-sm text-cream placeholder:text-cream/40 focus:outline-none focus:border-gold"
