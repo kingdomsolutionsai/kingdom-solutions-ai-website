@@ -8,7 +8,11 @@ import {
   formatClarityProIntakeEmail,
   formatClarityProParticipantEmail,
   formatContactEmail,
-import { formatAssessmentEmail, formatAssessmentResultsEmail, formatVictorsCircleOwnerEmail, formatVictorsCircleApplicantEmail } from "./brevo";
+  formatAssessmentEmail,
+  formatAssessmentResultsEmail,
+  formatVictorsCircleOwnerEmail,
+  formatVictorsCircleApplicantEmail,
+} from "./brevo";
 import { buildCapacityLeakAuditNotes, fileLeadWithConstance } from "./constance";
 import { generateCapacityLeakAudit } from "./llm";
 
