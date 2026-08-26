@@ -184,7 +184,33 @@ export function formatAssessmentEmail(data: {
     <p><strong>Recommended Next Step:</strong> ${escapeHtml(data.recommendedStep)}</p>
   `);
 }
+export function formatVictorsCircleOwnerEmail(data: {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone?: string;
+  currentRole: string;
+  motivation: string;
+}): string {
+  return emailWrapper(`
+    <h2>New Victor's Circle Application</h2>
+    <p><strong>Name:</strong> ${escapeHtml(data.firstName)} ${escapeHtml(data.lastName)}</p>
+    <p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
+    <p><strong>Phone:</strong> ${escapeHtml(data.phone || "—")}</p>
+    <p><strong>Current role / business:</strong> ${escapeHtml(data.currentRole)}</p>
+    <h3 style="margin-top:20px;">What's bringing her to Victor's Circle</h3>
+    <p style="border-left: 3px solid #cda34b; padding-left: 14px;">${escapeHtml(data.motivation)}</p>
+  `);
+}
 
+export function formatVictorsCircleApplicantEmail(data: { firstName: string }): string {
+  return emailWrapper(`
+    <p style="text-transform: uppercase; letter-spacing: 0.08em; font-size: 12px; color: #8c6927; margin-bottom: 6px;">Application Received</p>
+    <h1 style="font-size: 28px; margin: 0 0 20px;">Thank you, ${escapeHtml(data.firstName)}.</h1>
+    <p style="margin: 0 0 20px;">Your application for Victor's Circle Leadership Academy&trade; is in. Applications are reviewed personally, and we'll follow up soon with next steps for the January cohort.</p>
+    <p style="margin-top: 20px; font-size: 13px; color: #666;">In the meantime, feel free to reply to this email with any questions.</p>
+  `);
+}
 export function formatAssessmentResultsEmail(data: {
   firstName: string;
   resultStage: string;
