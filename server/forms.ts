@@ -197,7 +197,8 @@ export const formsRouter = router({
       });
 
             return { success: true, notified, participantNotified, filedWithConstance };
-    }),   submitVictorsCircleApplication: publicProcedure
+    }),   
+  submitVictorsCircleApplication: publicProcedure
     .input(
       z.object({
         firstName: z.string().min(1),
