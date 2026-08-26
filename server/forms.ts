@@ -8,9 +8,7 @@ import {
   formatClarityProIntakeEmail,
   formatClarityProParticipantEmail,
   formatContactEmail,
-  formatAssessmentEmail,
-  formatAssessmentResultsEmail,
-} from "./brevo";
+import { formatAssessmentEmail, formatAssessmentResultsEmail, formatVictorsCircleOwnerEmail, formatVictorsCircleApplicantEmail } from "./brevo";
 import { buildCapacityLeakAuditNotes, fileLeadWithConstance } from "./constance";
 import { generateCapacityLeakAudit } from "./llm";
 
@@ -199,7 +197,41 @@ export const formsRouter = router({
       });
 
             return { success: true, notified, participantNotified, filedWithConstance };
+    }),   submitVictorsCircleApplication: publicProcedure
+    .input(
+      z.object({
+        firstName: z.string().min(1),
+        lastName: z.string().min(1),
+        email: z.string().email(),
+        phone: z.string().optional(),
+        currentRole: z.string().min(1),
+        motivation: z.string().min(1),
+        commitmentConfirmed: z.literal(true),
+      })
+    )
+    .mutation(async ({ input }) => {
+      const notified = await sendBrevoEmail({
+        to: OWNER,
+        subject: `New Victor's Circle Application — ${input.firstName} ${input.lastName}`,
+        htmlContent: formatVictorsCircleOwnerEmail(input),
+        replyToEmail: input.email,
+        replyToName: input.firstName,
+      });
+      const applicantNotified = await sendBrevoEmail({
+        to: { email: input.email, name: input.firstName },
+        subject: "Your Victor's Circle Application",
+        htmlContent: formatVictorsCircleApplicantEmail(input),
+      });
+      const filedWithConstance = await fileLeadWithConstance({
+        name: `${input.firstName} ${input.lastName}`,
+        email: input.email,
+        source: "Victor's Circle Application",
+        stage: "New Lead",
+        notes: `Role: ${input.currentRole}. Motivation: ${input.motivation}`,
+      });
+      return { success: true, notified, applicantNotified, filedWithConstance };
     }),
+  
   // ---------------------------------------------------------------------------
   // Entrepreneur Next Step™ Assessment — client scores the 15-question quiz
   // itself and sends us the result. We notify Tabitha, email the visitor a
