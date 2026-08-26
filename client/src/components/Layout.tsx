@@ -9,7 +9,6 @@ const WEBINAR_URL = "https://whatentrepreneursneedtoknow.com";
 // Ordered so the Assessment (the lane's front door) sits first.
 // The Handbook line is ready to activate once the PDF is hosted on-site.
 type NavLink = { href: string; label: string; external?: boolean; premier?: boolean };
-
 const entrepreneurLinks: NavLink[] = [
   { href: "/victors-circle-leadership-academy", label: "Victor's Circle Leadership Academy™", premier: true },
   { href: "/entrepreneur-assessment", label: "Don't Know Where to Start?" },
@@ -117,8 +116,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
           {/* Desktop Navigation — Start Here · Services ▾ · About · Contact */}
           <div className="hidden xl:flex items-center gap-7 2xl:gap-9">
-           
-
             {/* For Entrepreneurs dropdown */}
             <div className="relative" ref={entRef}>
               <button
@@ -139,7 +136,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <div className="absolute left-1/2 -translate-x-1/2 top-full mt-4 min-w-[220px] bg-cream/98 backdrop-blur-xl border border-gold/15 shadow-[0_8px_30px_rgba(0,0,0,0.08)] py-2 z-50">
                   {entrepreneurLinks.map((link) =>
                     link.external ? (
-                      
+                      <a
                         key={link.href}
                         href={link.href}
                         target="_blank"
@@ -148,7 +145,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       >
                         {link.label}
                       </a>
-                    ) : (        
+                    ) : (
                       <Link
                         key={link.href}
                         href={link.href}
@@ -166,7 +163,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                         )}
                       </Link>
                     )
-                  )}   
+                  )}
                 </div>
               )}
             </div>
@@ -248,13 +245,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         {/* Mobile Navigation */}
         {mobileOpen && (
           <div className="xl:hidden bg-cream/98 backdrop-blur-xl border-t border-gold/10">
-                        <div className="max-w-[1400px] mx-auto px-6 py-8 flex flex-col gap-5">
+            <div className="max-w-[1400px] mx-auto px-6 py-8 flex flex-col gap-5">
               {/* For Entrepreneurs group */}
               <div className="flex flex-col gap-3">
                 <span className="font-body text-[0.65rem] font-medium tracking-[0.18em] uppercase text-gold/80">
                   For Entrepreneurs
                 </span>
-                               {entrepreneurLinks.map((link) =>
+                {entrepreneurLinks.map((link) =>
                   link.external ? (
                     <a
                       key={link.href}
@@ -281,38 +278,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                           Premier
                         </span>
                       )}
-                    </Link>
-                  )
-                )}
-              </div>
-
-              {/* For Entrepreneurs group */}
-              <div className="flex flex-col gap-3">
-                <span className="font-body text-[0.65rem] font-medium tracking-[0.18em] uppercase text-gold/80">
-                  For Entrepreneurs
-                </span>
-                {entrepreneurLinks.map((link) =>
-                  link.external ? (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-body text-base py-1 pl-3 transition-colors duration-200 text-charcoal/70 hover:text-charcoal"
-                    >
-                      {link.label}
-                    </a>
-                  ) : (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className={`font-body text-base py-1 pl-3 transition-colors duration-200 ${
-                        location === link.href
-                          ? "text-gold font-medium"
-                          : "text-charcoal/70 hover:text-charcoal"
-                      }`}
-                    >
-                      {link.label}
                     </Link>
                   )
                 )}
@@ -360,7 +325,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   className="w-full bg-charcoal text-cream-dark font-body text-[0.72rem] font-medium tracking-[0.1em] uppercase px-7 py-3.5 inline-block text-center transition-all duration-300 hover:bg-charcoal/90"
                 >
                   Apply Now
-                </button>   
+                </button>
               </div>
             </div>
           </div>
