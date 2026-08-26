@@ -208,13 +208,135 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Gold divider — before Executive AI Strategy */}
+           </section>
+      {/* Gold divider — before Victor's Circle */}
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <div className="gold-hairline" />
       </div>
-
+      {/* Section 3.5 — Victor's Circle Leadership Academy™ — flagship program */}
+      <section className="py-28 lg:py-36 bg-cream-dark/40">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
+          <div className="border-2 border-gold/40 bg-cream px-8 py-14 lg:px-16 lg:py-20 relative fade-up">
+            <span className="absolute -top-3 left-8 lg:left-16 bg-gold text-charcoal font-body text-[0.65rem] font-semibold tracking-[0.14em] uppercase px-4 py-1.5">
+              Premier Program
+            </span>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+              <div className="lg:col-span-7">
+                <p className="font-body text-[0.7rem] tracking-[0.16em] uppercase text-gold font-medium mb-6">
+                  For Women Entrepreneurs
+                </p>
+                <h2 className="font-display text-3xl sm:text-4xl lg:text-[2.5rem] font-medium text-charcoal leading-[1.15] mb-6">
+                  Victor's Circle Leadership Academy™
+                </h2>
+                <p className="font-body text-lg text-charcoal-light leading-relaxed mb-6">
+                  A Christ-centered leadership formation program for Christian women called to lead — in their business, their home, and their calling.
+                </p>
+                <p className="font-body text-base text-charcoal-light/80 leading-relaxed mb-10">
+                  This is where clarity, capacity, and conviction come together. Now accepting applications for the January cohort.
+                </p>
+                <div className="flex flex-col sm:flex-row items-start gap-5">
+                  <Link
+                    href="/victors-circle-leadership-academy"
+                    className="bg-charcoal text-cream-dark font-body text-[0.78rem] font-medium tracking-[0.08em] uppercase px-8 py-4 inline-flex items-center gap-3 transition-all duration-300 hover:bg-charcoal/90 active:scale-[0.97]"
+                  >
+                    Explore Victor's Circle <ArrowRight size={15} />
+                  </Link>
+                  <Link
+                    href="/victors-circle-leadership-academy#apply"
+                    className="font-body text-[0.82rem] font-medium text-charcoal/60 hover:text-gold inline-flex items-center gap-2 py-4 transition-colors duration-300"
+                  >
+                    Apply for the January Cohort <ArrowRight size={14} />
+                  </Link>
+                </div>
+              </div>
+              <div className="lg:col-span-4 lg:col-start-9">
+                <div className="space-y-8 border-l border-gold/30 pl-8">
+                  <div>
+                    <p className="font-body text-[0.65rem] tracking-[0.16em] uppercase text-gold/70 mb-1.5">Who It's For</p>
+                    <p className="font-body text-sm text-charcoal-light">Christian women entrepreneurs called to lead</p>
+                  </div>
+                  <div>
+                    <p className="font-body text-[0.65rem] tracking-[0.16em] uppercase text-gold/70 mb-1.5">Format</p>
+                    <p className="font-body text-sm text-charcoal-light">Cohort-based, application required</p>
+                  </div>
+                  <div>
+                    <p className="font-body text-[0.65rem] tracking-[0.16em] uppercase text-gold/70 mb-1.5">Next Cohort</p>
+                    <p className="font-body text-sm text-charcoal-light">Now enrolling — January</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
+        <div className="gold-hairline" />
+      </div>
+      </section>
+      {/* Gold divider — before Victor's Circle */}
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
+        <div className="gold-hairline" />
+      </div>
+      {/* Section 3.5 — Victor's Circle Leadership Academy™ — flagship program */}
+      <section className="py-28 lg:py-36 bg-cream-dark/40">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
+          <div className="border-2 border-gold/40 bg-cream px-8 py-14 lg:px-16 lg:py-20 relative fade-up">
+            <span className="absolute -top-3 left-8 lg:left-16 bg-gold text-charcoal font-body text-[0.65rem] font-semibold tracking-[0.14em] uppercase px-4 py-1.5">
+              Premier Program
+            </span>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+              <div className="lg:col-span-7">
+                <p className="font-body text-[0.7rem] tracking-[0.16em] uppercase text-gold font-medium mb-6">
+                  For Christian Women in Leadership
+                </p>
+                <h2 className="font-display text-3xl sm:text-4xl lg:text-[2.5rem] font-medium text-charcoal leading-[1.15] mb-4">
+                  Victor's Circle Leadership Academy™
+                </h2>
+                <p className="font-display italic text-lg text-gold mb-6">
+                  Grow in wisdom. Lead with peace. Rise with strength.
+                </p>
+                <p className="font-body text-lg text-charcoal-light leading-relaxed mb-6">
+                  A Christ-centered formation space for women who carry influence, responsibility, and the weight of leadership — at home, at work, in ministry, and in their communities.
+                </p>
+                <p className="font-body text-base text-charcoal-light/80 leading-relaxed mb-10">
+                  A 30-day reset that quiets anxiety, restores clarity, and equips you to lead with steady confidence. Now accepting applications for the January cohort.
+                </p>
+                <div className="flex flex-col sm:flex-row items-start gap-5">
+                  <Link
+                    href="/victors-circle-leadership-academy"
+                    className="bg-charcoal text-cream-dark font-body text-[0.78rem] font-medium tracking-[0.08em] uppercase px-8 py-4 inline-flex items-center gap-3 transition-all duration-300 hover:bg-charcoal/90 active:scale-[0.97]"
+                  >
+                    Explore Victor's Circle <ArrowRight size={15} />
+                  </Link>
+                  <Link
+                    href="/victors-circle-leadership-academy#apply"
+                    className="font-body text-[0.82rem] font-medium text-charcoal/60 hover:text-gold inline-flex items-center gap-2 py-4 transition-colors duration-300"
+                  >
+                    Apply for the January Cohort <ArrowRight size={14} />
+                  </Link>
+                </div>
+              </div>
+              <div className="lg:col-span-4 lg:col-start-9">
+                <div className="space-y-8 border-l border-gold/30 pl-8">
+                  <div>
+                    <p className="font-body text-[0.65rem] tracking-[0.16em] uppercase text-gold/70 mb-1.5">Who It's For</p>
+                    <p className="font-body text-sm text-charcoal-light">Christian women carrying influence and leadership</p>
+                  </div>
+                  <div>
+                    <p className="font-body text-[0.65rem] tracking-[0.16em] uppercase text-gold/70 mb-1.5">Format</p>
+                    <p className="font-body text-sm text-charcoal-light">30-day cohort, application required</p>
+                  </div>
+                  <div>
+                    <p className="font-body text-[0.65rem] tracking-[0.16em] uppercase text-gold/70 mb-1.5">Next Cohort</p>
+                    <p className="font-body text-sm text-charcoal-light">Now enrolling — January</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* Gold divider — before Executive AI Strategy */}
       {/* Section 4 — Executive AI Strategy — dark, authoritative */}
       <section className="py-28 lg:py-36 bg-charcoal">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
