@@ -26,6 +26,7 @@ const serviceLinks = [
 
 // Top-level nav after the dropdowns.
 const simpleLinks = [
+  { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
