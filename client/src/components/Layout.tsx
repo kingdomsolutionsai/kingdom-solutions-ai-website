@@ -1,10 +1,8 @@
 import { Link, useLocation } from "wouter";
 import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
-
 // The live webinar registration site (external).
 const WEBINAR_URL = "https://whatentrepreneursneedtoknow.com";
-
 // "For Entrepreneurs" lane — emerging-entrepreneur resources.
 // Ordered so the Assessment (the lane's front door) sits first.
 // The Handbook line is ready to activate once the PDF is hosted on-site.
@@ -15,7 +13,6 @@ const entrepreneurLinks: NavLink[] = [
   { href: "/handbook", label: "Handbook (Free)" },
   { href: WEBINAR_URL, label: "The Webinar", external: true },
 ];
-
 // Offers, ordered as the ladder — this is what lives inside "Services".
 const serviceLinks = [
   { href: "/capacity-leak-audit", label: "Capacity Leak Audit™" },
@@ -23,14 +20,12 @@ const serviceLinks = [
   { href: "/constance", label: "Constance™" },
   { href: "/executive-ai-strategy", label: "Executive AI Strategy" },
 ];
-
 // Top-level nav after the dropdowns.
 const simpleLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
-
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [location, setLocation] = useLocation();
   const [scrolled, setScrolled] = useState(false);
@@ -39,20 +34,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const [entOpen, setEntOpen] = useState(false);
   const servicesRef = useRef<HTMLDivElement>(null);
   const entRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
   useEffect(() => {
     setMobileOpen(false);
     setServicesOpen(false);
     setEntOpen(false);
     window.scrollTo(0, 0);
   }, [location]);
-
   // Close the desktop Services dropdown when clicking outside it.
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -66,7 +58,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     document.addEventListener("mousedown", handleClick);
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
-
   // The header's "Apply Now" CTA needs to land on Victor's Circle's actual
   // application form (#apply), not just the top of the page — and it needs
   // to work even when the visitor is already on
@@ -84,9 +75,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       window.setTimeout(scrollToForm, 100);
     }
   };
-
   const isServiceActive = serviceLinks.some((l) => l.href === location);
-
   return (
     <div className="min-h-screen flex flex-col">
       {/* Navigation — refined, spacious, premium */}
@@ -114,7 +103,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </span>
             </div>
           </Link>
-
           {/* Desktop Navigation — Start Here · Services ▾ · About · Contact */}
           <div className="hidden xl:flex items-center gap-7 2xl:gap-9">
             {/* For Entrepreneurs dropdown */}
@@ -168,7 +156,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </div>
               )}
             </div>
-
             {/* Services dropdown */}
             <div className="relative" ref={servicesRef}>
               <button
@@ -207,7 +194,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </div>
               )}
             </div>
-
             {/* About · Contact */}
             {simpleLinks.map((link) => (
               <Link
@@ -223,16 +209,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </Link>
             ))}
           </div>
-
           {/* CTA Button - Desktop — premium, distinguished */}
           <button
             type="button"
             onClick={goToApply}
             className="hidden xl:inline-flex items-center gap-2 ml-8 lg:ml-12 shrink-0 bg-charcoal text-cream-dark font-body text-[0.72rem] font-medium tracking-[0.1em] uppercase px-7 py-3.5 transition-all duration-300 hover:bg-charcoal/90 active:scale-[0.97]"
           >
-            Apply Now
+            Now Taking Applications — January 2027 Cohort
           </button>
-
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -242,7 +226,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </nav>
-
         {/* Mobile Navigation */}
         {mobileOpen && (
           <div className="xl:hidden bg-cream/98 backdrop-blur-xl border-t border-gold/10">
@@ -283,7 +266,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   )
                 )}
               </div>
-
               {/* Services group — shown as a labeled cluster on mobile */}
               <div className="flex flex-col gap-3">
                 <span className="font-body text-[0.65rem] font-medium tracking-[0.18em] uppercase text-gold/80">
@@ -303,7 +285,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   </Link>
                 ))}
               </div>
-
               {/* About · Contact */}
               {simpleLinks.map((link) => (
                 <Link
@@ -318,24 +299,21 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   {link.label}
                 </Link>
               ))}
-
               <div className="pt-4 mt-2 border-t border-taupe">
                 <button
                   type="button"
                   onClick={goToApply}
                   className="w-full bg-charcoal text-cream-dark font-body text-[0.72rem] font-medium tracking-[0.1em] uppercase px-7 py-3.5 inline-block text-center transition-all duration-300 hover:bg-charcoal/90"
                 >
-                  Apply Now
+                  Now Taking Applications — January 2027 Cohort
                 </button>
               </div>
             </div>
           </div>
         )}
       </header>
-
       {/* Main Content */}
       <main className="flex-1">{children}</main>
-
       {/* Footer — premium, editorial */}
       <footer className="bg-charcoal text-cream-dark">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-20 lg:py-24">
@@ -363,9 +341,19 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 Strategic AI systems for coaches, founders, consultants, executives, and high-capacity leaders who need clarity, capacity, and intelligent support.
               </p>
             </div>
-
-            {/* Services Column */}
+            {/* Services Column — Premier Offering sits above the standard services list */}
             <div>
+              <h4 className="font-body text-[0.65rem] font-medium tracking-[0.18em] uppercase text-gold mb-7">
+                Premier Offering
+              </h4>
+              <div className="flex flex-col gap-3.5 mb-10">
+                <Link
+                  href="/victors-circle-leadership-academy"
+                  className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300"
+                >
+                  Victor's Circle Leadership Academy™
+                </Link>
+              </div>
               <h4 className="font-body text-[0.65rem] font-medium tracking-[0.18em] uppercase text-gold mb-7">
                 Services
               </h4>
@@ -384,7 +372,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </Link>
               </div>
             </div>
-
             {/* Company Column */}
             <div>
               <h4 className="font-body text-[0.65rem] font-medium tracking-[0.18em] uppercase text-gold mb-7">
@@ -411,7 +398,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </Link>
               </div>
             </div>
-
             {/* Contact Column */}
             <div>
               <h4 className="font-body text-[0.65rem] font-medium tracking-[0.18em] uppercase text-gold mb-7">
@@ -438,7 +424,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </div>
             </div>
           </div>
-
           {/* Bottom Bar */}
           <div className="mt-20 pt-8 border-t border-white/8 flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="font-body text-xs text-warm-gray/70">
