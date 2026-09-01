@@ -40,6 +40,7 @@ const INCLUSIONS = [
   "Pop-up \"Quick Lives\" — short, powerful live sessions",
   "Fearless Faith Video Course (3 hours, lifetime access)",
   "Fearless Faith Workbook — reflection prompts and journaling space",
+  "Free access to Clarity Pro™",
   "Private community access",
 ];
 
