@@ -95,7 +95,7 @@ export default function VictorsCircleLeadershipAcademy() {
               href="#apply"
               className="rounded-sm inline-flex items-center gap-2 bg-charcoal text-cream font-body text-[0.72rem] font-medium tracking-[0.1em] uppercase px-8 py-4 hover:bg-charcoal/90 transition-colors"
             >
-              Apply for the January Cohort →
+              Apply for the January 2027 Cohort →
             </a>
           </div>
           <p className="font-body text-xs text-charcoal-light/70 uppercase tracking-[0.08em] mt-5">
@@ -213,7 +213,7 @@ export default function VictorsCircleLeadershipAcademy() {
       <section id="apply" className="py-20 lg:py-24 bg-charcoal text-cream">
         <div className="container max-w-xl">
           <div className="text-center mb-10">
-            <p className="editorial-label !text-gold mb-4">January Cohort · Application</p>
+            <p className="editorial-label !text-gold mb-4">January 2027 Cohort · Application</p>
             <h2 className="font-display text-3xl sm:text-4xl font-medium leading-tight mb-4">
               Apply for Victor's Circle.
             </h2>
