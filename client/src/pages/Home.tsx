@@ -164,6 +164,18 @@ export default function Home() {
               </p>
               <p className="font-body text-base sm:text-lg text-charcoal leading-relaxed">
                 <span className="font-semibold">
+                  Ready to build your business in the right order?
+                </span>{" "}
+                <Link
+                  href="/business-fast-track"
+                  className="font-semibold text-gold hover:text-gold-light underline underline-offset-4 decoration-gold/40 transition-colors duration-300"
+                >
+                  Explore the 30-Day Business Fast Track™
+                </Link>
+                .
+              </p>
+              <p className="font-body text-base sm:text-lg text-charcoal leading-relaxed">
+                <span className="font-semibold">
                   Already running a business but feeling stretched thin?
                 </span>{" "}
                 <Link

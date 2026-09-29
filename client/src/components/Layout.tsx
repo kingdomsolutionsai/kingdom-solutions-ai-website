@@ -3,22 +3,36 @@ import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 // The live webinar registration site (external).
 const WEBINAR_URL = "https://whatentrepreneursneedtoknow.com";
-// "For Entrepreneurs" lane — emerging-entrepreneur resources.
-// Ordered so the Assessment (the lane's front door) sits first.
-// The Handbook line is ready to activate once the PDF is hosted on-site.
-type NavLink = { href: string; label: string; external?: boolean; premier?: boolean };
+const WEBINAR_CTA = "Register for the Oct 20 Webinar";
+const ACADEMY_PATH = "/victors-circle-leadership-academy";
+
+type NavLink = { href: string; label: string; note?: string; external?: boolean };
+type NavGroup = { id: string; label: string; links: NavLink[] };
+
+// The site is organized around the decision a visitor is trying to make:
+// build the business (For Entrepreneurs), support a growing business
+// (Services), or pursue Christ-centered leadership formation (Faith & Leadership).
 const entrepreneurLinks: NavLink[] = [
-  { href: "/victors-circle-leadership-academy", label: "Victor's Circle Leadership Academy™", premier: true },
-  { href: "/entrepreneur-assessment", label: "Don't Know Where to Start?" },
+  { href: "/entrepreneur-assessment", label: "Find Your Starting Point", note: "Entrepreneur Assessment" },
+  { href: WEBINAR_URL, label: "The Webinar", note: "October 20, 2026", external: true },
+  { href: "/business-fast-track", label: "30-Day Business Fast Track™" },
   { href: "/handbook", label: "Handbook (Free)" },
-  { href: WEBINAR_URL, label: "The Webinar", external: true },
 ];
-// Offers, ordered as the ladder — this is what lives inside "Services".
-const serviceLinks = [
+// Offers, ordered as the ladder.
+const serviceLinks: NavLink[] = [
   { href: "/capacity-leak-audit", label: "Capacity Leak Audit™" },
   { href: "/clarity-pro", label: "Clarity Pro™" },
   { href: "/constance", label: "Constance™" },
   { href: "/executive-ai-strategy", label: "Executive AI Strategy" },
+];
+// Faith-based leadership path, kept separate so it never competes with the business offers.
+const faithLinks: NavLink[] = [
+  { href: ACADEMY_PATH, label: "Victor's Circle Leadership Academy™", note: "90-day cohort · January 2027" },
+];
+const navGroups: NavGroup[] = [
+  { id: "entrepreneurs", label: "For Entrepreneurs", links: entrepreneurLinks },
+  { id: "services", label: "Services", links: serviceLinks },
+  { id: "faith", label: "Faith & Leadership", links: faithLinks },
 ];
 // Top-level nav after the dropdowns.
 const simpleLinks = [
@@ -26,69 +40,103 @@ const simpleLinks = [
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
+
+const ctaClass =
+  "bg-charcoal text-cream-dark font-body text-[0.72rem] font-medium tracking-[0.1em] uppercase px-4 2xl:px-6 py-3.5 transition-all duration-300 hover:bg-charcoal/90 active:scale-[0.97]";
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [location, setLocation] = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
-  const [entOpen, setEntOpen] = useState(false);
-  const servicesRef = useRef<HTMLDivElement>(null);
-  const entRef = useRef<HTMLDivElement>(null);
+  const [openGroup, setOpenGroup] = useState<string | null>(null);
+  const navRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   useEffect(() => {
     setMobileOpen(false);
-    setServicesOpen(false);
-    setEntOpen(false);
+    setOpenGroup(null);
     window.scrollTo(0, 0);
   }, [location]);
-  // Close the desktop Services dropdown when clicking outside it.
+
+  // Close any open desktop dropdown when clicking outside the menu.
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
-      if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) {
-        setServicesOpen(false);
-      }
-      if (entRef.current && !entRef.current.contains(e.target as Node)) {
-        setEntOpen(false);
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setOpenGroup(null);
       }
     };
     document.addEventListener("mousedown", handleClick);
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
-  // The header's "Apply Now" CTA needs to land on Victor's Circle's actual
-  // application form (#apply), not just the top of the page — and it needs
-  // to work even when the visitor is already on
-  // /victors-circle-leadership-academy, where a plain route Link is a no-op
-  // because the route never changes.
+
+  // The top button follows the page: the academy page keeps its own
+  // application button, and every other page points to the webinar.
+  const onAcademyPage = location === ACADEMY_PATH;
   const goToApply = () => {
     setMobileOpen(false);
-    const scrollToForm = () => {
-      document.getElementById("apply")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    };
-    if (location === "/victors-circle-leadership-academy") {
-      scrollToForm();
-    } else {
-      setLocation("/victors-circle-leadership-academy");
-      window.setTimeout(scrollToForm, 100);
-    }
+    document.getElementById("apply")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
-  const isServiceActive = serviceLinks.some((l) => l.href === location);
+
+  const renderCta = (extra = "") =>
+    onAcademyPage ? (
+      <button type="button" onClick={goToApply} className={`${ctaClass} ${extra}`}>
+        Apply for January 2027
+      </button>
+    ) : (
+      <a href={WEBINAR_URL} target="_blank" rel="noopener noreferrer" className={`${ctaClass} ${extra}`}>
+        <span className="xl:hidden 2xl:inline">{WEBINAR_CTA}</span>
+        <span className="hidden xl:inline 2xl:hidden">Oct 20 Webinar: Register</span>
+      </a>
+    );
+
+  const renderLink = (link: NavLink, variant: "desktop" | "mobile") => {
+    const active = !link.external && location === link.href;
+    const base =
+      variant === "desktop"
+        ? "block px-5 py-3 transition-colors duration-200 whitespace-nowrap"
+        : "block py-1 pl-3 transition-colors duration-200";
+    const tone = active
+      ? "text-gold font-medium bg-gold/5"
+      : "text-charcoal/75 hover:text-charcoal hover:bg-gold/5";
+    const content = (
+      <>
+        <span className={variant === "desktop" ? "font-body text-[0.82rem] tracking-[0.02em]" : "font-body text-base"}>
+          {link.label}
+        </span>
+        {link.note && (
+          <span className="block font-body text-[0.68rem] tracking-[0.04em] text-charcoal/50 mt-0.5">
+            {link.note}
+          </span>
+        )}
+      </>
+    );
+    return link.external ? (
+      <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className={`${base} ${tone}`}>
+        {content}
+      </a>
+    ) : (
+      <Link key={link.href} href={link.href} className={`${base} ${tone}`}>
+        {content}
+      </Link>
+    );
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Navigation — refined, spacious, premium */}
+      {/* Navigation */}
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-cream/97 backdrop-blur-xl ${
-          scrolled
-            ? "shadow-[0_1px_0_0_rgba(197,160,68,0.12)]"
-            : "shadow-none"
+          scrolled ? "shadow-[0_1px_0_0_rgba(197,160,68,0.12)]" : "shadow-none"
         }`}
       >
         <nav className="max-w-[1400px] mx-auto px-6 lg:px-10 flex items-center justify-between h-24 lg:h-32">
-          {/* Logo — generous breathing room */}
-          <Link href="/" className="flex items-center gap-4 group shrink-0 mr-8 lg:mr-14">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-4 group shrink-0 mr-6 lg:mr-10">
             <img
               src="/assets/ksai-logo-transparent-400_82fa1f46.png"
               alt="Kingdom Solutions AI™"
@@ -103,120 +151,54 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </span>
             </div>
           </Link>
-          {/* Desktop Navigation — Start Here · Services ▾ · About · Contact */}
-          <div className="hidden xl:flex items-center gap-7 2xl:gap-9">
-            {/* For Entrepreneurs dropdown */}
-            <div className="relative" ref={entRef}>
-              <button
-                type="button"
-                onClick={() => setEntOpen((v) => !v)}
-                className="font-body text-[0.8rem] tracking-[0.02em] transition-colors duration-300 whitespace-nowrap inline-flex items-center gap-1 text-charcoal/70 hover:text-charcoal"
-                aria-expanded={entOpen}
-                aria-haspopup="true"
-              >
-                For Entrepreneurs
-                <ChevronDown
-                  size={14}
-                  className={`transition-transform duration-300 ${entOpen ? "rotate-180" : ""}`}
-                  aria-hidden="true"
-                />
-              </button>
-              {entOpen && (
-                <div className="absolute left-1/2 -translate-x-1/2 top-full mt-4 min-w-[220px] bg-cream/98 backdrop-blur-xl border border-gold/15 shadow-[0_8px_30px_rgba(0,0,0,0.08)] py-2 z-50">
-                  {entrepreneurLinks.map((link) =>
-                    link.external ? (
-                      <a
-                        key={link.href}
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block font-body text-[0.82rem] tracking-[0.02em] px-5 py-3 transition-colors duration-200 whitespace-nowrap text-charcoal/75 hover:text-charcoal hover:bg-gold/5"
-                      >
-                        {link.label}
-                      </a>
-                    ) : (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        className={`flex items-center gap-2 font-body text-[0.82rem] tracking-[0.02em] px-5 py-3 transition-colors duration-200 whitespace-nowrap ${
-                          location === link.href
-                            ? "text-gold font-medium bg-gold/5"
-                            : "text-charcoal/75 hover:text-charcoal hover:bg-gold/5"
-                        }`}
-                      >
-                        {link.label}
-                        {link.premier && (
-                          <span className="text-[0.6rem] font-semibold tracking-[0.08em] uppercase text-gold border border-gold/40 rounded-sm px-1.5 py-0.5">
-                            Premier
-                          </span>
-                        )}
-                      </Link>
-                    )
+
+          {/* Desktop Navigation: three lanes, then About and Contact */}
+          <div ref={navRef} className="hidden xl:flex items-center gap-4 2xl:gap-9">
+            {navGroups.map((group) => {
+              const isOpen = openGroup === group.id;
+              const isActive = group.links.some((l) => !l.external && l.href === location);
+              return (
+                <div key={group.id} className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setOpenGroup(isOpen ? null : group.id)}
+                    className={`font-body text-[0.8rem] tracking-[0.02em] transition-colors duration-300 whitespace-nowrap inline-flex items-center gap-1 ${
+                      isActive ? "text-gold font-medium" : "text-charcoal/70 hover:text-charcoal"
+                    }`}
+                    aria-expanded={isOpen}
+                    aria-haspopup="true"
+                  >
+                    {group.label}
+                    <ChevronDown
+                      size={14}
+                      className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                      aria-hidden="true"
+                    />
+                  </button>
+                  {isOpen && (
+                    <div className="absolute left-1/2 -translate-x-1/2 top-full mt-4 min-w-[260px] bg-cream/98 backdrop-blur-xl border border-gold/15 shadow-[0_8px_30px_rgba(0,0,0,0.08)] py-2 z-50">
+                      {group.links.map((link) => renderLink(link, "desktop"))}
+                    </div>
                   )}
                 </div>
-              )}
-            </div>
-            {/* Services dropdown */}
-            <div className="relative" ref={servicesRef}>
-              <button
-                type="button"
-                onClick={() => setServicesOpen((v) => !v)}
-                className={`font-body text-[0.8rem] tracking-[0.02em] transition-colors duration-300 whitespace-nowrap inline-flex items-center gap-1 ${
-                  isServiceActive
-                    ? "text-gold font-medium"
-                    : "text-charcoal/70 hover:text-charcoal"
-                }`}
-                aria-expanded={servicesOpen}
-                aria-haspopup="true"
-              >
-                Services
-                <ChevronDown
-                  size={14}
-                  className={`transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`}
-                  aria-hidden="true"
-                />
-              </button>
-              {servicesOpen && (
-                <div className="absolute left-1/2 -translate-x-1/2 top-full mt-4 min-w-[260px] bg-cream/98 backdrop-blur-xl border border-gold/15 shadow-[0_8px_30px_rgba(0,0,0,0.08)] py-2 z-50">
-                  {serviceLinks.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className={`block font-body text-[0.82rem] tracking-[0.02em] px-5 py-3 transition-colors duration-200 whitespace-nowrap ${
-                        location === link.href
-                          ? "text-gold font-medium bg-gold/5"
-                          : "text-charcoal/75 hover:text-charcoal hover:bg-gold/5"
-                      }`}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-            {/* About · Contact */}
+              );
+            })}
             {simpleLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={`font-body text-[0.8rem] tracking-[0.02em] transition-colors duration-300 whitespace-nowrap ${
-                  location === link.href
-                    ? "text-gold font-medium"
-                    : "text-charcoal/70 hover:text-charcoal"
+                  location === link.href ? "text-gold font-medium" : "text-charcoal/70 hover:text-charcoal"
                 }`}
               >
                 {link.label}
               </Link>
             ))}
           </div>
-          {/* CTA Button - Desktop — premium, distinguished */}
-          <button
-            type="button"
-            onClick={goToApply}
-            className="hidden xl:inline-flex items-center gap-2 ml-8 lg:ml-12 shrink-0 bg-charcoal text-cream-dark font-body text-[0.72rem] font-medium tracking-[0.1em] uppercase px-7 py-3.5 transition-all duration-300 hover:bg-charcoal/90 active:scale-[0.97]"
-          >
-            Now Taking Applications — January 2027 Cohort
-          </button>
+
+          {/* CTA Button - Desktop */}
+          {renderCta("hidden xl:inline-flex items-center gap-2 ml-6 shrink-0 whitespace-nowrap")}
+
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -226,98 +208,45 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </nav>
+
         {/* Mobile Navigation */}
         {mobileOpen && (
-          <div className="xl:hidden bg-cream/98 backdrop-blur-xl border-t border-gold/10">
+          <div className="xl:hidden bg-cream/98 backdrop-blur-xl border-t border-gold/10 max-h-[calc(100vh-6rem)] overflow-y-auto">
             <div className="max-w-[1400px] mx-auto px-6 py-8 flex flex-col gap-5">
-              {/* For Entrepreneurs group */}
-              <div className="flex flex-col gap-3">
-                <span className="font-body text-[0.65rem] font-medium tracking-[0.18em] uppercase text-gold/80">
-                  For Entrepreneurs
-                </span>
-                {entrepreneurLinks.map((link) =>
-                  link.external ? (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-body text-base py-1 pl-3 transition-colors duration-200 text-charcoal/70 hover:text-charcoal"
-                    >
-                      {link.label}
-                    </a>
-                  ) : (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className={`flex items-center gap-2 font-body text-base py-1 pl-3 transition-colors duration-200 ${
-                        location === link.href
-                          ? "text-gold font-medium"
-                          : "text-charcoal/70 hover:text-charcoal"
-                      }`}
-                    >
-                      {link.label}
-                      {link.premier && (
-                        <span className="text-[0.6rem] font-semibold tracking-[0.08em] uppercase text-gold border border-gold/40 rounded-sm px-1.5 py-0.5">
-                          Premier
-                        </span>
-                      )}
-                    </Link>
-                  )
-                )}
-              </div>
-              {/* Services group — shown as a labeled cluster on mobile */}
-              <div className="flex flex-col gap-3">
-                <span className="font-body text-[0.65rem] font-medium tracking-[0.18em] uppercase text-gold/80">
-                  Services
-                </span>
-                {serviceLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`font-body text-base py-1 pl-3 transition-colors duration-200 ${
-                      location === link.href
-                        ? "text-gold font-medium"
-                        : "text-charcoal/70 hover:text-charcoal"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-              {/* About · Contact */}
+              {navGroups.map((group) => (
+                <div key={group.id} className="flex flex-col gap-3">
+                  <span className="font-body text-[0.65rem] font-medium tracking-[0.18em] uppercase text-gold/80">
+                    {group.label}
+                  </span>
+                  {group.links.map((link) => renderLink(link, "mobile"))}
+                </div>
+              ))}
               {simpleLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   className={`font-body text-base py-1 transition-colors duration-200 ${
-                    location === link.href
-                      ? "text-gold font-medium"
-                      : "text-charcoal/70 hover:text-charcoal"
+                    location === link.href ? "text-gold font-medium" : "text-charcoal/70 hover:text-charcoal"
                   }`}
                 >
                   {link.label}
                 </Link>
               ))}
               <div className="pt-4 mt-2 border-t border-taupe">
-                <button
-                  type="button"
-                  onClick={goToApply}
-                  className="w-full bg-charcoal text-cream-dark font-body text-[0.72rem] font-medium tracking-[0.1em] uppercase px-7 py-3.5 inline-block text-center transition-all duration-300 hover:bg-charcoal/90"
-                >
-                  Now Taking Applications — January 2027 Cohort
-                </button>
+                {renderCta("w-full inline-block text-center")}
               </div>
             </div>
           </div>
         )}
       </header>
+
       {/* Main Content */}
       <main className="flex-1">{children}</main>
-      {/* Footer — premium, editorial */}
+
+      {/* Footer */}
       <footer className="bg-charcoal text-cream-dark">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-20 lg:py-24">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-12">
             {/* Brand Column */}
             <div className="lg:col-span-1">
               <div className="flex items-center gap-5 mb-8">
@@ -341,19 +270,36 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 Strategic AI systems for coaches, founders, consultants, executives, and high-capacity leaders who need clarity, capacity, and intelligent support.
               </p>
             </div>
-            {/* Services Column — Premier Offering sits above the standard services list */}
+            {/* For Entrepreneurs + Faith & Leadership */}
             <div>
               <h4 className="font-body text-[0.65rem] font-medium tracking-[0.18em] uppercase text-gold mb-7">
-                Premier Offering
+                For Entrepreneurs
               </h4>
               <div className="flex flex-col gap-3.5 mb-10">
-                <Link
-                  href="/victors-circle-leadership-academy"
-                  className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300"
-                >
+                <Link href="/entrepreneur-assessment" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
+                  Find Your Starting Point
+                </Link>
+                <a href={WEBINAR_URL} target="_blank" rel="noopener noreferrer" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
+                  The Webinar (Oct 20)
+                </a>
+                <Link href="/business-fast-track" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
+                  30-Day Business Fast Track™
+                </Link>
+                <Link href="/handbook" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
+                  Handbook (Free)
+                </Link>
+              </div>
+              <h4 className="font-body text-[0.65rem] font-medium tracking-[0.18em] uppercase text-gold mb-7">
+                Faith &amp; Leadership
+              </h4>
+              <div className="flex flex-col gap-3.5">
+                <Link href="/victors-circle-leadership-academy" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
                   Victor's Circle Leadership Academy™
                 </Link>
               </div>
+            </div>
+            {/* Services */}
+            <div>
               <h4 className="font-body text-[0.65rem] font-medium tracking-[0.18em] uppercase text-gold mb-7">
                 Services
               </h4>

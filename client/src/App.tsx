@@ -12,6 +12,7 @@ import ExecutiveAIStrategy from "./pages/ExecutiveAIStrategy";
 import Handbook from "@/pages/Handbook";
 import VictorsCircleLeadershipAcademy from "@/pages/VictorsCircleLeadershipAcademy";
 import EntrepreneurAssessment from "@/pages/EntrepreneurAssessment";
+import BusinessFastTrack from "@/pages/BusinessFastTrack";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import StrategyCall from "./pages/StrategyCall";
@@ -32,6 +33,7 @@ function Router() {
         <Route path="/handbook" component={Handbook} />
         <Route path="/victors-circle-leadership-academy" component={VictorsCircleLeadershipAcademy} />
         <Route path="/entrepreneur-assessment" component={EntrepreneurAssessment} />
+        <Route path="/business-fast-track" component={BusinessFastTrack} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
         <Route path="/strategy-call" component={StrategyCall} />
