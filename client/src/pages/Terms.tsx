@@ -1,10 +1,11 @@
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { usePageMeta } from "@/hooks/usePageMeta";
+import { Link } from "wouter";
 
 export default function Terms() {
   usePageMeta({
-    title: "Terms of Service — Kingdom Solutions AI™",
-    description: "Terms of Service for Kingdom Solutions AI™ products and advisory services including Clarity Pro™, Constance™, and Executive AI Strategy.",
+    title: "Terms of Service | Kingdom Solutions AI™",
+    description: "Terms of Service for Kingdom Solutions AI™ products, programs, and advisory services, including Clarity Pro™, the 30-Day Business Fast Track™, Victor's Circle Leadership Academy™, Constance™, and Executive AI Strategy.",
     canonicalUrl: "https://kingdomsolutionsai.com/terms",
     ogImage: "https://kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
@@ -21,12 +22,12 @@ export default function Terms() {
             </h1>
             <div className="w-12 h-px bg-gold/50 mb-10" />
             <p className="font-body text-sm text-charcoal-light mb-12">
-              Last Updated: August 2026
+              Last Updated: October 6, 2026
             </p>
 
             <div className="space-y-10 font-body text-base text-charcoal-light leading-relaxed">
               <p>
-                Welcome to Kingdom Solutions AI™. These Terms of Service govern your use of the Kingdom Solutions AI™ website, forms, digital products, AI-supported systems, strategy services, and related offers, including Clarity Pro™, Constance™ AI Chief of Staff, Capacity Leak Audit™, and Executive AI Strategy.
+                Welcome to Kingdom Solutions AI™. These Terms of Service govern your use of the Kingdom Solutions AI™ website, forms, digital products, AI-supported systems, strategy services, and related offers, including Clarity Pro™, the 30-Day Business Fast Track™, Victor's Circle Leadership Academy™, Constance™ AI Chief of Staff, Capacity Leak Audit™, Executive AI Strategy, and our digital products.
               </p>
               <p>
                 By accessing this website, submitting a form, purchasing a product, booking a strategy call, or using any Kingdom Solutions AI™ service, you agree to these Terms.
@@ -35,7 +36,7 @@ export default function Terms() {
               <div>
                 <h2 className="font-display text-xl font-medium text-charcoal mb-4">1. About Kingdom Solutions AI™</h2>
                 <p>
-                  Kingdom Solutions AI™ provides AI-supported strategy, clarity systems, capacity diagnostics, content direction, operational support planning, and advisory services for coaches, founders, consultants, executives, and high-capacity leaders.
+                  Kingdom Solutions AI™ provides AI-supported strategy, clarity systems, capacity diagnostics, content direction, operational support planning, guided business programs, leadership programs, digital products, and advisory services for coaches, founders, consultants, executives, and high-capacity leaders.
                 </p>
                 <p className="mt-4">
                   Our services are designed to help clients clarify their business, protect capacity, improve operational visibility, and develop strategic AI-supported systems.
@@ -103,10 +104,19 @@ export default function Terms() {
               <div>
                 <h2 className="font-display text-xl font-medium text-charcoal mb-4">7. Payments</h2>
                 <p>
-                  Payments for self-serve offers such as Clarity Pro™ Starter and Clarity Pro™ Guided may be processed through Stripe or another secure payment provider.
+                  Payments are processed through Stripe or another secure payment provider. Self-serve offers such as Clarity Pro™ and digital products may be purchased directly at checkout.
                 </p>
                 <p className="mt-4">
-                  Higher-touch offers such as Clarity Pro™ Buildout, Constance™ AI Chief of Staff, and Executive AI Strategy may require a strategy call, proposal, agreement, invoice, or private payment link before work begins.
+                  Programs such as the 30-Day Business Fast Track™ and Victor's Circle Leadership Academy™ begin with a conversation to confirm fit. Payment is completed through a private payment link shared after that conversation. Higher-touch offers such as Constance™ AI Chief of Staff and Executive AI Strategy require a strategy call and a proposal, agreement, or invoice before work begins.
+                </p>
+                <p className="mt-4">
+                  <strong className="text-charcoal">Payment plans.</strong> Where a program is offered in more than one payment, choosing a payment plan is a commitment to pay the full program price. You authorize the payment provider to save your payment method and charge each remaining payment automatically on the dates shown at enrollment. If a payment fails, it may be retried, and sessions, support, and access may be paused until it is completed. The remaining balance stays due even if you stop participating.
+                </p>
+                <p className="mt-4">
+                  <strong className="text-charcoal">Pay-over-time providers.</strong> If you choose a pay-over-time option such as Klarna or Affirm at checkout, your repayment agreement is with that provider. Kingdom Solutions AI™ is paid in full at the time of purchase, and your purchase is governed by these Terms and our Refund Policy in the same way as any other payment.
+                </p>
+                <p className="mt-4">
+                  <strong className="text-charcoal">Disputes.</strong> If you have a concern about a charge, please contact us before filing a dispute with your bank or card provider. If a chargeback is filed for a purchase that is non-refundable under our Refund Policy, access to programs, sessions, and digital materials may be suspended while it is reviewed, and we may provide records of your purchase and delivery to the payment provider.
                 </p>
                 <p className="mt-4">
                   You agree to provide accurate billing information and authorize the applicable payment provider to process your payment.
@@ -116,10 +126,14 @@ export default function Terms() {
               <div>
                 <h2 className="font-display text-xl font-medium text-charcoal mb-4">8. Refunds</h2>
                 <p>
-                  Refund eligibility depends on the offer purchased. Please review the Refund Policy linked in the website footer before purchasing.
+                  Services that have been provided are not refundable, and digital downloads and digital access are not refundable once delivered. The full terms for each offer, including payment plans and the limited exceptions for billing errors, are set out in our{" "}
+                  <Link href="/refund-policy" className="text-gold hover:text-gold-light transition-colors duration-200">
+                    Refund Policy
+                  </Link>
+                  , which forms part of these Terms. Please review it before purchasing.
                 </p>
                 <p className="mt-4">
-                  Because some offers include digital access, AI-supported materials, intake review, strategy sessions, or custom advisory support, refunds may be limited once access has been delivered, work has begun, or a session has been completed.
+                  Where a written proposal or service agreement for a specific engagement includes different terms, that agreement governs for that engagement.
                 </p>
               </div>
 
@@ -131,18 +145,21 @@ export default function Terms() {
                 <p className="mt-4">
                   Missed sessions without notice may be considered fulfilled. Repeated cancellations or missed appointments may affect access to future support.
                 </p>
+                <p className="mt-4">
+                  Sessions included in a program are held during the program dates. Sessions not used during the program period do not carry forward.
+                </p>
               </div>
 
               <div>
                 <h2 className="font-display text-xl font-medium text-charcoal mb-4">10. Intellectual Property</h2>
                 <p>
-                  The Kingdom Solutions AI™ name, Clarity Pro™, Constance™, Capacity Leak Audit™, Capacity Reset™, website copy, frameworks, systems, prompts, strategy materials, visuals, and related content are owned by Kingdom Solutions AI™ unless otherwise stated.
+                  The Kingdom Solutions AI™ name, Clarity Pro™, Constance™, Capacity Leak Audit™, Capacity Reset™, 30-Day Business Fast Track™, Right-Order Method™, Victor's Circle Leadership Academy™, Entrepreneur Next Step™ Assessment, website copy, frameworks, systems, prompts, strategy materials, visuals, and related content are owned by Kingdom Solutions AI™ unless otherwise stated.
                 </p>
                 <p className="mt-4">
                   You may not copy, resell, redistribute, reproduce, or package Kingdom Solutions AI™ materials, prompts, frameworks, systems, or content as your own product or service without written permission.
                 </p>
                 <p className="mt-4">
-                  Where a product or service includes digital access — such as a GPT link, login credential, access code, or onboarding material — that access is licensed to the purchasing individual or business only and may not be shared, forwarded, or made available to any other person or entity. Sharing access, or allowing more than one individual to use a single purchased credential, is a material breach of these Terms, voids refund eligibility under our Refund Policy, and may result in immediate suspension or termination of access without refund.
+                  Where a product or service includes digital access, such as a GPT link, download link, login credential, access code, toolkit, or onboarding material, that access is licensed to the purchasing individual or business only and may not be shared, forwarded, or made available to any other person or entity. Sharing access, or allowing more than one individual to use a single purchased credential, is a material breach of these Terms, voids refund eligibility under our Refund Policy, and may result in immediate suspension or termination of access without refund.
                 </p>
               </div>
 
@@ -152,14 +169,14 @@ export default function Terms() {
                   You retain responsibility for the content, ideas, business information, and materials you submit or create using Kingdom Solutions AI™ services.
                 </p>
                 <p className="mt-4">
-                  For Clarity Pro™ and similar offers, you may use your resulting business language, content drafts, offer language, and messaging in your own business. You may not resell or redistribute the underlying Kingdom Solutions AI™ system, prompts, process, or proprietary materials.
+                  For Clarity Pro™, the 30-Day Business Fast Track™, and similar offers, you may use your resulting business language, content drafts, offer language, and messaging in your own business. You may not resell or redistribute the underlying Kingdom Solutions AI™ system, prompts, process, or proprietary materials.
                 </p>
               </div>
 
               <div>
                 <h2 className="font-display text-xl font-medium text-charcoal mb-4">12. Third-Party Tools</h2>
                 <p>
-                  Kingdom Solutions AI™ may use or recommend third-party tools such as Stripe, Calendly, Brevo, Manus, OpenAI, Notion, CRM systems, email platforms, calendar tools, automation platforms, or other services.
+                  Kingdom Solutions AI™ may use or recommend third-party tools such as Stripe, Klarna, Affirm, Calendly, Zoom, Brevo, OpenAI, Notion, CRM systems, email platforms, calendar tools, automation platforms, or other services.
                 </p>
                 <p className="mt-4">
                   Your use of third-party platforms may be governed by their own terms, privacy policies, pricing, and data practices. Kingdom Solutions AI™ is not responsible for outages, policy changes, data handling, billing issues, or service limitations caused by third-party providers.
