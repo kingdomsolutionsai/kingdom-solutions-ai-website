@@ -1,14 +1,43 @@
-import { Link } from "wouter";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import "@/styles/business-fast-track.css";
 
 /**
  * 30-Day Business Fast Track™ landing page.
- * First cohort starts November 2, 2026 and is limited to eight women.
+ * First cohort starts November 2, 2026 (enrollment closes October 30) and is limited to eight women.
  * Styles live in styles/business-fast-track.css, scoped under .bft.
  */
 
-const CALL_URL = "/strategy-call";
+/**
+ * Enrollment for the first cohort: a Business Fast Track Strategy Call (Calendly,
+ * with intake questions) comes first, then a private payment link.
+ * After enrollment closes, the calls to action switch to asking about the next
+ * cohort, so the page never invites anyone to book for a cohort that has started.
+ */
+const CALL_URL = "https://calendly.com/tabitha-kingdomsolutionsai/business-fast-track-strategy-call";
+const NEXT_COHORT_URL =
+  "mailto:tabitha@kingdomsolutionsai.com?subject=" + encodeURIComponent("Next Business Fast Track cohort");
+const STARTS = "Monday, November 2";
+const CLOSES = "Friday, October 30";
+/** End of Friday, October 30, 2026, Eastern time. */
+const ENROLLMENT_CLOSES_AT = Date.parse("2026-10-31T04:00:00Z");
+
+function useEnrollment() {
+  const open = Date.now() < ENROLLMENT_CLOSES_AT;
+  return {
+    open,
+    href: open ? CALL_URL : NEXT_COHORT_URL,
+    label: open ? "Book a Fast Track Strategy Call" : "Ask About the Next Cohort",
+  };
+}
+
+function Cta({ className = "button" }: { className?: string }) {
+  const { href, label } = useEnrollment();
+  return (
+    <a className={className} href={href}>
+      {label}
+    </a>
+  );
+}
 
 const OUTCOMES = [
   { n: "01", title: "Business Priority Map", desc: "Know what your business needs now, what can wait, and where your attention belongs." },
@@ -55,11 +84,14 @@ const FAQS = [
   { q: "Will I have a complete business in thirty days?", a: "You will have the essential decisions, offer, message, revenue path, and 90-day implementation plan your business needs. You will not be promised that every website, funnel, legal, operational, or automation component will be completed in thirty days." },
   { q: "How much time should I plan to protect each week?", a: "Plan for the weekly session plus focused implementation time. The work is intentionally prioritized so you can complete the right pieces without trying to build the entire business at once." },
   { q: "Is AI used in the program?", a: "Yes, where it genuinely supports clarity, research, drafting, and implementation. AI will not be positioned as the authority over your offer, values, client commitments, or business decisions. You remain the leader throughout." },
-  { q: "Does joining the priority list guarantee a seat?", a: "No. Each cohort is limited to eight women. Priority-list members receive the first opportunity to review the final details and request a Business Fast Track Call before enrollment is announced more broadly." },
-  { q: "What happens after I join the priority list?", a: "You will receive the enrollment details first. If the program appears aligned with your goals and stage, the next step is a Business Fast Track Call to confirm fit, answer questions, and discuss your seat." },
+  { q: "How do I enroll?", a: `Start by booking a 30-minute Business Fast Track Strategy Call. We will look at where your business is today, what you most want settled in the next 30 days, and whether the Fast Track is the right next step. If it is a fit, you will receive a private enrollment link after the call. Enrollment for the first cohort closes ${CLOSES}, and the program begins ${STARTS}.` },
+  { q: "Can I pay in more than one payment?", a: "Yes. You can pay in full or choose a payment plan. Your payment options are shared after your Strategy Call. A payment plan is a commitment to the full program price, as described in our Refund Policy." },
+  { q: "Is the seat guaranteed when I book a call?", a: "No. Each cohort is limited to eight women, and seats are confirmed in the order enrollment is completed. Booking a call does not hold a seat." },
+  { q: "What if I am not sure the timing is right?", a: "Book the call anyway. You will leave knowing your next step, whether or not the Fast Track is the right fit for you now." },
 ];
 
 export default function BusinessFastTrack() {
+  const enrollment = useEnrollment();
   usePageMeta({
     title: "30-Day Business Fast Track™ | Kingdom Solutions AI™",
     description:
@@ -85,16 +117,17 @@ export default function BusinessFastTrack() {
               with confidence.
             </p>
             <div className="hero-actions">
-              <Link className="button" href={CALL_URL}>Join the Priority List</Link>
+              <Cta />
               <a className="button ghost" href="#program">See the 30-Day Plan</a>
             </div>
             <p className="micro">
-              Priority-list members receive the first opportunity to review the complete program details and request a
-              Business Fast Track Call. Joining the list does not guarantee a seat.
+              {enrollment.open
+                ? `Enrollment is open through ${CLOSES}. We begin ${STARTS}. Every enrollment starts with a short Strategy Call to make sure it is the right fit.`
+                : `Enrollment for the November cohort has closed. Reach out to hear first when the next cohort opens.`}
             </p>
           </div>
           <aside className="hero-card" aria-label="Program overview">
-            <span className="small">Q1 2027 Ready • Limited Seats</span>
+            <span className="small">Begins {STARTS.replace("Monday, ", "")} • 8 Seats • Q1 2027 Ready</span>
             <h2>Focused implementation. Personal strategic guidance. A business you can explain and sell.</h2>
             <div className="proof-row">
               <div className="proof"><strong>30</strong><span>Focused days</span></div>
@@ -250,10 +283,12 @@ export default function BusinessFastTrack() {
               <span>90 days Clarity Pro™</span>
               <span>Digital-book bonus</span>
             </div>
-            <Link className="button" href={CALL_URL}>Join the Priority List</Link>
+            <p className="seat-note">Pay in full or choose a payment plan. Payment options are shared after your Strategy Call.</p>
+            <Cta />
             <p className="micro" style={{ marginInline: "auto" }}>
-              Priority-list members receive early access to request a Business Fast Track Call when enrollment opens.
-              Admission is based on fit and available seats.
+              {enrollment.open
+                ? `Enrollment closes ${CLOSES}. We begin ${STARTS}. Seats are confirmed in the order enrollment is completed.`
+                : `Enrollment for the November cohort has closed.`}
             </p>
           </div>
         </div>
@@ -308,8 +343,12 @@ export default function BusinessFastTrack() {
         <div className="shell">
           <div className="kicker">Your expertise is not the problem</div>
           <h2>Your business needs a clear structure for turning it into value.</h2>
-          <p>Join the priority list and be among the first invited to explore the 30-Day Business Fast Track™.</p>
-          <Link className="button" href={CALL_URL}>Join the Priority List</Link>
+          <p>
+            {enrollment.open
+              ? `Book a Strategy Call to see whether the 30-Day Business Fast Track™ is your right next step. Enrollment closes ${CLOSES}.`
+              : "Ask about the next cohort of the 30-Day Business Fast Track™."}
+          </p>
+          <Cta />
         </div>
       </section>
     </div>
