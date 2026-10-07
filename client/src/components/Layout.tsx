@@ -29,7 +29,7 @@ const serviceLinks: NavLink[] = [
 ];
 // Faith-based leadership path, kept separate so it never competes with the business offers.
 const faithLinks: NavLink[] = [
-  { href: ACADEMY_PATH, label: "Victor's Circle Leadership Academy™", note: "90-day cohort · January 2027" },
+  { href: ACADEMY_PATH, label: "Victor's Circle Leadership Academy™", note: "90-day cohort · February 2027" },
 ];
 const navGroups: NavGroup[] = [
   { id: "entrepreneurs", label: "For Entrepreneurs", links: entrepreneurLinks },
@@ -87,7 +87,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const renderCta = (extra = "") =>
     onAcademyPage ? (
       <button type="button" onClick={goToApply} className={`${ctaClass} ${extra}`}>
-        Apply for January 2027
+        Apply for February 2027
       </button>
     ) : (
       <a

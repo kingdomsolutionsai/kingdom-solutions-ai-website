@@ -7,7 +7,7 @@ import { trpc } from "@/lib/trpc";
  * Premier / flagship program page. Christ-centered leadership formation
  * for Christian women in leadership. Paid cohort — applications only.
  * Content pulled from revivedspirit.com/product/victors-circle-leadership-academy
- * and reframed for a January-cohort application (per Tabitha's direction).
+ * and reframed for a February 2027 cohort application (per Tabitha's direction).
  */
 
 const WEEKS = [
@@ -48,7 +48,7 @@ export default function VictorsCircleLeadershipAcademy() {
   usePageMeta({
     title: "Victor's Circle Leadership Academy™ — Christ-Centered Leadership for Women | Kingdom Solutions AI™",
     description:
-      "Victor's Circle Leadership Academy™ is a Christ-centered leadership formation program for Christian women in leadership. Now accepting applications for the January cohort.",
+      "Victor's Circle Leadership Academy™ is a Christ-centered leadership formation program for Christian women in leadership. Now accepting applications for the February 2027 cohort.",
     canonicalUrl: "https://kingdomsolutionsai.com/victors-circle-leadership-academy",
     ogImage: "https://kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
@@ -96,7 +96,7 @@ export default function VictorsCircleLeadershipAcademy() {
               href="#apply"
               className="rounded-sm inline-flex items-center gap-2 bg-charcoal text-cream font-body text-[0.72rem] font-medium tracking-[0.1em] uppercase px-8 py-4 hover:bg-charcoal/90 transition-colors"
             >
-              Apply for the January 2027 Cohort →
+              Apply for the February 2027 Cohort →
             </a>
           </div>
           <p className="font-body text-xs text-charcoal-light/70 uppercase tracking-[0.08em] mt-5">
@@ -214,7 +214,7 @@ export default function VictorsCircleLeadershipAcademy() {
       <section id="apply" className="py-20 lg:py-24 bg-charcoal text-cream">
         <div className="container max-w-xl">
           <div className="text-center mb-10">
-            <p className="editorial-label !text-gold mb-4">January 2027 Cohort · Application</p>
+            <p className="editorial-label !text-gold mb-4">February 2027 Cohort · Application</p>
             <h2 className="font-display text-3xl sm:text-4xl font-medium leading-tight mb-4">
               Apply for Victor's Circle.
             </h2>
@@ -244,7 +244,7 @@ export default function VictorsCircleLeadershipAcademy() {
               </h3>
               <p className="font-body text-sm text-cream/70 leading-relaxed">
                 Your application is in. Check your inbox at <strong>{form.email}</strong> for
-                confirmation, and we'll be in touch personally with next steps for the January
+                confirmation, and we'll be in touch personally with next steps for the February
                 cohort.
               </p>
             </div>

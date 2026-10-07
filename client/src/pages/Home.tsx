@@ -250,14 +250,14 @@ export default function Home() {
                   A Christ-centered formation space for women who carry influence, responsibility, and the weight of leadership at home, at work, in ministry, and in their communities.
                 </p>
                 <p className="font-body text-base text-charcoal-light/80 leading-relaxed mb-10">
-                  A 90-day formation journey that quiets anxiety, restores clarity, and equips you to lead with steady confidence. Now accepting applications for the January cohort.
+                  A 90-day formation journey that quiets anxiety, restores clarity, and equips you to lead with steady confidence. Now accepting applications for the February 2027 cohort.
                 </p>
                 <div className="flex flex-col sm:flex-row items-start gap-5">
                   <Link href="/victors-circle-leadership-academy" className={primaryBtn}>
                     Explore Victor's Circle <ArrowRight size={15} />
                   </Link>
                   <Link href="/victors-circle-leadership-academy#apply" className={secondaryLink}>
-                    Apply for the January Cohort <ArrowRight size={14} />
+                    Apply for the February Cohort <ArrowRight size={14} />
                   </Link>
                 </div>
               </div>
@@ -273,7 +273,7 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="font-body text-[0.65rem] tracking-[0.16em] uppercase text-gold/70 mb-1.5">Next Cohort</p>
-                    <p className="font-body text-sm text-charcoal-light">Now enrolling for January</p>
+                    <p className="font-body text-sm text-charcoal-light">Now enrolling for February 2027</p>
                   </div>
                 </div>
               </div>

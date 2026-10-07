@@ -213,7 +213,7 @@ export function formatVictorsCircleApplicantEmail(data: { firstName: string }): 
   return emailWrapper(`
     <p style="text-transform: uppercase; letter-spacing: 0.08em; font-size: 12px; color: #8c6927; margin-bottom: 6px;">Application Received</p>
     <h1 style="font-size: 28px; margin: 0 0 20px;">Thank you, ${escapeHtml(data.firstName)}.</h1>
-    <p style="margin: 0 0 20px;">Your application for Victor's Circle Leadership Academy&trade; is in. Applications are reviewed personally, and we'll follow up soon with next steps for the January cohort.</p>
+    <p style="margin: 0 0 20px;">Your application for Victor's Circle Leadership Academy&trade; is in. Applications are reviewed personally, and we'll follow up soon with next steps for the February 2027 cohort.</p>
     <p style="margin-top: 20px; font-size: 13px; color: #666;">In the meantime, feel free to reply to this email with any questions.</p>
   `);
 }
