@@ -246,7 +246,7 @@ export function formatAssessmentResultsEmail(data: {
     ${focusItems}
     <h3 style="font-size: 16px; margin: 24px 0 10px;">What can wait</h3>
     <p style="border-left: 3px solid #cda34b; padding-left: 14px; margin: 0 0 24px;">${escapeHtml(result.notYet)}</p>
-    <h3 style="font-size: 16px; margin: 24px 0 10px;">One action you can take now</h3>
+    <h3 style="font-size: 16px; margin: 24px 0 10px;">Your next step this week</h3>
     <p>${escapeHtml(result.firstAction)}</p>
     <h3 style="font-size: 16px; margin: 24px 0 10px;">Your recommended next step</h3>
     <p>${escapeHtml(result.recommendation.reason)}</p>

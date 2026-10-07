@@ -360,7 +360,7 @@ export default function EntrepreneurAssessment() {
               </ol>
               <div className="border-t border-taupe mt-7 pt-6">
                 <p className="editorial-label mb-3">
-                  One action you can take now
+                  Your next step this week
                 </p>
                 <p className="font-body text-base text-charcoal leading-relaxed">
                   {result.firstAction}

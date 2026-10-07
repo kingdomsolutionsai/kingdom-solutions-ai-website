@@ -177,6 +177,6 @@ describe("Assessment submission and result email", () => {
     expect(html).toContain(
       'href="https://kingdomsolutionsai.com/capacity-leak-audit"',
     );
-    expect(html).toContain("One action you can take now");
+    expect(html).toContain("Your next step this week");
   });
 });
