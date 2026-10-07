@@ -244,7 +244,7 @@ export default function Home() {
                   A Christ-centered formation space for women who carry influence, responsibility, and the weight of leadership at home, at work, in ministry, and in their communities.
                 </p>
                 <p className="font-body text-base text-charcoal-light/80 leading-relaxed mb-10">
-                  A 30-day reset that quiets anxiety, restores clarity, and equips you to lead with steady confidence. Now accepting applications for the January cohort.
+                  A 90-day formation journey that quiets anxiety, restores clarity, and equips you to lead with steady confidence. Now accepting applications for the January cohort.
                 </p>
                 <div className="flex flex-col sm:flex-row items-start gap-5">
                   <Link href="/victors-circle-leadership-academy" className={primaryBtn}>
@@ -263,7 +263,7 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="font-body text-[0.65rem] tracking-[0.16em] uppercase text-gold/70 mb-1.5">Format</p>
-                    <p className="font-body text-sm text-charcoal-light">30-day cohort, application required</p>
+                    <p className="font-body text-sm text-charcoal-light">90-day cohort, application required</p>
                   </div>
                   <div>
                     <p className="font-body text-[0.65rem] tracking-[0.16em] uppercase text-gold/70 mb-1.5">Next Cohort</p>
