@@ -13,6 +13,7 @@
  */
 
 import { assessmentResultLabel, type AssessmentResult } from "../shared/entrepreneurAssessment";
+import { nextQuarterLabel } from "../shared/const";
 
 const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
 const SENDER = { email: "tabitha@kingdomsolutionsai.com", name: "Kingdom Solutions AI" };
@@ -249,6 +250,7 @@ export function formatAssessmentResultsEmail(data: {
     <h3 style="font-size: 16px; margin: 24px 0 10px;">Your next step this week</h3>
     <p>${escapeHtml(result.firstAction)}</p>
     <h3 style="font-size: 16px; margin: 24px 0 10px;">Your recommended next step</h3>
+    ${result.primaryGap ? `<p style="color: #8c6927; font-weight: 600;">Close this gap now, and you start ${nextQuarterLabel()} ready.</p>` : ""}
     <p>${escapeHtml(result.recommendation.reason)}</p>
     <p style="margin: 24px 0;"><a href="${escapeHtml(recommendationUrl)}" style="display: inline-block; background: #1a1a1a; color: #fff; padding: 14px 20px; text-decoration: none;">${escapeHtml(result.recommendation.label)}</a></p>
     <p>Questions about fit, timing, or scope? Reply to this email and tell me what remains uncertain.</p>

@@ -13,7 +13,7 @@ import {
   type AssessmentAnswers,
   type AssessmentResult,
 } from "@shared/entrepreneurAssessment";
-import { RIGHT_ORDER_PROMISE } from "@shared/const";
+import { RIGHT_ORDER_PROMISE, nextQuarterLabel } from "@shared/const";
 import GapVideo from "@/components/GapVideo";
 
 type Screen = "landing" | "assessment" | "capture" | "result";
@@ -91,6 +91,7 @@ export default function EntrepreneurAssessment() {
                   <em className="text-gold italic">Build what's next.</em>
                 </h1>
                 <p className="font-body text-lg lg:text-xl text-charcoal-light leading-relaxed max-w-2xl mb-6">
+                  <strong className="text-charcoal">Why now? So you start {nextQuarterLabel()} ready.</strong>{" "}
                   You do not have to build everything at once. Find which part
                   of your business deserves attention first: Direction, Offer,
                   Audience, or Structure.
@@ -380,6 +381,11 @@ export default function EntrepreneurAssessment() {
               <h3 className="font-display text-2xl mb-4">
                 Your recommended next step
               </h3>
+              {result.primaryGap && (
+                <p className="font-body text-base leading-relaxed mb-4 text-gold">
+                  Close this gap now, and you start {nextQuarterLabel()} ready.
+                </p>
+              )}
               <p className="font-body text-base leading-relaxed mb-6">
                 {result.recommendation.reason}
               </p>

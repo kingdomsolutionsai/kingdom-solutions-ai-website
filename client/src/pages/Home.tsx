@@ -3,7 +3,7 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { ArrowRight } from "lucide-react";
 import { GAPS, GAP_DESCRIPTIONS, type Gap } from "@shared/entrepreneurAssessment";
-import { RIGHT_ORDER_PROMISE } from "@shared/const";
+import { RIGHT_ORDER_PROMISE, nextQuarterLabel } from "@shared/const";
 import { CLIENT_STORIES } from "@/lib/clientStories";
 
 /*
@@ -36,6 +36,7 @@ export default function Home() {
     ogImage: "https://kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
   const revealRef = useScrollReveal();
+  const quarter = nextQuarterLabel();
   return (
     <div ref={revealRef}>
       {/* Hero */}
@@ -66,7 +67,7 @@ export default function Home() {
                 </Link>
               </div>
               <p className="font-body text-[0.8rem] text-charcoal/50 mt-4 fade-up">
-                Free assessment. 13 questions, about three minutes.
+                Free assessment. 13 questions, about three minutes. Find your gap now and start {quarter} ready.
               </p>
             </div>
           </div>
@@ -110,7 +111,7 @@ export default function Home() {
             </div>
             <div className="lg:col-span-4 lg:col-start-8 flex items-end fade-up">
               <p className="font-body text-base text-charcoal-light leading-relaxed">
-                Each gap calls for a different first move. The Entrepreneur Next Step™ Assessment shows you which one to close first and what can wait.
+                <span className="font-semibold text-charcoal">Why check now? So you start {quarter} ready.</span> Each gap calls for a different first move. The Entrepreneur Next Step™ Assessment shows you which one to close first and what can wait.
               </p>
             </div>
           </div>
@@ -424,7 +425,7 @@ export default function Home() {
               You do not have to build everything at once. Build the right thing next.
             </h2>
             <p className="font-body text-lg text-charcoal-light leading-relaxed mb-12">
-              Start by finding your gap. It takes about three minutes, and your results arrive with one action you can take this week.
+              Close the right gap now, and you walk into {quarter} ready instead of still deciding. Finding your gap takes about three minutes, and your results arrive with one action you can take this week.
             </p>
             <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
               <Link href="/entrepreneur-assessment" className={primaryBtn}>
