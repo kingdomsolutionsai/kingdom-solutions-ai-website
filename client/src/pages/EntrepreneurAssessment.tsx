@@ -7,12 +7,14 @@ import {
   ASSESSMENT_QUESTIONS,
   GAPS,
   GAP_DESCRIPTIONS,
+  GAP_VIDEOS,
   calculateAssessment,
   assessmentResultLabel,
   type AssessmentAnswers,
   type AssessmentResult,
 } from "@shared/entrepreneurAssessment";
 import { RIGHT_ORDER_PROMISE } from "@shared/const";
+import GapVideo from "@/components/GapVideo";
 
 type Screen = "landing" | "assessment" | "capture" | "result";
 const buttonClass =
@@ -315,6 +317,9 @@ export default function EntrepreneurAssessment() {
             <p className="font-body text-base sm:text-lg text-charcoal-light leading-relaxed mb-6">
               {result.summary}
             </p>
+            {result.primaryGap && GAP_VIDEOS[result.primaryGap] && (
+              <GapVideo url={GAP_VIDEOS[result.primaryGap]!} gap={result.primaryGap} />
+            )}
             <p className="font-body text-xs text-charcoal-light leading-relaxed mb-8">
               This is a practical starting point based on your answers, not a
               complete business evaluation. Your judgment and real-world

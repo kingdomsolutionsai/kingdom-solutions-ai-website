@@ -1,9 +1,9 @@
 import { Link, useLocation } from "wouter";
 import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
-// The live webinar registration site (external).
-const WEBINAR_URL = "https://whatentrepreneursneedtoknow.com";
-const WEBINAR_CTA = "Register for the Oct 20 Webinar";
+import { getSiteCta, WEBINAR_URL } from "@/lib/ctaSchedule";
+// The header button and webinar links follow the date schedule in ctaSchedule.ts.
+const siteCta = getSiteCta();
 const ACADEMY_PATH = "/victors-circle-leadership-academy";
 
 type NavLink = { href: string; label: string; note?: string; external?: boolean };
@@ -14,7 +14,9 @@ type NavGroup = { id: string; label: string; links: NavLink[] };
 // (Services), or pursue Christ-centered leadership formation (Faith & Leadership).
 const entrepreneurLinks: NavLink[] = [
   { href: "/entrepreneur-assessment", label: "Find Your Starting Point", note: "Entrepreneur Assessment" },
-  { href: WEBINAR_URL, label: "The Webinar", note: "October 20, 2026", external: true },
+  ...(siteCta.webinarDate
+    ? [{ href: WEBINAR_URL, label: "The Webinar", note: `Next live session: ${siteCta.webinarDate}`, external: true }]
+    : []),
   { href: "/business-fast-track", label: "30-Day Business Fast Track™" },
   { href: "/handbook", label: "Handbook (Free)" },
 ];
@@ -75,7 +77,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   }, []);
 
   // The top button follows the page: the academy page keeps its own
-  // application button, and every other page points to the webinar.
+  // application button, and every other page follows the date schedule.
   const onAcademyPage = location === ACADEMY_PATH;
   const goToApply = () => {
     setMobileOpen(false);
@@ -88,9 +90,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         Apply for January 2027
       </button>
     ) : (
-      <a href={WEBINAR_URL} target="_blank" rel="noopener noreferrer" className={`${ctaClass} ${extra}`}>
-        <span className="xl:hidden 2xl:inline">{WEBINAR_CTA}</span>
-        <span className="hidden xl:inline 2xl:hidden">Oct 20 Webinar: Register</span>
+      <a
+        href={siteCta.href}
+        {...(siteCta.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        className={`${ctaClass} ${extra}`}
+      >
+        <span className="xl:hidden 2xl:inline">{siteCta.label}</span>
+        <span className="hidden xl:inline 2xl:hidden">{siteCta.shortLabel}</span>
       </a>
     );
 
@@ -267,7 +273,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </div>
               </div>
               <p className="font-body text-sm text-warm-gray leading-relaxed max-w-xs">
-                Strategic AI systems for coaches, founders, consultants, executives, and high-capacity leaders who need clarity, capacity, and intelligent support.
+                Helping women entrepreneurs find the gap, close the right gap, and build what's next, with AI that keeps you in charge.
               </p>
             </div>
             {/* For Entrepreneurs + Faith & Leadership */}
@@ -279,9 +285,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <Link href="/entrepreneur-assessment" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
                   Find Your Starting Point
                 </Link>
-                <a href={WEBINAR_URL} target="_blank" rel="noopener noreferrer" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
-                  The Webinar (Oct 20)
-                </a>
+                {siteCta.webinarDate && (
+                  <a href={WEBINAR_URL} target="_blank" rel="noopener noreferrer" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
+                    The Webinar ({siteCta.webinarDate})
+                  </a>
+                )}
                 <Link href="/business-fast-track" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
                   30-Day Business Fast Track™
                 </Link>

@@ -4,6 +4,7 @@ import { usePageMeta } from "@/hooks/usePageMeta";
 import { ArrowRight } from "lucide-react";
 import { GAPS, GAP_DESCRIPTIONS, type Gap } from "@shared/entrepreneurAssessment";
 import { RIGHT_ORDER_PROMISE } from "@shared/const";
+import { CLIENT_STORIES } from "@/lib/clientStories";
 
 /*
  * Home page, organized around the Four Gaps framework:
@@ -321,6 +322,44 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Client stories: hidden until a story is added in lib/clientStories.ts */}
+      {CLIENT_STORIES.length > 0 && (
+        <section className="py-24 lg:py-32 bg-cream-dark/40">
+          <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
+            <div className="max-w-2xl mb-14 fade-up">
+              <p className="editorial-label mb-5">Gaps Closed</p>
+              <h2 className="font-display text-3xl sm:text-4xl font-medium text-charcoal leading-[1.15]">
+                What changes when the right gap closes first.
+              </h2>
+            </div>
+            <div className={`grid grid-cols-1 gap-8 ${CLIENT_STORIES.length > 1 ? "lg:grid-cols-2" : "max-w-3xl"} fade-up`}>
+              {CLIENT_STORIES.map((story) => (
+                <article key={story.name} className="bg-cream border border-taupe/60 p-8 lg:p-10">
+                  <p className="font-body text-[0.7rem] tracking-[0.16em] uppercase text-gold font-medium mb-6">
+                    {story.gap} Gap
+                  </p>
+                  <p className="font-body text-sm text-charcoal-light leading-[1.8] mb-4">
+                    <span className="font-semibold text-charcoal">Before.</span> {story.before}
+                  </p>
+                  <p className="font-body text-sm text-charcoal-light leading-[1.8] mb-6">
+                    <span className="font-semibold text-charcoal">After.</span> {story.after}
+                  </p>
+                  {story.quote && (
+                    <blockquote className="font-display italic text-lg text-charcoal border-l-2 border-gold/50 pl-5 mb-6">
+                      "{story.quote}"
+                    </blockquote>
+                  )}
+                  <p className="font-body text-sm font-medium text-charcoal">
+                    {story.name}
+                    {story.detail && <span className="font-normal text-charcoal-light">, {story.detail}</span>}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Why Tabitha */}
       <section className="py-24 lg:py-32 bg-cream">
