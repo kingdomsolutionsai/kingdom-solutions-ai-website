@@ -12,6 +12,8 @@
  * public forms.
  */
 
+import { assessmentResultLabel, type AssessmentResult } from "../shared/entrepreneurAssessment";
+
 const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
 const SENDER = { email: "tabitha@kingdomsolutionsai.com", name: "Kingdom Solutions AI" };
 
@@ -173,15 +175,18 @@ export function formatContactEmail(data: {
 export function formatAssessmentEmail(data: {
   firstName: string;
   email: string;
-  resultStage: string;
-  recommendedStep: string;
+  result: AssessmentResult;
 }): string {
   return emailWrapper(`
-    <h2>New Entrepreneur Next Step™ Assessment Completed</h2>
+    <h2>Entrepreneur Next Step™ Assessment Completed</h2>
     <p><strong>Name:</strong> ${escapeHtml(data.firstName)}</p>
     <p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
-    <p><strong>Result Stage:</strong> ${escapeHtml(data.resultStage)}</p>
-    <p><strong>Recommended Next Step:</strong> ${escapeHtml(data.recommendedStep)}</p>
+    <p><strong>First priority:</strong> ${escapeHtml(assessmentResultLabel(data.result))}</p>
+    <p><strong>Other areas:</strong> ${escapeHtml(data.result.secondaryGaps.join(", ") || "None flagged")}</p>
+    <p><strong>Structure focus:</strong> ${escapeHtml(data.result.structureType || "Not the primary gap")}</p>
+    <p><strong>Recommended next step:</strong> ${escapeHtml(data.result.recommendation.label)}</p>
+    <p><strong>Why:</strong> ${escapeHtml(data.result.recommendation.reason)}</p>
+    <p>Requested a result email. This submission does not create a marketing subscription.</p>
   `);
 }
 export function formatVictorsCircleOwnerEmail(data: {
@@ -213,26 +218,41 @@ export function formatVictorsCircleApplicantEmail(data: { firstName: string }): 
 }
 export function formatAssessmentResultsEmail(data: {
   firstName: string;
-  resultStage: string;
-  recommendedStep: string;
-  headline: string;
-  summary: string;
-  focus: string[];
-  notYet: string;
+  result: AssessmentResult;
 }): string {
-  const focusItems = data.focus
-    .map((f, idx) => `<p style="margin: 0 0 10px;"><strong>${idx + 1}.</strong> ${escapeHtml(f)}</p>`)
+  const result = data.result;
+  const focusItems = result.focus
+    .map(
+      (f, idx) =>
+        `<p style="margin: 0 0 10px;"><strong>${idx + 1}.</strong> ${escapeHtml(f)}</p>`,
+    )
     .join("");
+  const secondary = result.secondaryGaps.length
+    ? `<p>Your answers also suggest areas to revisit: <strong>${escapeHtml(result.secondaryGaps.map((g) => `${g} Gap`).join(", "))}</strong>. Start with the priority above, then reassess as you make progress.</p>`
+    : "";
+  // Recommendations come from shared, server-generated copy, never public input.
+  const recommendationUrl = `https://kingdomsolutionsai.com${result.recommendation.href}`;
   return emailWrapper(`
     <p style="text-transform: uppercase; letter-spacing: 0.08em; font-size: 12px; color: #8c6927; margin-bottom: 6px;">Your Assessment Result</p>
-    <h1 style="font-size: 32px; margin: 0 0 20px;">${escapeHtml(data.resultStage)}.</h1>
-    <h2 style="font-size: 20px; margin: 0 0 12px;">${escapeHtml(data.headline)}</h2>
-    <p style="margin: 0 0 20px;">${escapeHtml(data.summary)}</p>
-    <h3 style="font-size: 16px; margin: 24px 0 10px;">Focus on these three things</h3>
+    <p>Hello ${escapeHtml(data.firstName)},</p>
+    <h1 style="font-size: 32px; margin: 0 0 20px;">${escapeHtml(assessmentResultLabel(result))}</h1>
+    <h2 style="font-size: 20px; margin: 0 0 12px;">${escapeHtml(result.headline)}</h2>
+    <p style="margin: 0 0 20px;">${escapeHtml(result.summary)}</p>
+    <p style="font-size: 13px; color: #666;">This is a practical starting point based on your answers, not a complete business evaluation. Your judgment and real-world evidence remain essential.</p>
+    ${secondary}
+    <h3 style="font-size: 16px; margin: 24px 0 10px;">${result.primaryGap ? "What leaving this unresolved can cost" : "What to keep in view"}</h3>
+    <p>${escapeHtml(result.consequence)}</p>
+    <h3 style="font-size: 16px; margin: 24px 0 10px;">${result.primaryGap ? "Close the right gap" : "Build the right thing next"}</h3>
     ${focusItems}
-    <p style="text-transform: uppercase; letter-spacing: 0.08em; font-size: 12px; color: #8c6927; margin: 24px 0 6px;">What you can stop worrying about</p>
-    <p style="border-left: 3px solid #cda34b; padding-left: 14px; margin: 0 0 24px;">${escapeHtml(data.notYet)}</p>
-    <p style="margin-top: 20px;">Recommended next step: <strong>${escapeHtml(data.recommendedStep)}</strong></p>
-    <p style="margin-top: 20px; font-size: 13px; color: #666;">Want to explore a different scenario? You're welcome to retake the assessment any time at <a href="https://kingdomsolutionsai.com/entrepreneur-assessment">kingdomsolutionsai.com/entrepreneur-assessment</a>.</p>
+    <h3 style="font-size: 16px; margin: 24px 0 10px;">What can wait</h3>
+    <p style="border-left: 3px solid #cda34b; padding-left: 14px; margin: 0 0 24px;">${escapeHtml(result.notYet)}</p>
+    <h3 style="font-size: 16px; margin: 24px 0 10px;">One action you can take now</h3>
+    <p>${escapeHtml(result.firstAction)}</p>
+    <h3 style="font-size: 16px; margin: 24px 0 10px;">Your recommended next step</h3>
+    <p>${escapeHtml(result.recommendation.reason)}</p>
+    <p style="margin: 24px 0;"><a href="${escapeHtml(recommendationUrl)}" style="display: inline-block; background: #1a1a1a; color: #fff; padding: 14px 20px; text-decoration: none;">${escapeHtml(result.recommendation.label)}</a></p>
+    <p>Questions about fit, timing, or scope? Reply to this email and tell me what remains uncertain.</p>
+    <p>Clarity before complexity. Capacity before scale. Human authority throughout.</p>
+    <p style="margin-top: 20px; font-size: 13px; color: #666;">You can <a href="https://kingdomsolutionsai.com/entrepreneur-assessment">retake the assessment</a> as your business evolves.</p>
   `);
 }

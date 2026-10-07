@@ -15,6 +15,7 @@ import {
 } from "./brevo";
 import { buildCapacityLeakAuditNotes, fileLeadWithConstance } from "./constance";
 import { generateCapacityLeakAudit } from "./llm";
+import { calculateAssessment, assessmentResultLabel } from "../shared/entrepreneurAssessment";
 
 const OWNER = { email: "tabitha@kingdomsolutionsai.com", name: "Tabitha Rector" };
 
@@ -238,44 +239,63 @@ export const formsRouter = router({
     }),
   
   // ---------------------------------------------------------------------------
-  // Entrepreneur Next Step™ Assessment — client scores the 15-question quiz
-  // itself and sends us the result. We notify Tabitha, email the visitor a
-  // recap of their result, and file the lead into the Notion Pipeline via
-  // Constance, segmented by which stage the assessment identified.
+  // Calculate the Four Gaps result from validated answers on the server.
+  // The browser shows the same shared result without waiting for email.
+  // Submission requests a result copy, not a marketing subscription.
   // ---------------------------------------------------------------------------
   submitAssessmentRequest: publicProcedure
-       .input(
-      z.object({
-        firstName: z.string().min(1),
-        email: z.string().email(),
-        resultStage: z.enum(["Clarify", "Validate", "Establish", "Offer", "Sell", "Systemize", "Grow"]),
-        recommendedStep: z.string().min(1),
-        headline: z.string().min(1),
-        summary: z.string().min(1),
-        focus: z.array(z.string()).min(1),
-        notYet: z.string().min(1),
-      })
-    ) 
+    .input(
+      z
+        .object({
+          firstName: z.string().trim().min(1).max(100),
+          email: z.string().trim().email().max(254),
+          answers: z
+            .record(z.string(), z.number().int().min(0).max(3))
+            .refine((answers) => {
+              try {
+                calculateAssessment(answers);
+                return true;
+              } catch {
+                return false;
+              }
+            }, "Please answer every assessment question with a valid option."),
+        })
+        .strict(),
+    )
     .mutation(async ({ input }) => {
-      const notified = await sendBrevoEmail({
-        to: OWNER,
-        subject: `New Entrepreneur Assessment — ${input.firstName} (${input.resultStage})`,
-        htmlContent: formatAssessmentEmail(input),
-        replyToEmail: input.email,
-        replyToName: input.firstName,
-      });
-      const participantNotified = await sendBrevoEmail({
-        to: { email: input.email, name: input.firstName },
-        subject: `${input.firstName}, your Entrepreneur Next Step™ result`,
-        htmlContent: formatAssessmentResultsEmail(input),
-      });
-      const filedWithConstance = await fileLeadWithConstance({
-        name: input.firstName,
-        email: input.email,
-        source: "Entrepreneur Assessment",
-        stage: "New Lead",
-        notes: `Assessment result: ${input.resultStage}. Recommended next step: ${input.recommendedStep}.`,
-      });
-      return { success: true, notified, participantNotified, filedWithConstance };
+      const result = calculateAssessment(input.answers);
+      const label = assessmentResultLabel(result);
+      const [notified, participantNotified, filedWithConstance] =
+        await Promise.all([
+          sendBrevoEmail({
+            to: OWNER,
+            subject: `Entrepreneur Assessment — ${input.firstName} (${label})`,
+            htmlContent: formatAssessmentEmail({ ...input, result }),
+            replyToEmail: input.email,
+            replyToName: input.firstName,
+          }),
+          sendBrevoEmail({
+            to: { email: input.email, name: input.firstName },
+            subject: `${input.firstName}, your next business priority: ${label}`,
+            htmlContent: formatAssessmentResultsEmail({
+              firstName: input.firstName,
+              result,
+            }),
+          }),
+          fileLeadWithConstance({
+            name: input.firstName,
+            email: input.email,
+            source: "Entrepreneur Assessment",
+            stage: "New Lead",
+            notes: `Assessment version: Four Gaps v1. Priority: ${label}. Other areas: ${result.secondaryGaps.join(", ") || "None flagged"}. Structure focus: ${result.structureType || "Not primary"}. Recommended next step: ${result.recommendation.label}. Scores (out of 9): ${JSON.stringify(result.scores)}. Requested result email only; no marketing subscription created.`,
+          }),
+        ]);
+      return {
+        success: true,
+        result,
+        notified,
+        participantNotified,
+        filedWithConstance,
+      };
     }),
 });
