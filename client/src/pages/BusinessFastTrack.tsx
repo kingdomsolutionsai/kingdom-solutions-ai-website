@@ -1,3 +1,4 @@
+import { RIGHT_ORDER_PROMISE } from "@shared/const";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import "@/styles/business-fast-track.css";
 
@@ -36,6 +37,16 @@ function Cta({ className = "button" }: { className?: string }) {
     <a className={className} href={href}>
       {label}
     </a>
+  );
+}
+
+
+function RightOrderPromiseNote({ dark = false }: { dark?: boolean }) {
+  return (
+    <p className={`promise${dark ? " dark" : ""}`}>
+      <strong>The Right Order Promise.</strong> {RIGHT_ORDER_PROMISE}{" "}
+      <a href="/refund-policy">Details</a>
+    </p>
   );
 }
 
@@ -85,6 +96,7 @@ const FAQS = [
   { q: "How much time should I plan to protect each week?", a: "Plan for the weekly session plus focused implementation time. The work is intentionally prioritized so you can complete the right pieces without trying to build the entire business at once." },
   { q: "Is AI used in the program?", a: "Yes, where it genuinely supports clarity, research, drafting, and implementation. AI will not be positioned as the authority over your offer, values, client commitments, or business decisions. You remain the leader throughout." },
   { q: "How do I enroll?", a: `Start by booking a 30-minute Business Fast Track Strategy Call. We will look at where your business is today, what you most want settled in the next 30 days, and whether the Fast Track is the right next step. If it is a fit, you will receive a private enrollment link after the call. Enrollment for the first cohort closes ${CLOSES}, and the program begins ${STARTS}.` },
+  { q: "What if week one does not give me clarity?", a: `That is what the Right Order Promise is for. ${RIGHT_ORDER_PROMISE} It is a service commitment, not a refund or money-back guarantee.` },
   { q: "Can I pay in more than one payment?", a: "Yes. You can pay in full or choose a payment plan. Your payment options are shared after your Strategy Call. A payment plan is a commitment to the full program price, as described in our Refund Policy." },
   { q: "Is the seat guaranteed when I book a call?", a: "No. Each cohort is limited to eight women, and seats are confirmed in the order enrollment is completed. Booking a call does not hold a seat." },
   { q: "What if I am not sure the timing is right?", a: "Book the call anyway. You will leave knowing your next step, whether or not the Fast Track is the right fit for you now." },
@@ -125,6 +137,7 @@ export default function BusinessFastTrack() {
                 ? `Enrollment is open through ${CLOSES}. We begin ${STARTS}. Every enrollment starts with a short Strategy Call to make sure it is the right fit.`
                 : `Enrollment for the November cohort has closed. Reach out to hear first when the next cohort opens.`}
             </p>
+            <RightOrderPromiseNote dark />
           </div>
           <aside className="hero-card" aria-label="Program overview">
             <span className="small">Begins {STARTS.replace("Monday, ", "")} • 8 Seats • Q1 2027 Ready</span>
@@ -285,6 +298,7 @@ export default function BusinessFastTrack() {
             </div>
             <p className="seat-note">Pay in full or choose a payment plan. Payment options are shared after your Strategy Call.</p>
             <Cta />
+            <RightOrderPromiseNote dark />
             <p className="micro" style={{ marginInline: "auto" }}>
               {enrollment.open
                 ? `Enrollment closes ${CLOSES}. We begin ${STARTS}. Seats are confirmed in the order enrollment is completed.`
@@ -349,6 +363,7 @@ export default function BusinessFastTrack() {
               : "Ask about the next cohort of the 30-Day Business Fast Track™."}
           </p>
           <Cta />
+          <RightOrderPromiseNote dark />
         </div>
       </section>
     </div>

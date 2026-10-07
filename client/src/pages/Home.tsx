@@ -3,6 +3,7 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { ArrowRight } from "lucide-react";
 import { GAPS, GAP_DESCRIPTIONS, type Gap } from "@shared/entrepreneurAssessment";
+import { RIGHT_ORDER_PROMISE } from "@shared/const";
 
 /*
  * Home page, organized around the Four Gaps framework:
@@ -186,6 +187,9 @@ export default function Home() {
               <div className="w-10 h-[1px] bg-gold/50 mb-6" />
               <p className="font-body text-sm text-charcoal-light leading-[1.8] mb-10">
                 Thirty days of guided work to build in the right order: one clear offer, a message people understand, and a revenue path for your next 90 days. Every enrollment starts with a Strategy Call.
+              </p>
+              <p className="font-body text-[0.8rem] text-charcoal-light leading-[1.7] border-l-2 border-gold/50 pl-4 -mt-4 mb-10">
+                <span className="font-semibold text-charcoal">The Right Order Promise.</span> {RIGHT_ORDER_PROMISE}
               </p>
               <Link href="/business-fast-track" className={textLink}>
                 Explore the Fast Track <ArrowRight size={14} />
@@ -391,6 +395,10 @@ export default function Home() {
                 Book a Fast Track Strategy Call <ArrowRight size={14} />
               </Link>
             </div>
+            <p className="font-body text-[0.82rem] text-charcoal-light leading-[1.7] max-w-xl mx-auto mt-10">
+              <span className="font-semibold text-charcoal">The Right Order Promise.</span> {RIGHT_ORDER_PROMISE}{" "}
+              <Link href="/refund-policy" className="underline underline-offset-4 hover:text-gold">Details</Link>
+            </p>
           </div>
         </div>
       </section>

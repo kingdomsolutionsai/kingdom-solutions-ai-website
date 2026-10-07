@@ -12,6 +12,7 @@ import {
   type AssessmentAnswers,
   type AssessmentResult,
 } from "@shared/entrepreneurAssessment";
+import { RIGHT_ORDER_PROMISE } from "@shared/const";
 
 type Screen = "landing" | "assessment" | "capture" | "result";
 const buttonClass =
@@ -384,6 +385,11 @@ export default function EntrepreneurAssessment() {
                 {result.recommendation.label}{" "}
                 <ArrowRight size={16} className="shrink-0" aria-hidden="true" />
               </a>
+              {result.recommendation.href.includes("business-fast-track") && (
+                <p className="font-body text-sm leading-relaxed mt-5 border-l-2 border-gold/60 pl-4 text-cream-dark/85">
+                  <span className="font-semibold text-gold">The Right Order Promise.</span> {RIGHT_ORDER_PROMISE}
+                </p>
+              )}
               <p className="font-body text-sm leading-relaxed mt-5">
                 Need to clarify fit, timing, or scope first?{" "}
                 <a
