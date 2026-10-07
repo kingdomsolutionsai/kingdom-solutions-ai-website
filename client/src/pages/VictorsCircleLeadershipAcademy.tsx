@@ -29,7 +29,7 @@ const WEEKS = [
   {
     n: "Week 4",
     title: "Strong",
-    desc: "Build the rhythms that sustain peace long after the 30 days are over.",
+    desc: "Build the rhythms that sustain peace long after the 90 days are over.",
   },
 ];
 
@@ -88,7 +88,7 @@ export default function VictorsCircleLeadershipAcademy() {
           <p className="font-body text-lg text-charcoal-light leading-relaxed max-w-2xl mx-auto mb-10">
             A Christ-centered formation space for Christian women carrying real leadership
             responsibility — founders, executives, coaches, and ministry leaders navigating growth
-            and transition. A 30-day reset that strengthens your decisions, your boundaries, and
+            and transition. A 90-day journey that strengthens your decisions, your boundaries, and
             your leadership presence — so you lead from a settled place instead of overextension.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -150,7 +150,7 @@ export default function VictorsCircleLeadershipAcademy() {
             isn't theory.
           </h2>
           <p className="font-body text-sm text-charcoal-light/70 uppercase tracking-[0.08em] mb-10">
-            By the end of 30 days, you'll have:
+            By the end of 90 days, you'll have:
           </p>
           <div className="space-y-5 text-left">
             {[
@@ -158,7 +158,7 @@ export default function VictorsCircleLeadershipAcademy() {
               "One boundary or hard conversation finally had — not just planned",
               "Clarity on whether what's holding you back is a belief, a boundary, or a structural gap — and what to do about it",
               "A personal growth strategy built to protect your capacity — mentally, physically, and financially",
-              "A rhythm that outlasts the 30 days",
+              "A rhythm that outlasts the 90 days",
             ].map((line, i) => (
               <p key={i} className="font-body text-base text-charcoal-light leading-relaxed pl-6 border-l-2 border-gold/40">
                 {line}
@@ -194,7 +194,7 @@ export default function VictorsCircleLeadershipAcademy() {
         <div className="container max-w-2xl">
           <p className="editorial-label text-center mb-4">What's Included</p>
           <h2 className="font-display text-3xl sm:text-4xl font-medium text-charcoal leading-tight text-center mb-12">
-            A complete support system for the 30 days — and beyond.
+            A complete support system for the 90 days and beyond.
           </h2>
           <div className="border border-gold/30 rounded-sm divide-y divide-gold/20 bg-white/60">
             {INCLUSIONS.map((item, i) => (
