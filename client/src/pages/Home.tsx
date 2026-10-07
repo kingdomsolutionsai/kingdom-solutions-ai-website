@@ -31,7 +31,7 @@ export default function Home() {
   usePageMeta({
     title: "Kingdom Solutions AI™ | Find the Gap, Close the Gap, Build What's Next",
     description:
-      "Kingdom Solutions AI™ helps women entrepreneurs find the gap holding their business back, close it in the right order, and build what's next with AI that keeps them in charge. Led by Tabitha Rector, PCC.",
+      "Kingdom Solutions AI™ helps women entrepreneurs find the gap holding their business back, close it in the right order, and build what's next with human-authorized AI that keeps them in charge. Led by Tabitha Rector, PCC.",
     canonicalUrl: "https://kingdomsolutionsai.com/",
     ogImage: "https://kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
@@ -55,7 +55,7 @@ export default function Home() {
                 <em className="text-gold italic">intelligent support.</em>
               </h1>
               <p className="font-body text-lg lg:text-xl text-charcoal-light leading-[1.7] max-w-2xl mb-12 fade-up">
-                Most stalled businesses are not short on effort. They are working on the wrong gap. Kingdom Solutions AI™ helps women entrepreneurs find the gap holding them back, close it in the right order, and build what's next with AI that supports the work and keeps you in charge.
+                Most stalled businesses are not short on effort. They are working on the wrong gap. Kingdom Solutions AI™ helps women entrepreneurs find the gap holding them back, close it in the right order, and build what's next with human-authorized AI that keeps you in charge.
               </p>
               <div className="flex flex-col sm:flex-row items-start gap-5 fade-up">
                 <Link href="/entrepreneur-assessment" className={primaryBtn}>

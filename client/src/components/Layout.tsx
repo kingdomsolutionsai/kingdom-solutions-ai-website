@@ -273,7 +273,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </div>
               </div>
               <p className="font-body text-sm text-warm-gray leading-relaxed max-w-xs">
-                Helping women entrepreneurs find the gap, close the right gap, and build what's next, with AI that keeps you in charge.
+                Helping women entrepreneurs find the gap, close the right gap, and build what's next, with human-authorized AI that keeps you in charge.
               </p>
             </div>
             {/* For Entrepreneurs + Faith & Leadership */}
