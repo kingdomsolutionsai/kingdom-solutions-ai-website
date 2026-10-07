@@ -213,17 +213,21 @@ const ROUTE_METADATA: Record<string, PageMeta> = {
     twitterImage: `${BASE_URL}/assets/ksai-logo-transparent-400_82fa1f46.png`,
   },
   "/entrepreneur-assessment": {
-    title: "Entrepreneur Next Step™ Assessment — Find Your Stage | Kingdom Solutions AI™",
-    description: "Take the free Entrepreneur Next Step™ Assessment — a two-minute diagnostic that shows you exactly what stage your business is in and the single next step that matters most.",
+    title: "Entrepreneur Next Step™ Assessment | Find Your Business Gap",
+    description:
+      "Find the gap in your Direction, Offer, Audience, or Structure and the next step to build your business in the right order. Free, about three minutes.",
     canonicalUrl: `${BASE_URL}/entrepreneur-assessment`,
-    ogTitle: "Entrepreneur Next Step™ Assessment — Find Your Stage",
-    ogDescription: "A two-minute diagnostic that shows you exactly what stage your business is in and the single next step that matters most.",
+    ogTitle: "Entrepreneur Next Step™ Assessment | Find Your Business Gap",
+    ogDescription:
+      "Find the gap. Close the right gap. Build what's next. A free, three-minute assessment of Direction, Offer, Audience, and Structure.",
     ogUrl: `${BASE_URL}/entrepreneur-assessment`,
     ogType: "website",
     ogImage: `${BASE_URL}/assets/ksai-logo-transparent-400_82fa1f46.png`,
     twitterCard: "summary_large_image",
-    twitterTitle: "Entrepreneur Next Step™ Assessment — Find Your Stage",
-    twitterDescription: "A two-minute diagnostic that shows you exactly what stage your business is in and the single next step that matters most.",
+    twitterTitle:
+      "Entrepreneur Next Step™ Assessment | Find Your Business Gap",
+    twitterDescription:
+      "Find the gap. Close the right gap. Build what's next. A free, three-minute assessment of Direction, Offer, Audience, and Structure.",
     twitterImage: `${BASE_URL}/assets/ksai-logo-transparent-400_82fa1f46.png`,
   },
   "/business-fast-track": {
