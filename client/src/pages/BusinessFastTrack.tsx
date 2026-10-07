@@ -1,15 +1,17 @@
 import { RIGHT_ORDER_PROMISE } from "@shared/const";
+import { currentCohort } from "@/lib/fastTrackCohorts";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import "@/styles/business-fast-track.css";
 
 /**
  * 30-Day Business Fast Track™ landing page.
- * First cohort starts November 2, 2026 (enrollment closes October 30) and is limited to eight women.
+ * Cohort dates live in lib/fastTrackCohorts.ts; the page shows whichever cohort is enrolling.
+ * Each cohort is limited to eight women.
  * Styles live in styles/business-fast-track.css, scoped under .bft.
  */
 
 /**
- * Enrollment for the first cohort: a Business Fast Track Strategy Call (Calendly,
+ * Enrollment: a Business Fast Track Strategy Call (Calendly,
  * with intake questions) comes first, then a private payment link.
  * After enrollment closes, the calls to action switch to asking about the next
  * cohort, so the page never invites anyone to book for a cohort that has started.
@@ -17,13 +19,12 @@ import "@/styles/business-fast-track.css";
 const CALL_URL = "https://calendly.com/tabitha-kingdomsolutionsai/business-fast-track-strategy-call";
 const NEXT_COHORT_URL =
   "mailto:tabitha@kingdomsolutionsai.com?subject=" + encodeURIComponent("Next Business Fast Track cohort");
-const STARTS = "Monday, November 2";
-const CLOSES = "Friday, October 30";
-/** End of Friday, October 30, 2026, Eastern time. */
-const ENROLLMENT_CLOSES_AT = Date.parse("2026-10-31T04:00:00Z");
+const { cohort: COHORT, open: ENROLLMENT_OPEN } = currentCohort();
+const STARTS = COHORT.starts;
+const CLOSES = COHORT.closes;
 
 function useEnrollment() {
-  const open = Date.now() < ENROLLMENT_CLOSES_AT;
+  const open = ENROLLMENT_OPEN;
   return {
     open,
     href: open ? CALL_URL : NEXT_COHORT_URL,
@@ -55,7 +56,7 @@ const OUTCOMES = [
   { n: "02", title: "Signature Offer Blueprint", desc: "Define the client, problem, outcome, structure, and pricing direction for one focused offer." },
   { n: "03", title: "Sales-Ready Message Kit", desc: "Explain your value clearly through positioning, a concise offer message, and authority themes." },
   { n: "04", title: "Revenue Path", desc: "Choose a practical way to begin conversations, validate the offer, and invite the right people forward." },
-  { n: "05", title: "90-Day Roadmap", desc: "Enter Q1 with prioritized actions and a realistic plan for what to build, test, and refine next." },
+  { n: "05", title: "90-Day Roadmap", desc: `${COHORT.roadmapLead} with prioritized actions and a realistic plan for what to build, test, and refine next.` },
 ];
 
 const WEEKS = [
@@ -95,7 +96,7 @@ const FAQS = [
   { q: "Will I have a complete business in thirty days?", a: "You will have the essential decisions, offer, message, revenue path, and 90-day implementation plan your business needs. You will not be promised that every website, funnel, legal, operational, or automation component will be completed in thirty days." },
   { q: "How much time should I plan to protect each week?", a: "Plan for the weekly session plus focused implementation time. The work is intentionally prioritized so you can complete the right pieces without trying to build the entire business at once." },
   { q: "Is AI used in the program?", a: "Yes, where it genuinely supports clarity, research, drafting, and implementation. AI will not be positioned as the authority over your offer, values, client commitments, or business decisions. You remain the leader throughout." },
-  { q: "How do I enroll?", a: `Start by booking a 30-minute Business Fast Track Strategy Call. We will look at where your business is today, what you most want settled in the next 30 days, and whether the Fast Track is the right next step. If it is a fit, you will receive a private enrollment link after the call. Enrollment for the first cohort closes ${CLOSES}, and the program begins ${STARTS}.` },
+  { q: "How do I enroll?", a: `Start by booking a 30-minute Business Fast Track Strategy Call. We will look at where your business is today, what you most want settled in the next 30 days, and whether the Fast Track is the right next step. If it is a fit, you will receive a private enrollment link after the call. Enrollment for the ${COHORT.name} cohort closes ${CLOSES}, and the program begins ${STARTS}.` },
   { q: "What if week one does not give me clarity?", a: `That is what the Right Order Promise is for. ${RIGHT_ORDER_PROMISE} It is a service commitment, not a refund or money-back guarantee.` },
   { q: "Can I pay in more than one payment?", a: "Yes. You can pay in full or choose a payment plan. Your payment options are shared after your Strategy Call. A payment plan is a commitment to the full program price, as described in our Refund Policy." },
   { q: "Is the seat guaranteed when I book a call?", a: "No. Each cohort is limited to eight women, and seats are confirmed in the order enrollment is completed. Booking a call does not hold a seat." },
@@ -135,12 +136,12 @@ export default function BusinessFastTrack() {
             <p className="micro">
               {enrollment.open
                 ? `Enrollment is open through ${CLOSES}. We begin ${STARTS}. Every enrollment starts with a short Strategy Call to make sure it is the right fit.`
-                : `Enrollment for the November cohort has closed. Reach out to hear first when the next cohort opens.`}
+                : `Enrollment for the ${COHORT.name} cohort has closed. Reach out to hear first when the next cohort opens.`}
             </p>
             <RightOrderPromiseNote dark />
           </div>
           <aside className="hero-card" aria-label="Program overview">
-            <span className="small">Begins {STARTS.replace("Monday, ", "")} • 8 Seats • Q1 2027 Ready</span>
+            <span className="small">Begins {STARTS.replace("Monday, ", "")} • 8 Seats • {COHORT.badge}</span>
             <h2>Focused implementation. Personal strategic guidance. A business you can explain and sell.</h2>
             <div className="proof-row">
               <div className="proof"><strong>30</strong><span>Focused days</span></div>
@@ -173,7 +174,7 @@ export default function BusinessFastTrack() {
             </p>
             <p>
               The Business Fast Track gives you a focused place to make the right decisions, complete the foundational
-              work, and move into Q1 with a credible business direction.
+              work, and {COHORT.directionLine} with a credible business direction.
             </p>
           </div>
         </div>
@@ -302,7 +303,7 @@ export default function BusinessFastTrack() {
             <p className="micro" style={{ marginInline: "auto" }}>
               {enrollment.open
                 ? `Enrollment closes ${CLOSES}. We begin ${STARTS}. Seats are confirmed in the order enrollment is completed.`
-                : `Enrollment for the November cohort has closed.`}
+                : `Enrollment for the ${COHORT.name} cohort has closed.`}
             </p>
           </div>
         </div>

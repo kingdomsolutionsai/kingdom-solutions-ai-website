@@ -401,3 +401,15 @@ export function calculateAssessment(
 export function assessmentResultLabel(result: AssessmentResult): string {
   return result.primaryGap ? `${result.primaryGap} Gap` : "Build What's Next";
 }
+
+/**
+ * Tabitha's short video for each gap, shown on the result page.
+ * Leave a gap as null until its video exists; nothing shows until then.
+ * Paste the video's embed or share link (YouTube, Vimeo, Loom) or a direct .mp4 link.
+ */
+export const GAP_VIDEOS: Record<Gap, string | null> = {
+  Direction: null,
+  Offer: null,
+  Audience: null,
+  Structure: null,
+};

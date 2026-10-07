@@ -13,6 +13,7 @@
  */
 
 import { assessmentResultLabel, type AssessmentResult } from "../shared/entrepreneurAssessment";
+import { nextQuarterLabel } from "../shared/const";
 
 const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
 const SENDER = { email: "tabitha@kingdomsolutionsai.com", name: "Kingdom Solutions AI" };
@@ -212,7 +213,7 @@ export function formatVictorsCircleApplicantEmail(data: { firstName: string }): 
   return emailWrapper(`
     <p style="text-transform: uppercase; letter-spacing: 0.08em; font-size: 12px; color: #8c6927; margin-bottom: 6px;">Application Received</p>
     <h1 style="font-size: 28px; margin: 0 0 20px;">Thank you, ${escapeHtml(data.firstName)}.</h1>
-    <p style="margin: 0 0 20px;">Your application for Victor's Circle Leadership Academy&trade; is in. Applications are reviewed personally, and we'll follow up soon with next steps for the January cohort.</p>
+    <p style="margin: 0 0 20px;">Your application for Victor's Circle Leadership Academy&trade; is in. Applications are reviewed personally, and we'll follow up soon with next steps for the February 2027 cohort.</p>
     <p style="margin-top: 20px; font-size: 13px; color: #666;">In the meantime, feel free to reply to this email with any questions.</p>
   `);
 }
@@ -249,6 +250,7 @@ export function formatAssessmentResultsEmail(data: {
     <h3 style="font-size: 16px; margin: 24px 0 10px;">Your next step this week</h3>
     <p>${escapeHtml(result.firstAction)}</p>
     <h3 style="font-size: 16px; margin: 24px 0 10px;">Your recommended next step</h3>
+    ${result.primaryGap ? `<p style="color: #8c6927; font-weight: 600;">Close this gap now, and you start ${nextQuarterLabel()} ready.</p>` : ""}
     <p>${escapeHtml(result.recommendation.reason)}</p>
     <p style="margin: 24px 0;"><a href="${escapeHtml(recommendationUrl)}" style="display: inline-block; background: #1a1a1a; color: #fff; padding: 14px 20px; text-decoration: none;">${escapeHtml(result.recommendation.label)}</a></p>
     <p>Questions about fit, timing, or scope? Reply to this email and tell me what remains uncertain.</p>

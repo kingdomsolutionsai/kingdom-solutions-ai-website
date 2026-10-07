@@ -3,7 +3,8 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { ArrowRight } from "lucide-react";
 import { GAPS, GAP_DESCRIPTIONS, type Gap } from "@shared/entrepreneurAssessment";
-import { RIGHT_ORDER_PROMISE } from "@shared/const";
+import { RIGHT_ORDER_PROMISE, nextQuarterLabel } from "@shared/const";
+import { CLIENT_STORIES } from "@/lib/clientStories";
 
 /*
  * Home page, organized around the Four Gaps framework:
@@ -30,11 +31,12 @@ export default function Home() {
   usePageMeta({
     title: "Kingdom Solutions AI™ | Find the Gap, Close the Gap, Build What's Next",
     description:
-      "Kingdom Solutions AI™ helps women entrepreneurs find the gap holding their business back, close it in the right order, and build what's next with AI that keeps them in charge. Led by Tabitha Rector, PCC.",
+      "Kingdom Solutions AI™ helps women entrepreneurs find the gap holding their business back, close it in the right order, and build what's next with human-authorized AI that keeps them in charge. Led by Tabitha Rector, PCC.",
     canonicalUrl: "https://kingdomsolutionsai.com/",
     ogImage: "https://kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
   const revealRef = useScrollReveal();
+  const quarter = nextQuarterLabel();
   return (
     <div ref={revealRef}>
       {/* Hero */}
@@ -54,7 +56,7 @@ export default function Home() {
                 <em className="text-gold italic">intelligent support.</em>
               </h1>
               <p className="font-body text-lg lg:text-xl text-charcoal-light leading-[1.7] max-w-2xl mb-12 fade-up">
-                Most stalled businesses are not short on effort. They are working on the wrong gap. Kingdom Solutions AI™ helps women entrepreneurs find the gap holding them back, close it in the right order, and build what's next with AI that supports the work and keeps you in charge.
+                Most stalled businesses are not short on effort. They are working on the wrong gap. Kingdom Solutions AI™ helps women entrepreneurs find the gap holding them back, close it in the right order, and build what's next with human-authorized AI that keeps you in charge.
               </p>
               <div className="flex flex-col sm:flex-row items-start gap-5 fade-up">
                 <Link href="/entrepreneur-assessment" className={primaryBtn}>
@@ -65,7 +67,7 @@ export default function Home() {
                 </Link>
               </div>
               <p className="font-body text-[0.8rem] text-charcoal/50 mt-4 fade-up">
-                Free assessment. 13 questions, about three minutes.
+                Free assessment. 13 questions, about three minutes. Find your gap now and start {quarter} ready.
               </p>
             </div>
           </div>
@@ -109,7 +111,7 @@ export default function Home() {
             </div>
             <div className="lg:col-span-4 lg:col-start-8 flex items-end fade-up">
               <p className="font-body text-base text-charcoal-light leading-relaxed">
-                Each gap calls for a different first move. The Entrepreneur Next Step™ Assessment shows you which one to close first and what can wait.
+                <span className="font-semibold text-charcoal">Why check now? So you start {quarter} ready.</span> Each gap calls for a different first move. The Entrepreneur Next Step™ Assessment shows you which one to close first and what can wait.
               </p>
             </div>
           </div>
@@ -248,14 +250,14 @@ export default function Home() {
                   A Christ-centered formation space for women who carry influence, responsibility, and the weight of leadership at home, at work, in ministry, and in their communities.
                 </p>
                 <p className="font-body text-base text-charcoal-light/80 leading-relaxed mb-10">
-                  A 90-day formation journey that quiets anxiety, restores clarity, and equips you to lead with steady confidence. Now accepting applications for the January cohort.
+                  A 90-day formation journey that quiets anxiety, restores clarity, and equips you to lead with steady confidence. Now accepting applications for the February 2027 cohort.
                 </p>
                 <div className="flex flex-col sm:flex-row items-start gap-5">
                   <Link href="/victors-circle-leadership-academy" className={primaryBtn}>
                     Explore Victor's Circle <ArrowRight size={15} />
                   </Link>
                   <Link href="/victors-circle-leadership-academy#apply" className={secondaryLink}>
-                    Apply for the January Cohort <ArrowRight size={14} />
+                    Apply for the February Cohort <ArrowRight size={14} />
                   </Link>
                 </div>
               </div>
@@ -271,7 +273,7 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="font-body text-[0.65rem] tracking-[0.16em] uppercase text-gold/70 mb-1.5">Next Cohort</p>
-                    <p className="font-body text-sm text-charcoal-light">Now enrolling for January</p>
+                    <p className="font-body text-sm text-charcoal-light">Now enrolling for February 2027</p>
                   </div>
                 </div>
               </div>
@@ -321,6 +323,44 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Client stories: hidden until a story is added in lib/clientStories.ts */}
+      {CLIENT_STORIES.length > 0 && (
+        <section className="py-24 lg:py-32 bg-cream-dark/40">
+          <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
+            <div className="max-w-2xl mb-14 fade-up">
+              <p className="editorial-label mb-5">Gaps Closed</p>
+              <h2 className="font-display text-3xl sm:text-4xl font-medium text-charcoal leading-[1.15]">
+                What changes when the right gap closes first.
+              </h2>
+            </div>
+            <div className={`grid grid-cols-1 gap-8 ${CLIENT_STORIES.length > 1 ? "lg:grid-cols-2" : "max-w-3xl"} fade-up`}>
+              {CLIENT_STORIES.map((story) => (
+                <article key={story.name} className="bg-cream border border-taupe/60 p-8 lg:p-10">
+                  <p className="font-body text-[0.7rem] tracking-[0.16em] uppercase text-gold font-medium mb-6">
+                    {story.gap} Gap
+                  </p>
+                  <p className="font-body text-sm text-charcoal-light leading-[1.8] mb-4">
+                    <span className="font-semibold text-charcoal">Before.</span> {story.before}
+                  </p>
+                  <p className="font-body text-sm text-charcoal-light leading-[1.8] mb-6">
+                    <span className="font-semibold text-charcoal">After.</span> {story.after}
+                  </p>
+                  {story.quote && (
+                    <blockquote className="font-display italic text-lg text-charcoal border-l-2 border-gold/50 pl-5 mb-6">
+                      "{story.quote}"
+                    </blockquote>
+                  )}
+                  <p className="font-body text-sm font-medium text-charcoal">
+                    {story.name}
+                    {story.detail && <span className="font-normal text-charcoal-light">, {story.detail}</span>}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Why Tabitha */}
       <section className="py-24 lg:py-32 bg-cream">
@@ -385,7 +425,7 @@ export default function Home() {
               You do not have to build everything at once. Build the right thing next.
             </h2>
             <p className="font-body text-lg text-charcoal-light leading-relaxed mb-12">
-              Start by finding your gap. It takes about three minutes, and your results arrive with one action you can take this week.
+              Close the right gap now, and you walk into {quarter} ready instead of still deciding. Finding your gap takes about three minutes, and your results arrive with one action you can take this week.
             </p>
             <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
               <Link href="/entrepreneur-assessment" className={primaryBtn}>

@@ -11,3 +11,16 @@ export const NOT_ADMIN_ERR_MSG = 'You do not have required permission (10002)';
  */
 export const RIGHT_ORDER_PROMISE =
   "Complete the week-one work. If you do not leave week one with a clear priority and plan, you will receive a private realignment session at no additional cost.";
+
+/**
+ * The quarter a visitor is getting ready for: the next calendar quarter,
+ * with its year. October to December gives "Q1 2027", January to March
+ * gives "Q2 2027", and so on, so "start Q1 2027 ready" lines stay current
+ * without editing.
+ */
+export function nextQuarterLabel(now: Date = new Date()): string {
+  const current = Math.floor(now.getMonth() / 3) + 1;
+  const next = (current % 4) + 1;
+  const year = next === 1 ? now.getFullYear() + 1 : now.getFullYear();
+  return `Q${next} ${year}`;
+}
