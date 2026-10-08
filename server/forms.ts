@@ -16,6 +16,8 @@ import {
 import { buildCapacityLeakAuditNotes, fileLeadWithConstance } from "./constance";
 import { generateCapacityLeakAudit } from "./llm";
 import { calculateAssessment, assessmentResultLabel } from "../shared/entrepreneurAssessment";
+import { requestAssessmentFollowup } from "./assessmentFollowup";
+import { ASSESSMENT_FOLLOWUP_CONSENT, ASSESSMENT_FOLLOWUP_CONSENT_VERSION, assessmentFollowupRoute } from "../shared/assessmentFollowup";
 
 const OWNER = { email: "tabitha@kingdomsolutionsai.com", name: "Tabitha Rector" };
 
@@ -241,7 +243,7 @@ export const formsRouter = router({
   // ---------------------------------------------------------------------------
   // Calculate the Four Gaps result from validated answers on the server.
   // The browser shows the same shared result without waiting for email.
-  // Submission requests a result copy, not a marketing subscription.
+  // Optional follow-ups require a separate double-opt-in confirmation.
   // ---------------------------------------------------------------------------
   submitAssessmentRequest: publicProcedure
     .input(
@@ -249,6 +251,7 @@ export const formsRouter = router({
         .object({
           firstName: z.string().trim().min(1).max(100),
           email: z.string().trim().email().max(254),
+          followupOptIn: z.boolean().default(false),
           answers: z
             .record(z.string(), z.number().int().min(0).max(3))
             .refine((answers) => {
@@ -265,12 +268,16 @@ export const formsRouter = router({
     .mutation(async ({ input }) => {
       const result = calculateAssessment(input.answers);
       const label = assessmentResultLabel(result);
+      const followupStatus = await requestAssessmentFollowup({ ...input, result });
+      const followupConsentRecord = input.followupOptIn
+        ? `Optional follow-up request at ${new Date().toISOString()}. Route: ${assessmentFollowupRoute(result)}. Consent version: ${ASSESSMENT_FOLLOWUP_CONSENT_VERSION}. Consent text: ${ASSESSMENT_FOLLOWUP_CONSENT}. Confirmation status: ${followupStatus}. A request is not proof of confirmation. No ongoing newsletter subscription created.`
+        : "Requested result email only; no marketing subscription created.";
       const [notified, participantNotified, filedWithConstance] =
         await Promise.all([
           sendBrevoEmail({
             to: OWNER,
             subject: `Entrepreneur Assessment — ${input.firstName} (${label})`,
-            htmlContent: formatAssessmentEmail({ ...input, result }),
+            htmlContent: formatAssessmentEmail({ ...input, result, followupConsentRecord }),
             replyToEmail: input.email,
             replyToName: input.firstName,
           }),
@@ -287,7 +294,7 @@ export const formsRouter = router({
             email: input.email,
             source: "Entrepreneur Assessment",
             stage: "New Lead",
-            notes: `Assessment version: Four Gaps v1. Priority: ${label}. Other areas: ${result.secondaryGaps.join(", ") || "None flagged"}. Structure focus: ${result.structureType || "Not primary"}. Recommended next step: ${result.recommendation.label}. Scores (out of 9): ${JSON.stringify(result.scores)}. Requested result email only; no marketing subscription created.`,
+            notes: `Assessment version: Four Gaps v1. Priority: ${label}. Other areas: ${result.secondaryGaps.join(", ") || "None flagged"}. Structure focus: ${result.structureType || "Not primary"}. Recommended next step: ${result.recommendation.label}. Scores (out of 9): ${JSON.stringify(result.scores)}. ${followupConsentRecord}`,
           }),
         ]);
       return {
@@ -296,6 +303,8 @@ export const formsRouter = router({
         notified,
         participantNotified,
         filedWithConstance,
+        followupStatus,
       };
     }),
 });
+
