@@ -71,7 +71,7 @@ export default function Home() {
               <div className="w-16 h-[2px] bg-gold mb-8 fade-up" />
               <p className="editorial-label mb-6 fade-up">For experienced women entrepreneurs building a business that lasts</p>
               <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-[4.25rem] font-medium text-charcoal leading-[1.1] mb-8 fade-up">
-                Turn your expertise into a clear business. Build it in the 
+                Turn your expertise into a clear offer. Build your business in the 
                 <em className="text-gold italic">right order.</em>
               </h1>
               <p className="font-body text-lg lg:text-xl text-charcoal-light leading-[1.7] max-w-2xl mb-12 fade-up">
