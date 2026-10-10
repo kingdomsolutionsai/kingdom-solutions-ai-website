@@ -1,36 +1,20 @@
 import { Link } from "wouter";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { usePageMeta } from "@/hooks/usePageMeta";
-import { ArrowRight, Download } from "lucide-react";
-import { useState } from "react";
-import { trpc } from "@/lib/trpc";
+import { ArrowRight } from "lucide-react";
 
-const HANDBOOK_PDF = "/assets/handbook.pdf";
 const WEBINAR_URL = "https://whatentrepreneursneedtoknow.com";
 
 export default function Handbook() {
   usePageMeta({
-    title: "The Entrepreneur Handbook — What Every New Entrepreneur Needs to Know | Kingdom Solutions AI™",
+    title: "What Every New Entrepreneur Needs to Know | Kingdom Solutions AI™ by Tabitha Rector",
     description:
-      "A free step-by-step handbook for moving from expertise and vision to a clear, compliant, revenue-ready business — in the right order, without the overwhelm. From Kingdom Solutions AI™.",
+      "A practical guide for experienced women turning their expertise into a clear business, with the systems, start order, and revenue path to build with confidence.",
     canonicalUrl: "https://kingdomsolutionsai.com/handbook",
     ogImage: "https://kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
 
   const revealRef = useScrollReveal();
-  const [formData, setFormData] = useState({ firstName: "", email: "" });
-  const [submitted, setSubmitted] = useState(false);
-
-  const submitMutation = trpc.forms.submitHandbookRequest.useMutation({
-    onSuccess: () => setSubmitted(true),
-    // Never trap the reader — if the backend hiccups, still reveal the download.
-    onError: () => setSubmitted(true),
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    submitMutation.mutate(formData);
-  };
 
   return (
     <div ref={revealRef}>
@@ -53,11 +37,11 @@ export default function Handbook() {
               clear, compliant, revenue-ready business—in the right order,
               without the overwhelm.
             </p>
-            <a href="#get-handbook" className="btn-gold rounded-sm inline-flex items-center gap-2">
-              Get the Handbook <ArrowRight size={16} />
+            <a href={WEBINAR_URL} target="_blank" rel="noopener noreferrer" className="btn-gold rounded-sm inline-flex items-center gap-2">
+              Register for the Webinar <ArrowRight size={16} />
             </a>
             <p className="font-body text-xs tracking-[0.1em] uppercase text-charcoal-light mt-5">
-              Free · delivered to your inbox
+              Chapter One is included with webinar registration
             </p>
           </div>
         </div>
@@ -118,82 +102,20 @@ export default function Handbook() {
 
       <div className="container"><div className="gold-hairline" /></div>
 
-      {/* Email capture / download */}
+      {/* Webinar registration and complimentary Chapter One */}
       <section id="get-handbook" className="py-20 lg:py-28 bg-cream">
         <div className="container">
-          <div className="max-w-xl mx-auto">
-            {!submitted ? (
-              <div className="fade-up">
-                <div className="text-center mb-10">
-                  <p className="editorial-label mb-4">Get Your Copy</p>
-                  <h2 className="font-display text-3xl font-medium text-charcoal mb-3">
-                    Send me the Handbook
-                  </h2>
-                  <p className="font-body text-base text-charcoal-light">
-                    Enter your name and email—your copy arrives in your inbox,
-                    and downloads right here.
-                  </p>
-                </div>
-
-                <form onSubmit={handleSubmit} className="bg-card border border-taupe rounded-sm p-8 lg:p-10 space-y-5">
-                  <div>
-                    <label className="font-body text-sm font-medium text-charcoal mb-2 block">First Name</label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.firstName}
-                      onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                      className="w-full px-4 py-3 bg-cream border border-taupe rounded-sm font-body text-sm text-charcoal focus:border-gold focus:ring-1 focus:ring-gold/30 outline-none transition-colors"
-                      placeholder="Your first name"
-                    />
-                  </div>
-                  <div>
-                    <label className="font-body text-sm font-medium text-charcoal mb-2 block">Email</label>
-                    <input
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 bg-cream border border-taupe rounded-sm font-body text-sm text-charcoal focus:border-gold focus:ring-1 focus:ring-gold/30 outline-none transition-colors"
-                      placeholder="your@email.com"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    disabled={submitMutation.isPending}
-                    className="w-full btn-gold rounded-sm disabled:opacity-60"
-                  >
-                    {submitMutation.isPending ? "Preparing your copy…" : "Send me the Handbook"}
-                  </button>
-                  <p className="font-body text-xs text-charcoal-light text-center">
-                    Free. No spam. Unsubscribe anytime.
-                  </p>
-                </form>
-              </div>
-            ) : (
-              <div className="fade-up text-center bg-card border border-taupe rounded-sm p-10 lg:p-12">
-                <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mx-auto mb-6">
-                  <svg className="w-6 h-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <h3 className="font-display text-2xl font-medium text-charcoal mb-3">
-                  Your Handbook is on its way.
-                </h3>
-                <p className="font-body text-base text-charcoal-light leading-relaxed mb-8">
-                  Check your inbox for your copy—and you can download it right
-                  now below.
-                </p>
-                <a
-                  href={HANDBOOK_PDF}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-gold rounded-sm inline-flex items-center gap-2"
-                >
-                  <Download size={16} /> Download the Handbook
-                </a>
-              </div>
-            )}
+          <div className="max-w-3xl mx-auto text-center fade-up">
+            <p className="editorial-label mb-4">A Complimentary First Step</p>
+            <h2 className="font-display text-3xl font-medium text-charcoal mb-4">
+              Read Chapter One with the live webinar.
+            </h2>
+            <p className="font-body text-base text-charcoal-light leading-relaxed max-w-2xl mx-auto mb-8">
+              Register for What Every New Entrepreneur Needs to Know. Chapter One is provided as a registration gift; the complete book is a separate paid resource.
+            </p>
+            <a href={WEBINAR_URL} target="_blank" rel="noopener noreferrer" className="btn-gold rounded-sm inline-flex items-center gap-2">
+              Reserve Your Webinar Seat <ArrowRight size={16} />
+            </a>
           </div>
         </div>
       </section>
@@ -231,24 +153,12 @@ export default function Handbook() {
               </span>
             </a>
 
-            {/* Entrepreneur Next Step Assessment — activate when built.
-                When /entrepreneur-assessment exists, change this <div> to a
-                <Link to="/entrepreneur-assessment"> and drop the "Coming soon" pill. */}
-            <div className="border border-gold/15 rounded-sm p-8 opacity-90">
-              <p className="font-body text-[0.7rem] tracking-[0.16em] uppercase text-gold mb-4">
-                Coming Soon
-              </p>
-              <h3 className="font-display text-2xl font-medium text-cream-dark mb-3">
-                The Entrepreneur Next Step™ Assessment
-              </h3>
-              <p className="font-body text-sm text-warm-gray leading-relaxed mb-6">
-                Not sure what to do next? Find your current stage—and what you
-                can stop worrying about for now—in about three minutes.
-              </p>
-              <span className="font-body text-sm text-warm-gray/70 inline-flex items-center gap-2">
-                Launching soon
-              </span>
-            </div>
+            <Link href="/entrepreneur-assessment" className="group border border-gold/25 rounded-sm p-8 hover:border-gold/60 transition-colors">
+              <p className="font-body text-[0.7rem] tracking-[0.16em] uppercase text-gold mb-4">Free Assessment</p>
+              <h3 className="font-display text-2xl font-medium text-cream-dark mb-3">The Entrepreneur Next Step™ Assessment</h3>
+              <p className="font-body text-sm text-warm-gray leading-relaxed mb-6">Find your current business gap and what you can stop worrying about for now in about three minutes.</p>
+              <span className="font-body text-sm text-gold inline-flex items-center gap-2 group-hover:gap-3 transition-all">Find your gap <ArrowRight size={15} /></span>
+            </Link>
           </div>
         </div>
       </section>
@@ -257,7 +167,7 @@ export default function Handbook() {
       <section className="py-8 bg-cream">
         <div className="container">
           <p className="font-body text-xs text-warm-gray text-center max-w-2xl mx-auto leading-relaxed">
-            This handbook is educational and is not legal, tax, financial,
+            This book is educational and is not legal, tax, financial,
             insurance, or licensing advice. Requirements vary by location and
             profession—confirm with qualified professionals and official
             agencies before acting.

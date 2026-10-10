@@ -23,6 +23,7 @@ interface PageMeta {
   twitterTitle: string;
   twitterDescription: string;
   twitterImage: string;
+  noIndex?: boolean;
 }
 
 /** Escape HTML special characters in metadata values to prevent injection */
@@ -45,45 +46,45 @@ function cleanPath(urlPath: string): string {
 
 const ROUTE_METADATA: Record<string, PageMeta> = {
   "/": {
-    title: "Kingdom Solutions AI™ — Strategic AI Systems for High-Capacity Leaders",
-    description: "Kingdom Solutions AI™ helps coaches, founders, consultants, and executives build strategic AI systems for clarity, capacity, and intelligent support. Premium advisory by Tabitha Rector.",
+    title: "Business Strategy for Women Entrepreneurs | Kingdom Solutions AI™",
+    description: "Kingdom Solutions AI™ by Tabitha Rector helps experienced women entrepreneurs turn expertise into a clear offer, build in the right order, and add human-authorized AI where it creates capacity.",
     canonicalUrl: `${BASE_URL}/`,
-    ogTitle: "Kingdom Solutions AI™ — Strategic AI Systems for High-Capacity Leaders",
-    ogDescription: "Kingdom Solutions AI™ helps coaches, founders, consultants, and executives build strategic AI systems for clarity, capacity, and intelligent support. Premium advisory by Tabitha Rector.",
+    ogTitle: "Business Strategy for Women Entrepreneurs | Kingdom Solutions AI™",
+    ogDescription: "Kingdom Solutions AI™ by Tabitha Rector helps experienced women entrepreneurs turn expertise into a clear offer, build in the right order, and add human-authorized AI where it creates capacity.",
     ogUrl: `${BASE_URL}/`,
     ogType: "website",
     ogImage: `${BASE_URL}/assets/ksai-logo-transparent-400_82fa1f46.png`,
     twitterCard: "summary_large_image",
-    twitterTitle: "Kingdom Solutions AI™ — Strategic AI Systems for High-Capacity Leaders",
-    twitterDescription: "Premium executive advisory firm building strategic AI systems for coaches, founders, consultants, and high-capacity leaders.",
+    twitterTitle: "Business Strategy for Women Entrepreneurs | Kingdom Solutions AI™",
+    twitterDescription: "Business strategy for experienced women entrepreneurs, with human-authorized AI where it creates capacity.",
     twitterImage: `${BASE_URL}/assets/ksai-logo-transparent-400_82fa1f46.png`,
   },
   "/about": {
     title: "About Tabitha Rector — Kingdom Solutions AI™",
-    description: "30 years of leadership, management, and coaching. Tabitha Rector founded Kingdom Solutions AI™ to help high-capacity leaders build strategic AI systems for clarity, capacity, and sustainable growth.",
+    description: "Tabitha Rector is a Business & Entrepreneurship Strategist with 30+ years of leadership and coaching experience, helping experienced women entrepreneurs turn expertise into a clear offer and build in the right order.",
     canonicalUrl: `${BASE_URL}/about`,
     ogTitle: "About Tabitha Rector — Kingdom Solutions AI™",
-    ogDescription: "30 years of leadership, management, and coaching. Tabitha Rector founded Kingdom Solutions AI™ to help high-capacity leaders build strategic AI systems for clarity, capacity, and sustainable growth.",
+    ogDescription: "Tabitha Rector helps experienced women entrepreneurs turn expertise into a clear offer and build their business in the right order.",
     ogUrl: `${BASE_URL}/about`,
     ogType: "website",
     ogImage: `${BASE_URL}/assets/tabitha-headshot_fea7ebce.webp`,
     twitterCard: "summary_large_image",
     twitterTitle: "About Tabitha Rector — Kingdom Solutions AI™",
-    twitterDescription: "30 years of leadership, management, and coaching. Tabitha Rector founded Kingdom Solutions AI™ to help high-capacity leaders build strategic AI systems.",
+    twitterDescription: "Meet Tabitha Rector, Business & Entrepreneurship Strategist and founder of Kingdom Solutions AI™.",
     twitterImage: `${BASE_URL}/assets/tabitha-headshot_fea7ebce.webp`,
   },
   "/clarity-pro": {
-    title: "Clarity Pro™ — Strategic Clarity & Content System | Kingdom Solutions AI™",
-    description: "Clarity Pro™ helps new coaches, founders, and consultants clarify their niche, build a strong offer, develop their business voice, and create a content strategy. Three tiers from self-guided to full buildout.",
+    title: "Clarity Pro™ — Clear Offers & Messaging for Women Entrepreneurs | KSAI",
+    description: "Clarity Pro™ helps experienced women entrepreneurs clarify who they serve, shape a strong offer, and create messaging buyers understand.",
     canonicalUrl: `${BASE_URL}/clarity-pro`,
     ogTitle: "Clarity Pro™ — Strategic Clarity & Content System | Kingdom Solutions AI™",
-    ogDescription: "Clarity Pro™ helps new coaches, founders, and consultants clarify their niche, build a strong offer, develop their business voice, and create a content strategy.",
+    ogDescription: "Clarity Pro™ helps experienced women entrepreneurs clarify who they serve, shape a strong offer, and create messaging buyers understand.",
     ogUrl: `${BASE_URL}/clarity-pro`,
     ogType: "website",
     ogImage: `${BASE_URL}/assets/clarity-visual_f897fefc.png`,
     twitterCard: "summary_large_image",
     twitterTitle: "Clarity Pro™ — Strategic Clarity & Content System | Kingdom Solutions AI™",
-    twitterDescription: "Clarity Pro™ helps new coaches, founders, and consultants clarify their niche, build a strong offer, and create a content strategy.",
+    twitterDescription: "Clarity Pro™ helps experienced women entrepreneurs clarify their offer and create messaging buyers understand.",
     twitterImage: `${BASE_URL}/assets/clarity-visual_f897fefc.png`,
   },
   "/constance": {
@@ -130,10 +131,10 @@ const ROUTE_METADATA: Record<string, PageMeta> = {
   },
   "/contact": {
     title: "Contact Kingdom Solutions AI™ — Reach Tabitha Rector",
-    description: "Contact Kingdom Solutions AI™ for questions about strategic AI systems, Clarity Pro™, Constance™, or Executive AI Strategy. Reach Tabitha Rector directly.",
+    description: "Contact Kingdom Solutions AI™ by Tabitha Rector about business strategy, Clarity Pro™, the 30-Day Business Fast Track™, or human-authorized AI support.",
     canonicalUrl: `${BASE_URL}/contact`,
     ogTitle: "Contact Kingdom Solutions AI™ — Reach Tabitha Rector",
-    ogDescription: "Contact Kingdom Solutions AI™ for questions about strategic AI systems, Clarity Pro™, Constance™, or Executive AI Strategy. Reach Tabitha Rector directly.",
+    ogDescription: "Contact Kingdom Solutions AI™ by Tabitha Rector about business strategy, Clarity Pro™, the 30-Day Business Fast Track™, or human-authorized AI support.",
     ogUrl: `${BASE_URL}/contact`,
     ogType: "website",
     ogImage: `${BASE_URL}/assets/ksai-logo-transparent-400_82fa1f46.png`,
@@ -144,10 +145,10 @@ const ROUTE_METADATA: Record<string, PageMeta> = {
   },
   "/strategy-call": {
     title: "Book a Strategy Call — Kingdom Solutions AI™",
-    description: "Book a private strategy call with Tabitha Rector to assess your leadership context, operational pressure, and AI systems needs. The first step toward clarity and capacity.",
+    description: "Book a strategy call with Tabitha Rector to identify your business's next right step, clarify your offer, and see whether the 30-Day Business Fast Track™ is a fit.",
     canonicalUrl: `${BASE_URL}/strategy-call`,
     ogTitle: "Book a Strategy Call — Kingdom Solutions AI™",
-    ogDescription: "Book a private strategy call with Tabitha Rector to assess your leadership context, operational pressure, and AI systems needs.",
+    ogDescription: "Book a call with Tabitha Rector to clarify your next business step and see whether the 30-Day Business Fast Track™ is a fit.",
     ogUrl: `${BASE_URL}/strategy-call`,
     ogType: "website",
     ogImage: `${BASE_URL}/assets/ksai-logo-transparent-400_82fa1f46.png`,
@@ -199,17 +200,17 @@ const ROUTE_METADATA: Record<string, PageMeta> = {
     twitterImage: `${BASE_URL}/assets/ksai-logo-transparent-400_82fa1f46.png`,
   },
   "/handbook": {
-    title: "Free Handbook — Legal, Tax & Compliance Basics for New Entrepreneurs | Kingdom Solutions AI™",
-    description: "Get the free Kingdom Solutions AI™ Handbook — a clear, practical guide to the legal, tax, and compliance basics every new business owner needs to get right from day one.",
+    title: "What Every New Entrepreneur Needs to Know | Kingdom Solutions AI™",
+    description: "A practical guide to building a business in the right order. Chapter One is included with registration for the What Every New Entrepreneur Needs to Know webinar.",
     canonicalUrl: `${BASE_URL}/handbook`,
-    ogTitle: "Free Handbook — Legal, Tax & Compliance Basics for New Entrepreneurs",
-    ogDescription: "A clear, practical guide to the legal, tax, and compliance basics every new business owner needs to get right from day one.",
+    ogTitle: "What Every New Entrepreneur Needs to Know | Kingdom Solutions AI™",
+    ogDescription: "A practical guide to building a business in the right order. Chapter One is included with registration for the What Every New Entrepreneur Needs to Know webinar.",
     ogUrl: `${BASE_URL}/handbook`,
     ogType: "website",
     ogImage: `${BASE_URL}/assets/ksai-logo-transparent-400_82fa1f46.png`,
     twitterCard: "summary_large_image",
-    twitterTitle: "Free Handbook — Legal, Tax & Compliance Basics for New Entrepreneurs",
-    twitterDescription: "A clear, practical guide to the legal, tax, and compliance basics every new business owner needs to get right from day one.",
+    twitterTitle: "What Every New Entrepreneur Needs to Know | Kingdom Solutions AI™",
+    twitterDescription: "The complete book is a paid resource. Webinar registrants receive Chapter One as a gift.",
     twitterImage: `${BASE_URL}/assets/ksai-logo-transparent-400_82fa1f46.png`,
   },
   "/entrepreneur-assessment": {
@@ -257,6 +258,7 @@ const ROUTE_METADATA: Record<string, PageMeta> = {
     twitterTitle: "Victor's Circle Leadership Academy™ — Christ-Centered Leadership for Women",
     twitterDescription: "A Christ-centered leadership formation program for Christian women entrepreneurs. Now accepting applications for the February 2027 cohort.",
     twitterImage: `${BASE_URL}/assets/ksai-logo-transparent-400_82fa1f46.png`,
+    noIndex: true,
   },
 };
 /** The set of known public routes that should return HTTP 200 */
@@ -363,6 +365,10 @@ export function injectSeoMetadata(html: string, requestUrl: string): string {
     /<meta name="twitter:description" content="[^"]*" \/>/,
     `<meta name="twitter:description" content="${twDesc}" />\n    <meta name="twitter:image" content="${twImage}" />`
   );
+
+  if (meta.noIndex) {
+    html = html.replace(/<\/head>/, `    <meta name="robots" content="noindex, follow" />\n  </head>`);
+  }
 
   // Add canonical link (inject before </head>)
   html = html.replace(

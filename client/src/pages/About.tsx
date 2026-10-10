@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 export default function About() {
   usePageMeta({
     title: "About Tabitha Rector — Kingdom Solutions AI™",
-    description: "30 years of leadership, management, and coaching. Tabitha Rector founded Kingdom Solutions AI™ to help high-capacity leaders build strategic AI systems for clarity, capacity, and sustainable growth.",
+    description: "Tabitha Rector is a Business & Entrepreneurship Strategist with 30+ years of leadership and coaching experience, helping experienced women entrepreneurs turn expertise into a clear offer and build in the right order.",
     canonicalUrl: "https://kingdomsolutionsai.com/about",
     ogImage: "https://kingdomsolutionsai.com/assets/tabitha-headshot_fea7ebce.webp",
   });
@@ -25,17 +25,17 @@ export default function About() {
               </h1>
               <div className="w-12 h-px bg-gold/50 mb-6" />
               <p className="font-body text-lg text-charcoal-light leading-relaxed mb-4">
-                Executive AI Strategist · Leadership Coach · Certified AI Strategy Consultant
+                Business & Entrepreneurship Strategist · Professional Certified Coach (PCC)
               </p>
               <p className="font-body text-base text-charcoal-light leading-relaxed">
-                Founder of Kingdom Solutions AI™ and Victor's Circle Leadership Academy
+                Founder of Kingdom Solutions AI™
               </p>
             </div>
             <div className="lg:col-span-5 lg:col-start-8 fade-up">
               <div className="aspect-[3/4] overflow-hidden">
                 <img
                   src="/assets/tabitha-headshot_fea7ebce.webp"
-                  alt="Executive workspace"
+                  alt="Tabitha Rector, founder of Kingdom Solutions AI™"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -58,10 +58,10 @@ export default function About() {
                 With over 30 years of experience in leadership, management, and coaching, I have seen firsthand how easily high-capacity women slip into cycles of depletion — even while serving with excellence.
               </p>
               <p>
-                After walking through my own season of burnout and restoration, I began studying the brain-body connection, nervous system resilience, and the spiritual roots of clarity and peace. That journey shaped my book, <em className="text-charcoal">Reflect Restore Revive: Overcoming Anxiety Through the Power of Faith</em>, and ultimately led to the creation of Victor's Circle Leadership Academy.
+                After walking through my own season of burnout and restoration, I wrote <em className="text-charcoal">Reflect Restore Revive: Overcoming Anxiety Through the Power of Faith</em>. That experience also shaped how I help women build businesses that support their lives rather than consume them.
               </p>
               <p>
-                Today, I am especially passionate about helping overwhelmed leaders use AI intentionally — not to replace human connection, but to create more space for what matters most. Through AI-powered systems, executive support tools, and leadership workflows, I help leaders reduce decision fatigue, simplify operations, and build more time freedom without sacrificing their wellbeing or calling.
+                Today, I help experienced women entrepreneurs turn their expertise into a clear, credible offer and build their business in the right order. When the business is ready for it, human-authorized AI can create capacity without taking authority away from the woman leading it.
               </p>
               <p className="font-medium text-charcoal italic">
                 Because leadership is not just about what you do. It is about who you are while you are doing it.

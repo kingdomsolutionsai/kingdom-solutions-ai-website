@@ -13,6 +13,25 @@ import { CLIENT_STORIES } from "@/lib/clientStories";
  * always match.
  */
 
+const FAQS = [
+  {
+    question: "Who does Kingdom Solutions AI™ help?",
+    answer: "Kingdom Solutions AI™ helps experienced women entrepreneurs turn their expertise into a clear offer and build a credible business in the right order.",
+  },
+  {
+    question: "What are the four business gaps?",
+    answer: "The Direction, Offer, Audience, and Structure gaps describe common places where a business can stall. The Entrepreneur Next Step™ Assessment helps identify which gap to address first.",
+  },
+  {
+    question: "What happens in the 30-Day Business Fast Track™?",
+    answer: "It is a guided 30-day experience to shape one clear offer, a message buyers understand, and a revenue path for the next 90 days. Enrollment begins with a Strategy Call.",
+  },
+  {
+    question: "When should a business add AI?",
+    answer: "Start by clarifying the business and its process. Add human-authorized AI when it supports a clear business need, with the business owner remaining in control of decisions.",
+  },
+];
+
 const GAP_SIGNS: Record<Gap, string> = {
   Direction: "You have ideas and skills, but no settled answer to who you serve and what you sell first.",
   Offer: "People like what you do, yet the value and the decision to buy are not clear enough to say yes.",
@@ -29,9 +48,9 @@ const secondaryLink =
 
 export default function Home() {
   usePageMeta({
-    title: "Kingdom Solutions AI™ | Find the Gap, Close the Gap, Build What's Next",
+    title: "Business Strategy for Women Entrepreneurs | Kingdom Solutions AI™",
     description:
-      "Kingdom Solutions AI™ helps women entrepreneurs find the gap holding their business back, close it in the right order, and build what's next with human-authorized AI that keeps them in charge. Led by Tabitha Rector, PCC.",
+      "Kingdom Solutions AI™ by Tabitha Rector helps experienced women entrepreneurs turn expertise into a clear offer, build their business in the right order, and add human-authorized AI where it creates capacity.",
     canonicalUrl: "https://kingdomsolutionsai.com/",
     ogImage: "https://kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
@@ -50,13 +69,13 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <div className="lg:col-span-8 lg:col-start-1">
               <div className="w-16 h-[2px] bg-gold mb-8 fade-up" />
-              <p className="editorial-label mb-6 fade-up">For women building a business that lasts</p>
+              <p className="editorial-label mb-6 fade-up">For experienced women entrepreneurs building a business that lasts</p>
               <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-[4.25rem] font-medium text-charcoal leading-[1.1] mb-8 fade-up">
-                Build your business with clarity, capacity, and{" "}
-                <em className="text-gold italic">intelligent support.</em>
+                Turn your expertise into a clear offer. Build your business in the 
+                <em className="text-gold italic">right order.</em>
               </h1>
               <p className="font-body text-lg lg:text-xl text-charcoal-light leading-[1.7] max-w-2xl mb-12 fade-up">
-                Most stalled businesses are not short on effort. They are working on the wrong gap. Kingdom Solutions AI™ helps women entrepreneurs find the gap holding them back, close it in the right order, and build what's next with human-authorized AI that keeps you in charge.
+                Kingdom Solutions AI™ helps experienced women entrepreneurs turn what they know into a clear offer, build the business in the right order, and use human-authorized AI when it supports the work. Tabitha Rector brings more than 30 years of leadership, business, and coaching experience.
               </p>
               <div className="flex flex-col sm:flex-row items-start gap-5 fade-up">
                 <Link href="/entrepreneur-assessment" className={primaryBtn}>
@@ -228,58 +247,38 @@ export default function Home() {
         <div className="gold-hairline" />
       </div>
 
-      {/* Victor's Circle Leadership Academy */}
-      <section className="py-28 lg:py-36 bg-cream-dark/40">
+      {/* Questions prospects ask */}
+      <section className="py-24 lg:py-32 bg-cream-dark/40">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-          <div className="border-2 border-gold/40 bg-cream px-8 py-14 lg:px-16 lg:py-20 relative fade-up">
-            <span className="absolute -top-3 left-8 lg:left-16 bg-gold text-charcoal font-body text-[0.65rem] font-semibold tracking-[0.14em] uppercase px-4 py-1.5">
-              Premier Program
-            </span>
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-              <div className="lg:col-span-7">
-                <p className="font-body text-[0.7rem] tracking-[0.16em] uppercase text-gold font-medium mb-6">
-                  For Christian Women in Leadership
-                </p>
-                <h2 className="font-display text-3xl sm:text-4xl lg:text-[2.5rem] font-medium text-charcoal leading-[1.15] mb-4">
-                  Victor's Circle Leadership Academy™
-                </h2>
-                <p className="font-display italic text-lg text-gold mb-6">
-                  Grow in wisdom. Lead with peace. Rise with strength.
-                </p>
-                <p className="font-body text-lg text-charcoal-light leading-relaxed mb-6">
-                  A Christ-centered formation space for women who carry influence, responsibility, and the weight of leadership at home, at work, in ministry, and in their communities.
-                </p>
-                <p className="font-body text-base text-charcoal-light/80 leading-relaxed mb-10">
-                  A 90-day formation journey that quiets anxiety, restores clarity, and equips you to lead with steady confidence. Now accepting applications for the February 2027 cohort.
-                </p>
-                <div className="flex flex-col sm:flex-row items-start gap-5">
-                  <Link href="/victors-circle-leadership-academy" className={primaryBtn}>
-                    Explore Victor's Circle <ArrowRight size={15} />
-                  </Link>
-                  <Link href="/victors-circle-leadership-academy#apply" className={secondaryLink}>
-                    Apply for the February Cohort <ArrowRight size={14} />
-                  </Link>
-                </div>
-              </div>
-              <div className="lg:col-span-4 lg:col-start-9">
-                <div className="space-y-8 border-l border-gold/30 pl-8">
-                  <div>
-                    <p className="font-body text-[0.65rem] tracking-[0.16em] uppercase text-gold/70 mb-1.5">Who It's For</p>
-                    <p className="font-body text-sm text-charcoal-light">Christian women carrying influence and leadership</p>
-                  </div>
-                  <div>
-                    <p className="font-body text-[0.65rem] tracking-[0.16em] uppercase text-gold/70 mb-1.5">Format</p>
-                    <p className="font-body text-sm text-charcoal-light">90-day cohort, application required</p>
-                  </div>
-                  <div>
-                    <p className="font-body text-[0.65rem] tracking-[0.16em] uppercase text-gold/70 mb-1.5">Next Cohort</p>
-                    <p className="font-body text-sm text-charcoal-light">Now enrolling for February 2027</p>
-                  </div>
-                </div>
-              </div>
+          <div className="max-w-3xl mx-auto">
+            <p className="editorial-label mb-5 text-center">Questions, Clearly Answered</p>
+            <h2 className="font-display text-3xl sm:text-4xl font-medium text-charcoal text-center mb-12">
+              Start with clarity. Add systems in the right order.
+            </h2>
+            <div className="space-y-8">
+              {FAQS.map((item) => (
+                <article key={item.question} className="border-b border-taupe/70 pb-7">
+                  <h3 className="font-display text-xl font-medium text-charcoal mb-3">{item.question}</h3>
+                  <p className="font-body text-base text-charcoal-light leading-relaxed">{item.answer}</p>
+                </article>
+              ))}
             </div>
           </div>
         </div>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: FAQS.map((item) => ({
+                "@type": "Question",
+                name: item.question,
+                acceptedAnswer: { "@type": "Answer", text: item.answer },
+              })),
+            }),
+          }}
+        />
       </section>
 
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
@@ -397,7 +396,7 @@ export default function Home() {
                 <li className="border-l-2 border-gold/50 pl-5">
                   <p className="font-body text-sm font-semibold text-charcoal mb-1">Author and faith-rooted leader</p>
                   <p className="font-body text-sm text-charcoal-light leading-[1.7]">
-                    Author of the Founder's Handbook and <em>Reflect Restore Revive</em>, with a faith-centered path for women who want it.
+                    Author of <em>What Every New Entrepreneur Needs to Know</em> and <em>Reflect Restore Revive</em>.
                   </p>
                 </li>
               </ul>
