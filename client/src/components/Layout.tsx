@@ -18,7 +18,7 @@ const entrepreneurLinks: NavLink[] = [
     ? [{ href: WEBINAR_URL, label: "The Webinar", note: `Next live session: ${siteCta.webinarDate}`, external: true }]
     : []),
   { href: "/business-fast-track", label: "30-Day Business Fast Track™" },
-  { href: "/handbook", label: "Handbook (Free)" },
+  { href: "/handbook", label: "Book + Webinar" },
 ];
 // Offers, ordered as the ladder.
 const serviceLinks: NavLink[] = [
@@ -27,14 +27,9 @@ const serviceLinks: NavLink[] = [
   { href: "/constance", label: "Constance™" },
   { href: "/executive-ai-strategy", label: "Executive AI Strategy" },
 ];
-// Faith-based leadership path, kept separate so it never competes with the business offers.
-const faithLinks: NavLink[] = [
-  { href: ACADEMY_PATH, label: "Victor's Circle Leadership Academy™", note: "90-day cohort · February 2027" },
-];
 const navGroups: NavGroup[] = [
   { id: "entrepreneurs", label: "For Entrepreneurs", links: entrepreneurLinks },
   { id: "services", label: "Services", links: serviceLinks },
-  { id: "faith", label: "Faith & Leadership", links: faithLinks },
 ];
 // Top-level nav after the dropdowns.
 const simpleLinks = [
@@ -273,15 +268,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </div>
               </div>
               <p className="font-body text-sm text-warm-gray leading-relaxed max-w-xs">
-                Helping women entrepreneurs find the gap, close the right gap, and build what's next, with human-authorized AI that keeps you in charge.
+                Helping experienced women entrepreneurs turn expertise into a clear offer, build in the right order, and add human-authorized AI where it creates capacity.
               </p>
             </div>
-            {/* For Entrepreneurs + Faith & Leadership */}
+            {/* For Entrepreneurs */}
             <div>
               <h4 className="font-body text-[0.65rem] font-medium tracking-[0.18em] uppercase text-gold mb-7">
                 For Entrepreneurs
               </h4>
-              <div className="flex flex-col gap-3.5 mb-10">
+              <div className="flex flex-col gap-3.5">
                 <Link href="/entrepreneur-assessment" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
                   Find Your Starting Point
                 </Link>
@@ -294,15 +289,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   30-Day Business Fast Track™
                 </Link>
                 <Link href="/handbook" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
-                  Handbook (Free)
-                </Link>
-              </div>
-              <h4 className="font-body text-[0.65rem] font-medium tracking-[0.18em] uppercase text-gold mb-7">
-                Faith &amp; Leadership
-              </h4>
-              <div className="flex flex-col gap-3.5">
-                <Link href="/victors-circle-leadership-academy" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
-                  Victor's Circle Leadership Academy™
+                  Book + Webinar
                 </Link>
               </div>
             </div>
@@ -384,7 +371,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               © 2026 Kingdom Solutions AI™. All rights reserved.
             </p>
             <p className="font-body text-xs text-warm-gray/70">
-              Founded by Tabitha Rector · Executive AI Strategist
+              Founded by Tabitha Rector · Business & Entrepreneurship Strategist
             </p>
           </div>
         </div>
