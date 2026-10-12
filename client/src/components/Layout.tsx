@@ -20,6 +20,7 @@ const entrepreneurLinks: NavLink[] = [
   { href: "/business-fast-track", label: "30-Day Business Fast Track™" },
   { href: "/clarity-pro", label: "Clarity Pro™" },
   { href: "/handbook", label: "Free Right-Order Handbook" },
+  { href: "https://payhip.com/KingdomSolutionsAIResourceShop", label: "Resource Shop", external: true },
 ];
 // Human-authorized AI offers, kept distinct from the business-building path.
 const aiLinks: NavLink[] = [
@@ -336,6 +337,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <Link href="/handbook" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
                   Free Right-Order Handbook
                 </Link>
+                <a href="https://payhip.com/KingdomSolutionsAIResourceShop" target="_blank" rel="noopener noreferrer" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
+                  Resource Shop
+                </a>
               </div>
               <h4 className="font-body text-[0.65rem] font-medium tracking-[0.18em] uppercase text-gold mb-7">
                 Faith &amp; Leadership
