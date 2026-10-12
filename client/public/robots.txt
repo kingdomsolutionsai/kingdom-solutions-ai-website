@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kingdomsolutionsai.com/sitemap.xml
+Sitemap: https://www.kingdomsolutionsai.com/sitemap.xml

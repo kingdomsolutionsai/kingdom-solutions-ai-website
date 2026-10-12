@@ -32,8 +32,8 @@ export default function Home() {
     title: "Kingdom Solutions AI™ by Tabitha Rector | Build Your Business in the Right Order",
     description:
       "Kingdom Solutions AI™ by Tabitha Rector helps experienced women turn their expertise into a clear business, build it in the right order, and grow with human-authorized AI support.",
-    canonicalUrl: "https://kingdomsolutionsai.com/",
-    ogImage: "https://kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
+    canonicalUrl: "https://www.kingdomsolutionsai.com/",
+    ogImage: "https://www.kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
   const revealRef = useScrollReveal();
   const quarter = nextQuarterLabel();

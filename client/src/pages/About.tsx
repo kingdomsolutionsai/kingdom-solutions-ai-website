@@ -7,8 +7,8 @@ export default function About() {
   usePageMeta({
     title: "About Tabitha Rector — Kingdom Solutions AI™",
     description: "Tabitha Rector is a Business & Entrepreneurship Strategist who helps experienced women turn their expertise into a clear business, build it in the right order, and grow with human-authorized AI support.",
-    canonicalUrl: "https://kingdomsolutionsai.com/about",
-    ogImage: "https://kingdomsolutionsai.com/assets/tabitha-headshot_fea7ebce.webp",
+    canonicalUrl: "https://www.kingdomsolutionsai.com/about",
+    ogImage: "https://www.kingdomsolutionsai.com/assets/tabitha-headshot_fea7ebce.webp",
   });
   const revealRef = useScrollReveal();
 
