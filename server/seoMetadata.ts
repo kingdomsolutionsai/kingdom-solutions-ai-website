@@ -8,7 +8,7 @@
  * The client-side usePageMeta hook still runs for SPA navigation.
  */
 
-const BASE_URL = "https://kingdomsolutionsai.com";
+const BASE_URL = "https://www.kingdomsolutionsai.com";
 
 interface PageMeta {
   title: string;

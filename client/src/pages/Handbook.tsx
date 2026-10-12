@@ -13,8 +13,8 @@ export default function Handbook() {
     title: "The Right-Order Business Starter Handbook™ | Kingdom Solutions AI™",
     description:
       "Get the free Right-Order Business Starter Handbook™—a practical guide to building a clear, compliant, revenue-ready business without the overwhelm.",
-    canonicalUrl: "https://kingdomsolutionsai.com/handbook",
-    ogImage: "https://kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
+    canonicalUrl: "https://www.kingdomsolutionsai.com/handbook",
+    ogImage: "https://www.kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
 
   const revealRef = useScrollReveal();
