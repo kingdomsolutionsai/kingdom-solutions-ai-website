@@ -10,11 +10,11 @@ const WEBINAR_URL = "https://whatentrepreneursneedtoknow.com";
 
 export default function Handbook() {
   usePageMeta({
-    title: "The Entrepreneur Handbook — What Every New Entrepreneur Needs to Know | Kingdom Solutions AI™",
+    title: "The Right-Order Business Starter Handbook™ | Kingdom Solutions AI™",
     description:
-      "A free step-by-step handbook for moving from expertise and vision to a clear, compliant, revenue-ready business — in the right order, without the overwhelm. From Kingdom Solutions AI™.",
-    canonicalUrl: "https://kingdomsolutionsai.com/handbook",
-    ogImage: "https://kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
+      "Get the free Right-Order Business Starter Handbook™—a practical guide to building a clear, compliant, revenue-ready business without the overwhelm.",
+    canonicalUrl: "https://www.kingdomsolutionsai.com/handbook",
+    ogImage: "https://www.kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
 
   const revealRef = useScrollReveal();
@@ -43,18 +43,17 @@ export default function Handbook() {
               alt="Kingdom Solutions AI™"
               className="w-16 h-16 mx-auto mb-6"
             />
-            <p className="editorial-label mb-6">The Emerging Entrepreneur Series</p>
+            <p className="editorial-label mb-6">Free Business-Building Resource</p>
             <h1 className="font-display text-4xl sm:text-5xl lg:text-[3.4rem] font-medium text-charcoal leading-[1.1] mb-6">
-              What Every New Entrepreneur{" "}
-              <em className="text-gold italic">Needs to Know</em>
+              The Right-Order Business{" "}
+              <em className="text-gold italic">Starter Handbook™</em>
             </h1>
             <p className="font-body text-lg lg:text-xl text-charcoal-light leading-relaxed max-w-2xl mx-auto mb-10">
-              A step-by-step handbook for moving from expertise and vision to a
-              clear, compliant, revenue-ready business—in the right order,
-              without the overwhelm.
+              A practical guide to building a clear, compliant, revenue-ready
+              business without the overwhelm.
             </p>
             <a href="#get-handbook" className="btn-gold rounded-sm inline-flex items-center gap-2">
-              Get the Handbook <ArrowRight size={16} />
+              Get the Free Handbook <ArrowRight size={16} />
             </a>
             <p className="font-body text-xs tracking-[0.1em] uppercase text-charcoal-light mt-5">
               Free · delivered to your inbox
@@ -127,7 +126,7 @@ export default function Handbook() {
                 <div className="text-center mb-10">
                   <p className="editorial-label mb-4">Get Your Copy</p>
                   <h2 className="font-display text-3xl font-medium text-charcoal mb-3">
-                    Send me the Handbook
+                    Send me the Right-Order Handbook
                   </h2>
                   <p className="font-body text-base text-charcoal-light">
                     Enter your name and email—your copy arrives in your inbox,
@@ -163,7 +162,7 @@ export default function Handbook() {
                     disabled={submitMutation.isPending}
                     className="w-full btn-gold rounded-sm disabled:opacity-60"
                   >
-                    {submitMutation.isPending ? "Preparing your copy…" : "Send me the Handbook"}
+                    {submitMutation.isPending ? "Preparing your copy…" : "Send me the Right-Order Handbook"}
                   </button>
                   <p className="font-body text-xs text-charcoal-light text-center">
                     Free. No spam. Unsubscribe anytime.
@@ -178,7 +177,7 @@ export default function Handbook() {
                   </svg>
                 </div>
                 <h3 className="font-display text-2xl font-medium text-charcoal mb-3">
-                  Your Handbook is on its way.
+                  Your Right-Order Handbook is on its way.
                 </h3>
                 <p className="font-body text-base text-charcoal-light leading-relaxed mb-8">
                   Check your inbox for your copy—and you can download it right
@@ -190,7 +189,7 @@ export default function Handbook() {
                   rel="noopener noreferrer"
                   className="btn-gold rounded-sm inline-flex items-center gap-2"
                 >
-                  <Download size={16} /> Download the Handbook
+                  <Download size={16} /> Download the Right-Order Handbook
                 </a>
               </div>
             )}
@@ -231,24 +230,24 @@ export default function Handbook() {
               </span>
             </a>
 
-            {/* Entrepreneur Next Step Assessment — activate when built.
-                When /entrepreneur-assessment exists, change this <div> to a
-                <Link to="/entrepreneur-assessment"> and drop the "Coming soon" pill. */}
-            <div className="border border-gold/15 rounded-sm p-8 opacity-90">
+            <Link
+              href="/entrepreneur-assessment"
+              className="group border border-gold/25 rounded-sm p-8 hover:border-gold/60 transition-colors"
+            >
               <p className="font-body text-[0.7rem] tracking-[0.16em] uppercase text-gold mb-4">
-                Coming Soon
+                Free Assessment
               </p>
               <h3 className="font-display text-2xl font-medium text-cream-dark mb-3">
                 The Entrepreneur Next Step™ Assessment
               </h3>
               <p className="font-body text-sm text-warm-gray leading-relaxed mb-6">
-                Not sure what to do next? Find your current stage—and what you
-                can stop worrying about for now—in about three minutes.
+                Not sure what to do next? Find the Direction, Offer, Audience,
+                or Structure gap to close first—in about three minutes.
               </p>
-              <span className="font-body text-sm text-warm-gray/70 inline-flex items-center gap-2">
-                Launching soon
+              <span className="font-body text-sm text-gold inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                Find your gap <ArrowRight size={15} />
               </span>
-            </div>
+            </Link>
           </div>
         </div>
       </section>

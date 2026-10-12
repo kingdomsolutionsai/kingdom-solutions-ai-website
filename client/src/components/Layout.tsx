@@ -10,21 +10,21 @@ type NavLink = { href: string; label: string; note?: string; external?: boolean 
 type NavGroup = { id: string; label: string; links: NavLink[] };
 
 // The site is organized around the decision a visitor is trying to make:
-// build the business (For Entrepreneurs), support a growing business
-// (Services), or pursue Christ-centered leadership formation (Faith & Leadership).
+// build the business, add human-authorized AI support once the foundation is
+// ready, or pursue Christ-centered leadership formation.
 const entrepreneurLinks: NavLink[] = [
   { href: "/entrepreneur-assessment", label: "Find Your Starting Point", note: "Entrepreneur Assessment" },
   ...(siteCta.webinarDate
     ? [{ href: WEBINAR_URL, label: "The Webinar", note: `Next live session: ${siteCta.webinarDate}`, external: true }]
     : []),
   { href: "/business-fast-track", label: "30-Day Business Fast Track™" },
-  { href: "/handbook", label: "Handbook (Free)" },
+  { href: "/clarity-pro", label: "Clarity Pro™" },
+  { href: "/handbook", label: "Free Right-Order Handbook" },
   { href: "https://payhip.com/KingdomSolutionsAIResourceShop", label: "Resource Shop", external: true },
 ];
-// Offers, ordered as the ladder.
-const serviceLinks: NavLink[] = [
+// Human-authorized AI offers, kept distinct from the business-building path.
+const aiLinks: NavLink[] = [
   { href: "/capacity-leak-audit", label: "Capacity Leak Audit™" },
-  { href: "/clarity-pro", label: "Clarity Pro™" },
   { href: "/constance", label: "Constance™" },
   { href: "/executive-ai-strategy", label: "Executive AI Strategy" },
 ];
@@ -33,8 +33,8 @@ const faithLinks: NavLink[] = [
   { href: ACADEMY_PATH, label: "Victor's Circle Leadership Academy™", note: "90-day cohort · February 2027" },
 ];
 const navGroups: NavGroup[] = [
-  { id: "entrepreneurs", label: "For Entrepreneurs", links: entrepreneurLinks },
-  { id: "services", label: "Services", links: serviceLinks },
+  { id: "entrepreneurs", label: "Build Your Business", links: entrepreneurLinks },
+  { id: "ai", label: "Human-Authorized AI", links: aiLinks },
   { id: "faith", label: "Faith & Leadership", links: faithLinks },
 ];
 // Top-level nav after the dropdowns.
@@ -64,6 +64,43 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     setMobileOpen(false);
     setOpenGroup(null);
     window.scrollTo(0, 0);
+  }, [location]);
+
+  // Keep every route aligned with the host that serves the site. Some legacy
+  // pages still supply the pre-redirect hostname through their local metadata
+  // effect; normalizing head tags here prevents conflicting canonical signals
+  // after client-side navigation or hydration.
+  useEffect(() => {
+    const canonicalHost = "https://www.kingdomsolutionsai.com";
+    const legacyHost = "https://kingdomsolutionsai.com";
+
+    const normalizeSeoUrls = () => {
+      const canonical = document.querySelector('link[rel="canonical"]');
+      const canonicalHref = canonical?.getAttribute("href");
+      if (canonicalHref?.startsWith(legacyHost)) {
+        canonical?.setAttribute("href", canonicalHref.replace(legacyHost, canonicalHost));
+      }
+
+      document
+        .querySelectorAll('meta[property="og:url"], meta[property="og:image"], meta[name="twitter:image"]')
+        .forEach((element) => {
+          const content = element.getAttribute("content");
+          if (content?.startsWith(legacyHost)) {
+            element.setAttribute("content", content.replace(legacyHost, canonicalHost));
+          }
+        });
+    };
+
+    normalizeSeoUrls();
+    const observer = new MutationObserver(normalizeSeoUrls);
+    observer.observe(document.head, {
+      attributes: true,
+      attributeFilter: ["href", "content"],
+      childList: true,
+      subtree: true,
+    });
+
+    return () => observer.disconnect();
   }, [location]);
 
   // Close any open desktop dropdown when clicking outside the menu.
@@ -274,13 +311,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </div>
               </div>
               <p className="font-body text-sm text-warm-gray leading-relaxed max-w-xs">
-                Helping women entrepreneurs find the gap, close the right gap, and build what's next, with human-authorized AI that keeps you in charge.
+                Helping experienced women turn their expertise into a clear business, build it in the right order, and grow with human-authorized AI support that keeps you in charge.
               </p>
             </div>
-            {/* For Entrepreneurs + Faith & Leadership */}
+            {/* Build Your Business + Faith & Leadership */}
             <div>
               <h4 className="font-body text-[0.65rem] font-medium tracking-[0.18em] uppercase text-gold mb-7">
-                For Entrepreneurs
+                Build Your Business
               </h4>
               <div className="flex flex-col gap-3.5 mb-10">
                 <Link href="/entrepreneur-assessment" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
@@ -294,8 +331,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <Link href="/business-fast-track" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
                   30-Day Business Fast Track™
                 </Link>
+                <Link href="/clarity-pro" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
+                  Clarity Pro™
+                </Link>
                 <Link href="/handbook" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
-                  Handbook (Free)
+                  Free Right-Order Handbook
                 </Link>
                 <a href="https://payhip.com/KingdomSolutionsAIResourceShop" target="_blank" rel="noopener noreferrer" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
                   Resource Shop
@@ -310,17 +350,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </Link>
               </div>
             </div>
-            {/* Services */}
+            {/* Human-Authorized AI */}
             <div>
               <h4 className="font-body text-[0.65rem] font-medium tracking-[0.18em] uppercase text-gold mb-7">
-                Services
+                Human-Authorized AI
               </h4>
               <div className="flex flex-col gap-3.5">
                 <Link href="/capacity-leak-audit" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
                   Capacity Leak Audit™
-                </Link>
-                <Link href="/clarity-pro" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
-                  Clarity Pro™
                 </Link>
                 <Link href="/constance" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
                   Constance™ AI Chief of Staff
@@ -388,7 +425,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               © 2026 Kingdom Solutions AI™. All rights reserved.
             </p>
             <p className="font-body text-xs text-warm-gray/70">
-              Founded by Tabitha Rector · Executive AI Strategist
+              Kingdom Solutions AI™ by Tabitha Rector · Business &amp; Entrepreneurship Strategist
             </p>
           </div>
         </div>

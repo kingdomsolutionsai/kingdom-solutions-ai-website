@@ -30,11 +30,11 @@ const secondaryLink =
 
 export default function Home() {
   usePageMeta({
-    title: "Kingdom Solutions AI™ | Find the Gap, Close the Gap, Build What's Next",
+    title: "Kingdom Solutions AI™ by Tabitha Rector | Build Your Business in the Right Order",
     description:
-      "Kingdom Solutions AI™ helps women entrepreneurs find the gap holding their business back, close it in the right order, and build what's next with human-authorized AI that keeps them in charge. Led by Tabitha Rector, PCC.",
-    canonicalUrl: "https://kingdomsolutionsai.com/",
-    ogImage: "https://kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
+      "Kingdom Solutions AI™ by Tabitha Rector helps experienced women turn their expertise into a clear business, build it in the right order, and grow with human-authorized AI support.",
+    canonicalUrl: "https://www.kingdomsolutionsai.com/",
+    ogImage: "https://www.kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
   const revealRef = useScrollReveal();
   const quarter = nextQuarterLabel();

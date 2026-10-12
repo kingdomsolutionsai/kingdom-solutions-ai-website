@@ -36,7 +36,7 @@ export default function Terms() {
               <div>
                 <h2 className="font-display text-xl font-medium text-charcoal mb-4">1. About Kingdom Solutions AI™</h2>
                 <p>
-                  Kingdom Solutions AI™ provides AI-supported strategy, clarity systems, capacity diagnostics, content direction, operational support planning, guided business programs, leadership programs, digital products, and advisory services for coaches, founders, consultants, executives, and high-capacity leaders.
+                  Kingdom Solutions AI™ helps experienced women turn their expertise into a clear business, build it in the right order, and grow without being consumed by it. Our work includes business strategy, clarity systems, capacity diagnostics, guided programs, digital products, and human-authorized AI support.
                 </p>
                 <p className="mt-4">
                   Our services are designed to help clients clarify their business, protect capacity, improve operational visibility, and develop strategic AI-supported systems.
