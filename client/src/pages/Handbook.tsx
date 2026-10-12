@@ -231,24 +231,24 @@ export default function Handbook() {
               </span>
             </a>
 
-            {/* Entrepreneur Next Step Assessment — activate when built.
-                When /entrepreneur-assessment exists, change this <div> to a
-                <Link to="/entrepreneur-assessment"> and drop the "Coming soon" pill. */}
-            <div className="border border-gold/15 rounded-sm p-8 opacity-90">
+            <Link
+              href="/entrepreneur-assessment"
+              className="group border border-gold/25 rounded-sm p-8 hover:border-gold/60 transition-colors"
+            >
               <p className="font-body text-[0.7rem] tracking-[0.16em] uppercase text-gold mb-4">
-                Coming Soon
+                Free Assessment
               </p>
               <h3 className="font-display text-2xl font-medium text-cream-dark mb-3">
                 The Entrepreneur Next Step™ Assessment
               </h3>
               <p className="font-body text-sm text-warm-gray leading-relaxed mb-6">
-                Not sure what to do next? Find your current stage—and what you
-                can stop worrying about for now—in about three minutes.
+                Not sure what to do next? Find the Direction, Offer, Audience,
+                or Structure gap to close first—in about three minutes.
               </p>
-              <span className="font-body text-sm text-warm-gray/70 inline-flex items-center gap-2">
-                Launching soon
+              <span className="font-body text-sm text-gold inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                Find your gap <ArrowRight size={15} />
               </span>
-            </div>
+            </Link>
           </div>
         </div>
       </section>
