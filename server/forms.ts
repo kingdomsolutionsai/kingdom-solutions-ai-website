@@ -168,15 +168,15 @@ export const formsRouter = router({
       // 2. Send the visitor their download link.
       const participantNotified = await sendBrevoEmail({
         to: { email: input.email, name: input.firstName },
-        subject: "Your Entrepreneur Handbook is ready",
+        subject: "Your Right-Order Business Starter Handbook is ready",
         htmlContent: `
           <div style="font-family: Georgia, serif; color: #10100f; line-height: 1.7; max-width: 560px; margin: 0 auto;">
             <p style="font-size: 18px;">Hi ${input.firstName},</p>
-            <p>Thank you for requesting <em>What Every New Entrepreneur Needs to Know</em>. Here is your copy:</p>
+            <p>Thank you for requesting <em>The Right-Order Business Starter Handbook™</em>. Here is your copy:</p>
             <p style="text-align: center; margin: 32px 0;">
               <a href="${HANDBOOK_URL}"
                  style="display: inline-block; background: #cda34b; color: #10100f; font-family: Arial, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 15px 28px; border-radius: 6px;">
-                Download the Handbook
+                Download the Right-Order Handbook
               </a>
             </p>
             <p>This handbook walks you through moving from expertise and vision to a clear, compliant, revenue-ready business — in the right order, without the overwhelm.</p>
@@ -198,7 +198,7 @@ export const formsRouter = router({
         email: input.email,
         source: "Handbook",
         stage: "New Lead",
-        notes: "Requested the free Entrepreneur Handbook via the /handbook landing page.",
+        notes: "Requested the free Right-Order Business Starter Handbook via the /handbook landing page.",
       });
 
             return { success: true, notified, participantNotified, filedWithConstance };
