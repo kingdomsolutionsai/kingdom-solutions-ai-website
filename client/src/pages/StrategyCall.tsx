@@ -7,7 +7,7 @@ import { useEffect } from "react";
 export default function StrategyCall() {
   usePageMeta({
     title: "Book a Strategy Call — Kingdom Solutions AI™",
-    description: "Book a private strategy call with Tabitha Rector to assess your leadership context, operational pressure, and AI systems needs. The first step toward clarity and capacity.",
+    description: "Book a private strategy call with Tabitha Rector to identify whether your next step is business clarity, guided implementation, or human-authorized AI support.",
     canonicalUrl: "https://kingdomsolutionsai.com/strategy-call",
     ogImage: "https://kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
