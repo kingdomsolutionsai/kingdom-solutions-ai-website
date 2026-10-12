@@ -87,7 +87,7 @@ export default function ClarityPro() {
         <div className="hero-glow hero-glow-one" aria-hidden="true" />
         <div className="hero-glow hero-glow-two" aria-hidden="true" />
         <div className="hero-copy">
-          <p className="eyebrow">AI BUSINESS CLARITY STRATEGIST</p>
+          <p className="eyebrow">PRIVATE BUSINESS POSITIONING</p>
           <h1>
             Turn your expertise into a business people
             <em> understand.</em>
@@ -463,11 +463,12 @@ export default function ClarityPro() {
             </p>
           </details>
           <details>
-            <summary>Is this only for brand-new coaches?</summary>
+            <summary>Is this only for women starting from scratch?</summary>
             <p>
-              No. It is built for anyone whose experience is real but whose
-              business language has not caught up yet—new coaches,
-              corporate-to-coach professionals, founders, and consultants alike.
+              No. It is built for experienced women whose expertise is real but
+              whose business language has not caught up yet. You may be turning
+              a career, consulting practice, coaching method, or body of knowledge
+              into a business people can understand and buy.
             </p>
           </details>
           <details>

@@ -24,7 +24,7 @@ export default function ExecutiveAIStrategy() {
                 For Leaders Who Need the Right AI Strategy Before They Add Another Tool.
               </h1>
               <p className="font-body text-lg lg:text-xl text-warm-gray leading-relaxed max-w-xl mb-10">
-                Executive AI Strategy helps high-capacity leaders identify where clarity, capacity, follow-up, and operations are breaking — then design the right AI systems to support the business without adding more noise.
+                Executive AI Strategy helps women with established businesses identify where capacity, follow-up, and operations are breaking — then design the right human-authorized AI systems without adding more noise or surrendering decision-making.
               </p>
               <Link
                 href="/strategy-call"

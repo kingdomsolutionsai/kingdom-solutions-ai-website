@@ -10,20 +10,20 @@ type NavLink = { href: string; label: string; note?: string; external?: boolean 
 type NavGroup = { id: string; label: string; links: NavLink[] };
 
 // The site is organized around the decision a visitor is trying to make:
-// build the business (For Entrepreneurs), support a growing business
-// (Services), or pursue Christ-centered leadership formation (Faith & Leadership).
+// build the business, add human-authorized AI support once the foundation is
+// ready, or pursue Christ-centered leadership formation.
 const entrepreneurLinks: NavLink[] = [
   { href: "/entrepreneur-assessment", label: "Find Your Starting Point", note: "Entrepreneur Assessment" },
   ...(siteCta.webinarDate
     ? [{ href: WEBINAR_URL, label: "The Webinar", note: `Next live session: ${siteCta.webinarDate}`, external: true }]
     : []),
   { href: "/business-fast-track", label: "30-Day Business Fast Track™" },
-  { href: "/handbook", label: "Handbook (Free)" },
-];
-// Offers, ordered as the ladder.
-const serviceLinks: NavLink[] = [
-  { href: "/capacity-leak-audit", label: "Capacity Leak Audit™" },
   { href: "/clarity-pro", label: "Clarity Pro™" },
+  { href: "/handbook", label: "Free Entrepreneur Handbook" },
+];
+// Human-authorized AI offers, kept distinct from the business-building path.
+const aiLinks: NavLink[] = [
+  { href: "/capacity-leak-audit", label: "Capacity Leak Audit™" },
   { href: "/constance", label: "Constance™" },
   { href: "/executive-ai-strategy", label: "Executive AI Strategy" },
 ];
@@ -32,8 +32,8 @@ const faithLinks: NavLink[] = [
   { href: ACADEMY_PATH, label: "Victor's Circle Leadership Academy™", note: "90-day cohort · February 2027" },
 ];
 const navGroups: NavGroup[] = [
-  { id: "entrepreneurs", label: "For Entrepreneurs", links: entrepreneurLinks },
-  { id: "services", label: "Services", links: serviceLinks },
+  { id: "entrepreneurs", label: "Build Your Business", links: entrepreneurLinks },
+  { id: "ai", label: "Human-Authorized AI", links: aiLinks },
   { id: "faith", label: "Faith & Leadership", links: faithLinks },
 ];
 // Top-level nav after the dropdowns.
@@ -273,13 +273,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </div>
               </div>
               <p className="font-body text-sm text-warm-gray leading-relaxed max-w-xs">
-                Helping women entrepreneurs find the gap, close the right gap, and build what's next, with human-authorized AI that keeps you in charge.
+                Helping experienced women turn their expertise into a clear business, build it in the right order, and grow with human-authorized AI support that keeps you in charge.
               </p>
             </div>
-            {/* For Entrepreneurs + Faith & Leadership */}
+            {/* Build Your Business + Faith & Leadership */}
             <div>
               <h4 className="font-body text-[0.65rem] font-medium tracking-[0.18em] uppercase text-gold mb-7">
-                For Entrepreneurs
+                Build Your Business
               </h4>
               <div className="flex flex-col gap-3.5 mb-10">
                 <Link href="/entrepreneur-assessment" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
@@ -293,8 +293,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <Link href="/business-fast-track" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
                   30-Day Business Fast Track™
                 </Link>
+                <Link href="/clarity-pro" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
+                  Clarity Pro™
+                </Link>
                 <Link href="/handbook" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
-                  Handbook (Free)
+                  Free Entrepreneur Handbook
                 </Link>
               </div>
               <h4 className="font-body text-[0.65rem] font-medium tracking-[0.18em] uppercase text-gold mb-7">
@@ -306,17 +309,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </Link>
               </div>
             </div>
-            {/* Services */}
+            {/* Human-Authorized AI */}
             <div>
               <h4 className="font-body text-[0.65rem] font-medium tracking-[0.18em] uppercase text-gold mb-7">
-                Services
+                Human-Authorized AI
               </h4>
               <div className="flex flex-col gap-3.5">
                 <Link href="/capacity-leak-audit" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
                   Capacity Leak Audit™
-                </Link>
-                <Link href="/clarity-pro" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
-                  Clarity Pro™
                 </Link>
                 <Link href="/constance" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
                   Constance™ AI Chief of Staff
@@ -384,7 +384,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               © 2026 Kingdom Solutions AI™. All rights reserved.
             </p>
             <p className="font-body text-xs text-warm-gray/70">
-              Founded by Tabitha Rector · Executive AI Strategist
+              Kingdom Solutions AI™ by Tabitha Rector · Business &amp; Entrepreneurship Strategist
             </p>
           </div>
         </div>

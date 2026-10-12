@@ -24,7 +24,7 @@ export default function Constance() {
     if (metaDesc) {
       metaDesc.setAttribute(
         "content",
-        "Constance is your AI Chief of Staff™, helping leaders protect their capacity, strengthen follow-up, prepare for meetings, and operate with greater clarity and control."
+        "Constance™ is a human-authorized AI Chief of Staff that helps women entrepreneurs protect capacity, strengthen follow-up, prepare for meetings, and stay in control."
       );
     }
 
@@ -42,7 +42,7 @@ export default function Constance() {
     // Open Graph tags
     const ogTags: Record<string, string> = {
       "og:title": "Constance AI Chief of Staff™ | Executive Capacity, Protected",
-      "og:description": "A strategic AI Chief of Staff system designed to help high-capacity leaders protect their time, strengthen execution, and stop carrying the business alone.",
+      "og:description": "Human-authorized AI support that helps women entrepreneurs protect capacity, strengthen execution, and stop carrying every operational thread alone.",
       "og:url": "https://kingdomsolutionsai.com/constance",
       "og:type": "website",
       "og:image": "https://kingdomsolutionsai.com/assets/constance-lion-crown-circle_b1d9c829.png",
@@ -66,7 +66,7 @@ export default function Constance() {
     const twitterTags: Record<string, string> = {
       "twitter:card": "summary_large_image",
       "twitter:title": "Constance AI Chief of Staff™ | Executive Capacity, Protected",
-      "twitter:description": "A strategic AI Chief of Staff system designed to help high-capacity leaders protect their time, strengthen execution, and stop carrying the business alone.",
+      "twitter:description": "Human-authorized AI support that helps women entrepreneurs protect capacity and stop carrying every operational thread alone.",
       "twitter:image": "https://kingdomsolutionsai.com/assets/constance-lion-crown-circle_b1d9c829.png",
     };
 

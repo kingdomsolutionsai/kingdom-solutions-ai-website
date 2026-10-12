@@ -8,7 +8,7 @@ import { trpc } from "@/lib/trpc";
 export default function Contact() {
   usePageMeta({
     title: "Contact Kingdom Solutions AI™ — Reach Tabitha Rector",
-    description: "Contact Kingdom Solutions AI™ for questions about strategic AI systems, Clarity Pro™, Constance™, or Executive AI Strategy. Reach Tabitha Rector directly.",
+    description: "Contact Kingdom Solutions AI™ by Tabitha Rector about business-building support, Clarity Pro™, the 30-Day Business Fast Track™, or human-authorized AI systems.",
     canonicalUrl: "https://kingdomsolutionsai.com/contact",
     ogImage: "https://kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
@@ -101,6 +101,7 @@ export default function Contact() {
                       >
                         <option value="">Select a topic...</option>
                         <option value="capacity-audit">Capacity Leak Audit™</option>
+                        <option value="business-fast-track">30-Day Business Fast Track™</option>
                         <option value="clarity-pro">Clarity Pro™</option>
                         <option value="constance">Constance™ AI Chief of Staff</option>
                         <option value="executive-strategy">Executive AI Strategy</option>
