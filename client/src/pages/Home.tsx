@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { GAPS, GAP_DESCRIPTIONS, type Gap } from "@shared/entrepreneurAssessment";
 import { RIGHT_ORDER_PROMISE, nextQuarterLabel } from "@shared/const";
 import { CLIENT_STORIES } from "@/lib/clientStories";
+import WarmConversationBundle from "@/components/WarmConversationBundle";
 
 /*
  * Home page, organized around the Four Gaps framework:
@@ -227,6 +228,8 @@ export default function Home() {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <div className="gold-hairline" />
       </div>
+
+      <WarmConversationBundle />
 
       {/* Victor's Circle Leadership Academy */}
       <section className="py-28 lg:py-36 bg-cream-dark/40">
