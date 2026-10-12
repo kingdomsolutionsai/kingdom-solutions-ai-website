@@ -19,7 +19,7 @@ const entrepreneurLinks: NavLink[] = [
     : []),
   { href: "/business-fast-track", label: "30-Day Business Fast Track™" },
   { href: "/clarity-pro", label: "Clarity Pro™" },
-  { href: "/handbook", label: "Free Entrepreneur Handbook" },
+  { href: "/handbook", label: "Free Right-Order Handbook" },
 ];
 // Human-authorized AI offers, kept distinct from the business-building path.
 const aiLinks: NavLink[] = [
@@ -297,7 +297,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   Clarity Pro™
                 </Link>
                 <Link href="/handbook" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
-                  Free Entrepreneur Handbook
+                  Free Right-Order Handbook
                 </Link>
               </div>
               <h4 className="font-body text-[0.65rem] font-medium tracking-[0.18em] uppercase text-gold mb-7">
