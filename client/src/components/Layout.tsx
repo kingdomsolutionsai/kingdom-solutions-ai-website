@@ -65,6 +65,43 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     window.scrollTo(0, 0);
   }, [location]);
 
+  // Keep every route aligned with the host that serves the site. Some legacy
+  // pages still supply the pre-redirect hostname through their local metadata
+  // effect; normalizing head tags here prevents conflicting canonical signals
+  // after client-side navigation or hydration.
+  useEffect(() => {
+    const canonicalHost = "https://www.kingdomsolutionsai.com";
+    const legacyHost = "https://kingdomsolutionsai.com";
+
+    const normalizeSeoUrls = () => {
+      const canonical = document.querySelector('link[rel="canonical"]');
+      const canonicalHref = canonical?.getAttribute("href");
+      if (canonicalHref?.startsWith(legacyHost)) {
+        canonical?.setAttribute("href", canonicalHref.replace(legacyHost, canonicalHost));
+      }
+
+      document
+        .querySelectorAll('meta[property="og:url"], meta[property="og:image"], meta[name="twitter:image"]')
+        .forEach((element) => {
+          const content = element.getAttribute("content");
+          if (content?.startsWith(legacyHost)) {
+            element.setAttribute("content", content.replace(legacyHost, canonicalHost));
+          }
+        });
+    };
+
+    normalizeSeoUrls();
+    const observer = new MutationObserver(normalizeSeoUrls);
+    observer.observe(document.head, {
+      attributes: true,
+      attributeFilter: ["href", "content"],
+      childList: true,
+      subtree: true,
+    });
+
+    return () => observer.disconnect();
+  }, [location]);
+
   // Close any open desktop dropdown when clicking outside the menu.
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
