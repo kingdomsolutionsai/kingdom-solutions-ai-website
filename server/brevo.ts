@@ -177,6 +177,7 @@ export function formatAssessmentEmail(data: {
   firstName: string;
   email: string;
   result: AssessmentResult;
+  followupConsentRecord?: string;
 }): string {
   return emailWrapper(`
     <h2>Entrepreneur Next Step™ Assessment Completed</h2>
@@ -187,7 +188,7 @@ export function formatAssessmentEmail(data: {
     <p><strong>Structure focus:</strong> ${escapeHtml(data.result.structureType || "Not the primary gap")}</p>
     <p><strong>Recommended next step:</strong> ${escapeHtml(data.result.recommendation.label)}</p>
     <p><strong>Why:</strong> ${escapeHtml(data.result.recommendation.reason)}</p>
-    <p>Requested a result email. This submission does not create a marketing subscription.</p>
+    <p>${escapeHtml(data.followupConsentRecord || "Requested a result email. This submission does not create a marketing subscription.")}</p>
   `);
 }
 export function formatVictorsCircleOwnerEmail(data: {
@@ -258,3 +259,4 @@ export function formatAssessmentResultsEmail(data: {
     <p style="margin-top: 20px; font-size: 13px; color: #666;">You can <a href="https://kingdomsolutionsai.com/entrepreneur-assessment">retake the assessment</a> as your business evolves.</p>
   `);
 }
+

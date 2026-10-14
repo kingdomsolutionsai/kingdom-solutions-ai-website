@@ -3,6 +3,7 @@ import { usePageMeta } from "@/hooks/usePageMeta";
 import { ArrowRight, RotateCcw } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { trpc } from "@/lib/trpc";
+import { ASSESSMENT_FOLLOWUP_CONSENT } from "@shared/assessmentFollowup";
 import {
   ASSESSMENT_QUESTIONS,
   GAPS,
@@ -35,6 +36,7 @@ export default function EntrepreneurAssessment() {
   const [i, setI] = useState(0);
   const [answers, setAnswers] = useState<AssessmentAnswers>({});
   const [form, setForm] = useState({ firstName: "", email: "" });
+  const [followupOptIn, setFollowupOptIn] = useState(false);
   const [result, setResult] = useState<AssessmentResult | null>(null);
   const submitMutation = trpc.forms.submitAssessmentRequest.useMutation({
     onSuccess: (data) => setResult(data.result),
@@ -60,6 +62,7 @@ export default function EntrepreneurAssessment() {
       firstName: form.firstName.trim(),
       email: form.email.trim(),
       answers,
+      followupOptIn,
     });
   };
 
@@ -69,11 +72,17 @@ export default function EntrepreneurAssessment() {
     setAnswers({});
     setResult(null);
     setForm({ firstName: "", email: "" });
+    setFollowupOptIn(false);
     submitMutation.reset();
   };
 
   return (
     <div ref={revealRef} className="bg-cream min-h-screen">
+      {screen === "landing" && new URLSearchParams(window.location.search).get("followup") === "confirmed" && (
+        <div role="status" className="container pt-28 pb-3 font-body text-sm text-charcoal">
+          Thank you for confirming your assessment follow-up request. The three-email series is planned for Days 2, 5, and 7 after confirmation. You can unsubscribe from any follow-up email.
+        </div>
+      )}
       {screen === "landing" && (
         <>
           <section
@@ -282,13 +291,24 @@ export default function EntrepreneurAssessment() {
                   placeholder="your@email.com"
                 />
               </div>
+              <label className="flex items-start gap-3 font-body text-sm text-charcoal-light leading-relaxed">
+                <input
+                  type="checkbox"
+                  checked={followupOptIn}
+                  onChange={(e) => setFollowupOptIn(e.target.checked)}
+                  className="mt-1 shrink-0 accent-gold"
+                />
+                <span>{ASSESSMENT_FOLLOWUP_CONSENT}</span>
+              </label>
               <button type="submit" className={`${buttonClass} w-full`}>
                 Show My Result <ArrowRight size={16} aria-hidden="true" />
               </button>
               <p className="font-body text-xs text-charcoal-light leading-relaxed">
-                We use these details to deliver your result and recommend an
-                appropriate next step. This form does not subscribe you to a
-                marketing sequence. Read our{" "}
+                Your result appears immediately, and we will email you a copy.
+                Follow-up emails are optional. If you select the checkbox, check
+                your inbox and confirm your email to start the three-email
+                series. This does not sign you up for an ongoing newsletter.
+                Read our{" "}
                 <a href="/privacy" className="underline underline-offset-4">
                   Privacy Policy
                 </a>
@@ -421,6 +441,19 @@ export default function EntrepreneurAssessment() {
                   ? `Your email copy was accepted for delivery to ${form.email}. If it does not arrive, check your spam or promotions folder.`
                   : "We could not confirm delivery of your email copy. Your complete result is above; please save or print this page."}
             </div>
+            {followupOptIn && (
+              <p role="status" className="font-body text-sm text-charcoal-light leading-relaxed mb-8">
+                {submitMutation.isPending
+                  ? "We are requesting your separate follow-up confirmation email."
+                  : submitMutation.data?.followupStatus === "confirmation-requested"
+                    ? "Check your inbox to confirm your follow-up emails. The series starts only after confirmation."
+                    : submitMutation.data?.followupStatus === "already-confirmed"
+                      ? "You have already confirmed an assessment follow-up series. This submission will not restart it."
+                      : submitMutation.data?.followupStatus === "blocked"
+                        ? "Your existing email opt-out has been preserved. We have not started follow-up emails."
+                        : "We could not request your follow-up confirmation email. Your assessment result is still available above."}
+              </p>
+            )}
             <p className="font-body text-sm text-charcoal-light mb-6">
               Clarity before complexity. Capacity before scale. Human authority
               throughout.
@@ -438,3 +471,4 @@ export default function EntrepreneurAssessment() {
     </div>
   );
 }
+
