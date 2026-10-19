@@ -51,24 +51,23 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <div className="lg:col-span-8 lg:col-start-1">
               <div className="w-16 h-[2px] bg-gold mb-8 fade-up" />
-              <p className="editorial-label mb-6 fade-up">For women building a business that lasts</p>
+              <p className="editorial-label mb-6 fade-up">For experienced women ready to build from what they know</p>
               <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-[4.25rem] font-medium text-charcoal leading-[1.1] mb-8 fade-up">
-                Build your business with clarity, capacity, and{" "}
-                <em className="text-gold italic">intelligent support.</em>
+                Turn your expertise into a clear business, built in the right order.
               </h1>
               <p className="font-body text-lg lg:text-xl text-charcoal-light leading-[1.7] max-w-2xl mb-12 fade-up">
-                Most stalled businesses are not short on effort. They are working on the wrong gap. Kingdom Solutions AI™ helps women entrepreneurs find the gap holding them back, close it in the right order, and build what's next with human-authorized AI that keeps you in charge.
+                The 30-Day Business Fast Track™ helps you shape a clear offer, say what you do in a way the right people understand, and build a practical path to clients—without trying to do everything at once. AI can support the work where useful. You stay in charge.
               </p>
               <div className="flex flex-col sm:flex-row items-start gap-5 fade-up">
-                <Link href="/entrepreneur-assessment" className={primaryBtn}>
-                  Find Your Gap <ArrowRight size={15} />
+                <Link href="/business-fast-track" className={primaryBtn}>
+                  Explore the 30-Day Business Fast Track™ <ArrowRight size={15} />
                 </Link>
-                <Link href="/business-fast-track" className={secondaryLink}>
-                  Explore the 30-Day Business Fast Track™ <ArrowRight size={14} />
+                <Link href="/entrepreneur-assessment" className={secondaryLink}>
+                  Not sure where to start? Take the free assessment <ArrowRight size={14} />
                 </Link>
               </div>
               <p className="font-body text-[0.8rem] text-charcoal/50 mt-4 fade-up">
-                Free assessment. 13 questions, about three minutes. Find your gap now and start {quarter} ready.
+                A guided 30-day build for your next stage. Start {quarter} with a clearer plan.
               </p>
             </div>
           </div>
@@ -431,11 +430,11 @@ export default function Home() {
               Close the right gap now, and you walk into {quarter} ready instead of still deciding. Finding your gap takes about three minutes, and your results arrive with one action you can take this week.
             </p>
             <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
-              <Link href="/entrepreneur-assessment" className={primaryBtn}>
-                Find Your Gap <ArrowRight size={15} />
+              <Link href="/business-fast-track" className={primaryBtn}>
+                Explore the 30-Day Business Fast Track™ <ArrowRight size={15} />
               </Link>
-              <Link href="/business-fast-track" className="font-body text-[0.82rem] font-medium text-charcoal/60 hover:text-gold inline-flex items-center gap-2 transition-colors duration-300">
-                Book a Fast Track Strategy Call <ArrowRight size={14} />
+              <Link href="/entrepreneur-assessment" className="font-body text-[0.82rem] font-medium text-charcoal/60 hover:text-gold inline-flex items-center gap-2 transition-colors duration-300">
+                Take the free assessment <ArrowRight size={14} />
               </Link>
             </div>
             <p className="font-body text-[0.82rem] text-charcoal-light leading-[1.7] max-w-xl mx-auto mt-10">
