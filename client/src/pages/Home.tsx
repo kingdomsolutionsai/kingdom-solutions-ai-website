@@ -148,7 +148,7 @@ export default function Home() {
             <div className="lg:col-span-6 lg:col-start-1 fade-up">
               <p className="editorial-label mb-5">Close the Right Gap</p>
               <h2 className="font-display text-3xl sm:text-4xl lg:text-[2.5rem] font-medium text-charcoal leading-[1.15]">
-                Choose the support that closes your gap.
+                The Fast Track is the guided path. Focused support is here when you need it.
               </h2>
             </div>
             <div className="lg:col-span-4 lg:col-start-8 flex items-end fade-up">
@@ -188,7 +188,7 @@ export default function Home() {
               </h3>
               <div className="w-10 h-[1px] bg-gold/50 mb-6" />
               <p className="font-body text-sm text-charcoal-light leading-[1.8] mb-10">
-                Thirty days of guided work to build in the right order: one clear offer, a message people understand, and a revenue path for your next 90 days. Every enrollment starts with a Strategy Call.
+                Thirty days of guided work to build in the right order: one clear offer, a message people understand, and a revenue path for your next 90 days. Every enrollment starts with a Strategy Call. When your offer is clear, the Lead Generator & Qualifier can support prospect research and lead qualification as part of your outreach.
               </p>
               <p className="font-body text-[0.8rem] text-charcoal-light leading-[1.7] border-l-2 border-gold/50 pl-4 -mt-4 mb-10">
                 <span className="font-semibold text-charcoal">The Right Order Promise.</span> {RIGHT_ORDER_PROMISE}
