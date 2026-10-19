@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 export default function About() {
   usePageMeta({
     title: "About Tabitha Rector — Kingdom Solutions AI™",
-    description: "Tabitha Rector is a Business & Entrepreneurship Strategist who helps experienced women turn their expertise into a clear business, build it in the right order, and grow with human-authorized AI support.",
+    description: "Tabitha Rector, Professional Certified Coach (PCC), helps experienced women entrepreneurs turn their expertise into a clear offer and build their business in the right order through the 30-Day Business Fast Track™.",
     canonicalUrl: "https://www.kingdomsolutionsai.com/about",
     ogImage: "https://www.kingdomsolutionsai.com/assets/tabitha-headshot_fea7ebce.webp",
   });
@@ -25,7 +25,7 @@ export default function About() {
               </h1>
               <div className="w-12 h-px bg-gold/50 mb-6" />
               <p className="font-body text-lg text-charcoal-light leading-relaxed mb-4">
-                Business &amp; Entrepreneurship Strategist · Professional Certified Coach
+                Business &amp; Entrepreneurship Strategist · Professional Certified Coach (PCC)
               </p>
               <p className="font-body text-base text-charcoal-light leading-relaxed">
                 Founder of Kingdom Solutions AI™ · Human-authorized AI systems that protect the leader
@@ -55,13 +55,13 @@ export default function About() {
             </div>
             <div className="lg:col-span-6 lg:col-start-6 space-y-6 font-body text-base text-charcoal-light leading-relaxed">
               <p>
-                With more than 30 years of experience across banking, business leadership, management, and coaching, I know that experienced women rarely lack ability. The challenge is translating what they know into a clear business people understand and building it in the right order.
+                For more than 30 years, I’ve guided businesses, their owners, and their teams in sales, marketing, banking, lending, business advisory, and coaching. I’ve coached teams on sales and marketing and helped them create wins by turning priorities into focused action. I’m also a Professional Certified Coach (PCC).
               </p>
               <p>
-                After walking through my own season of burnout and restoration, I began studying the brain-body connection, nervous system resilience, and the spiritual roots of clarity and peace. That journey shaped my book, <em className="text-charcoal">Reflect Restore Revive: Overcoming Anxiety Through the Power of Faith</em>, and ultimately led to the creation of Victor's Circle Leadership Academy.
+                After walking through my own season of burnout and restoration, I began studying the brain-body connection, nervous system resilience, and the spiritual roots of clarity and peace. That journey shaped my book, <em className="text-charcoal">Reflect Restore Revive: Overcoming Anxiety Through the Power of Faith</em>, and deepened my commitment to helping women build and lead with greater clarity and capacity.
               </p>
               <p>
-                Today, I help experienced women clarify who they serve, shape their expertise into a credible offer, and build the foundation their growth can support. When the business is ready, human-authorized AI systems can reduce decision fatigue, strengthen follow-up, and create more room for the work only the founder can do.
+                Today, I help experienced women entrepreneurs turn their expertise into a clear offer, a message people understand, and a practical path to clients. In the 30-Day Business Fast Track™, we work in the right order: identify the gap that matters most, clarify the offer and message, and build a revenue path for the next stage of business. AI can support the work where useful, while you remain the decision-maker.
               </p>
               <p className="font-medium text-charcoal italic">
                 Clarity before complexity. Capacity before scale. Human authority throughout.
@@ -130,14 +130,14 @@ export default function About() {
               Build the right thing next.
             </h2>
             <p className="font-body text-lg text-charcoal-light leading-relaxed mb-10">
-              If you are unsure whether your next step is business clarity or operational support, start with the assessment. It will show you which gap to close first.
+              Not sure which business gap to address first? Start with the Entrepreneur Next Step™ Assessment. If you already know you’re ready for guided implementation, explore the 30-Day Business Fast Track™.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-6">
               <Link href="/entrepreneur-assessment" className="btn-gold rounded-sm inline-flex items-center justify-center gap-2">
                 Find Your Business Gap <ArrowRight size={16} />
               </Link>
               <Link href="/strategy-call" className="font-body text-sm font-medium text-charcoal-light hover:text-gold inline-flex items-center justify-center gap-2 transition-colors duration-200">
-                Book a Strategy Call <ArrowRight size={14} />
+                30-Day Business Fast Track™ Strategy Call <ArrowRight size={14} />
               </Link>
             </div>
 
