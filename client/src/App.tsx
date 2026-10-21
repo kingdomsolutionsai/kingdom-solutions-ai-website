@@ -20,6 +20,7 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import RefundPolicy from "./pages/RefundPolicy";
 import Layout from "./components/Layout";
+import VideoExperience, { VideoExperienceWatch } from "./pages/VideoExperience";
 
 function Router() {
   return (
@@ -34,6 +35,8 @@ function Router() {
         <Route path="/victors-circle-leadership-academy" component={VictorsCircleLeadershipAcademy} />
         <Route path="/entrepreneur-assessment" component={EntrepreneurAssessment} />
         <Route path="/business-fast-track" component={BusinessFastTrack} />
+        <Route path="/video-experience/watch" component={VideoExperienceWatch} />
+        <Route path="/video-experience" component={VideoExperience} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
         <Route path="/strategy-call" component={StrategyCall} />
