@@ -110,6 +110,18 @@ export default function Home() {
         </section>
       )}
 
+      {/* Quiet invitation: on-demand learning remains distinct from Nov 17 live signup. */}
+      <section aria-label="Build in the Right Order video experience" className="bg-[#151517] py-14 sm:py-20">
+        <div className="mx-auto grid max-w-[1400px] gap-7 px-6 lg:grid-cols-[1fr_auto] lg:items-center lg:px-10">
+          <div>
+            <p className="mb-3 text-[0.72rem] uppercase tracking-[0.18em] text-[#c9a358]">Complimentary on-demand learning</p>
+            <h2 className="font-display text-3xl font-medium leading-tight text-[#f6f2e9] sm:text-4xl">Build in the Right Order™</h2>
+            <p className="mt-3 max-w-2xl font-body text-base leading-relaxed text-[#ddd1be]">What if the next step isn't building more? Experience practical teaching from Tabitha Rector's October webinar and identify what your business needs first.</p>
+          </div>
+          <Link href="/video-experience" className="inline-flex items-center justify-center gap-3 border border-[#c9a358] px-7 py-4 font-body text-xs font-medium uppercase tracking-wider text-[#f6f2e9] transition hover:bg-[#c9a358] hover:text-[#151517]">Watch the free experience <ArrowRight size={15}/></Link>
+        </div>
+      </section>
+
       {/* Context line */}
       <section className="py-24 lg:py-32 bg-cream">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
