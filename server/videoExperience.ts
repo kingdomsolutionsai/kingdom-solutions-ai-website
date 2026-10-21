@@ -151,7 +151,11 @@ const inputSchema = z.object({
 }).strict();
 
 export const videoExperienceRouter = router({
+  availability: publicProcedure.query(() => ({ ready: existsSync(videoPath()) })),
   requestAccess: publicProcedure.input(inputSchema).mutation(async ({ input }) => {
+    if (!existsSync(videoPath())) {
+      throw new TRPCError({ code: "PRECONDITION_FAILED", message: "The video is not yet available. Please check back soon." });
+    }
     if (input.companyUrl) return { success: true };
     const now = Date.now();
     // Avoid repeated transactional-email blasts. Harmless across restarts.
