@@ -42,9 +42,33 @@ function bunnyConfig(): { libraryId: string; videoId: string; tokenKey: string }
   return { libraryId, videoId, tokenKey };
 }
 
-function readyToWatch(): boolean {
-  return Boolean(bunnyConfig()) || existsSync(videoPath());
+function videoAccessSigningSecret(): string | null {
+  // Use a dedicated secret when present. Bunny's private token key is a
+  // cryptographically strong fallback for installations without one yet.
+  // Purpose separation is applied in accessSecret() below.
+  const configured = process.env.VIDEO_ACCESS_SECRET?.trim() || process.env.JWT_SECRET?.trim() || "";
+  if (configured.length >= 32) return configured;
+  const bunnyTokenKey = process.env.BUNNY_STREAM_TOKEN_KEY?.trim() || "";
+  return bunnyTokenKey.length >= 32 ? bunnyTokenKey : null;
 }
+
+function readyToWatch(): boolean {
+  return (Boolean(bunnyConfig()) || existsSync(videoPath())) &&
+    Boolean(videoAccessSigningSecret()) &&
+    Boolean(process.env.BREVO_API_KEY?.trim());
+}
+
+// Only non-sensitive availability flags; never log secret values, tickets, or
+// visitor contact details. Helps operators diagnose Render configuration.
+console.info("[Video experience] Startup configuration:", JSON.stringify({
+  bunnyLibraryPresent: Boolean(process.env.BUNNY_STREAM_LIBRARY_ID?.trim()),
+  bunnyVideoPresent: Boolean(process.env.BUNNY_STREAM_VIDEO_ID?.trim()),
+  bunnyTokenPresent: Boolean(process.env.BUNNY_STREAM_TOKEN_KEY?.trim()),
+  dedicatedAccessSecretValid: Boolean(process.env.VIDEO_ACCESS_SECRET?.trim() && process.env.VIDEO_ACCESS_SECRET.trim().length >= 32),
+  accessSignerReady: Boolean(videoAccessSigningSecret()),
+  brevoConfigured: Boolean(process.env.BREVO_API_KEY?.trim()),
+  publicRegistrationEnabled: readyToWatch(),
+}));
 
 function signedBunnyEmbed(config: NonNullable<ReturnType<typeof bunnyConfig>>): string {
   const expires = Math.floor(Date.now() / 1000) + 3600;
@@ -64,14 +88,15 @@ type TicketData = {
 };
 
 function accessSecret(): Buffer {
-  const secret = process.env.VIDEO_ACCESS_SECRET || process.env.JWT_SECRET;
-  if (!secret || secret.length < 32) {
+  const secret = videoAccessSigningSecret();
+  if (!secret) {
+    console.error("[Video experience] Missing valid video access signing secret.");
     throw new TRPCError({
       code: "INTERNAL_SERVER_ERROR",
       message: "Video access is not configured yet.",
     });
   }
-  return createHash("sha256").update(secret).digest();
+  return createHash("sha256").update("ksaivideoaccess:2026:v1:").update(secret).digest();
 }
 
 function issueTicket(data: TicketData): string {
