@@ -9,6 +9,9 @@
  * explicit and optional; access alone is not a newsletter subscription.
  */
 import { createCipheriv, createDecipheriv, createHash, randomBytes } from "node:crypto";
+import { createReadStream, existsSync, statSync } from "node:fs";
+import path from "node:path";
+import type { Request, Response } from "express";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { publicProcedure, router } from "./_core/trpc";
@@ -20,6 +23,10 @@ const VERIFIED_LIST = "KSAI Video Experience: Verified Access";
 const OPT_IN_LIST = "KSAI Video Experience: Optional Updates";
 const EXPIRY_MS = 14 * 24 * 60 * 60 * 1000;
 const COOLDOWN_MS = 45 * 1000;
+const VIDEO_FILENAME = "Build_In_Right_Order_Website_Approved.mp4";
+function videoPath(): string {
+  return path.resolve(process.cwd(), process.env.NODE_ENV === "production" ? "dist/private_media" : "server/private_media", VIDEO_FILENAME);
+}
 const lastRequest = new Map<string, number>();
 
 type TicketData = {
@@ -28,7 +35,7 @@ type TicketData = {
 };
 
 function accessSecret(): Buffer {
-  const secret = process.env.VIDEO_ACCESS_SECRET;
+  const secret = process.env.VIDEO_ACCESS_SECRET || process.env.JWT_SECRET;
   if (!secret || secret.length < 32) {
     throw new TRPCError({
       code: "INTERNAL_SERVER_ERROR",
@@ -190,14 +197,64 @@ export const videoExperienceRouter = router({
       // Email verification succeeded. Do not lock people out if Brevo is down.
       console.error("[Video experience] Verified access could not sync to Brevo:", error);
     }
-    const videoUrl = process.env.VIDEO_EXPERIENCE_VIDEO_URL?.trim() ?? "";
-    // A URL is configured only after the final, reviewed cut is hosted.
-    if (videoUrl && !/^https:\/\//i.test(videoUrl)) {
-      throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "The playback source is invalid." });
-    }
+    const ready = existsSync(videoPath());
     return {
-      firstName: data.firstName, ready: Boolean(videoUrl),
-      videoUrl, marketingConsent: data.marketingConsent,
+      firstName: data.firstName, ready,
+      videoUrl: ready ? `/api/video-experience/stream?ticket=${encodeURIComponent(input.ticket)}` : "",
+      marketingConsent: data.marketingConsent,
     };
   }),
 });
+
+/**
+ * Serve the MP4 directly from a private (not web-accessible) build directory.
+ * Range support is required for normal browser seeking/playback. Only a
+ * ticket delivered to a verified mailbox grants access.
+ */
+export function streamPrivateVideo(req: Request, res: Response): void {
+  const ticket = typeof req.query.ticket === "string" ? req.query.ticket : "";
+  if (!ticket || ticket.length > 4096) {
+    res.status(403).send("A verified email link is required.");
+    return;
+  }
+  try {
+    readTicket(ticket);
+  } catch {
+    res.status(403).send("This viewing link has expired. Please request a new one.");
+    return;
+  }
+  const file = videoPath();
+  if (!existsSync(file)) {
+    res.status(404).send("The preview is not available yet.");
+    return;
+  }
+  const size = statSync(file).size;
+  res.setHeader("Content-Type", "video/mp4");
+  res.setHeader("Content-Disposition", 'inline; filename="Build-In-The-Right-Order-Preview.mp4"');
+  res.setHeader("Cache-Control", "private, no-store");
+  res.setHeader("Referrer-Policy", "no-referrer");
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("Accept-Ranges", "bytes");
+
+  const range = req.headers.range;
+  if (!range) {
+    res.status(200).setHeader("Content-Length", String(size));
+    createReadStream(file).on("error", () => res.destroy()).pipe(res);
+    return;
+  }
+  // Single byte-range only; reject malformed or out-of-bounds requests.
+  const m = /^bytes=(\d*)-(\d*)$/.exec(range.trim());
+  const start = m && m[1] ? Number(m[1]) : m && m[2] ? Math.max(0, size - Number(m[2])) : NaN;
+  const end = m && m[1] && m[2] ? Number(m[2]) : size - 1;
+  if (!m || !Number.isSafeInteger(start) || !Number.isSafeInteger(end) ||
+      start < 0 || start >= size || end < start) {
+    res.status(416).setHeader("Content-Range", `bytes */${size}`);
+    res.end();
+    return;
+  }
+  const last = Math.min(end, size - 1);
+  res.status(206);
+  res.setHeader("Content-Range", `bytes ${start}-${last}/${size}`);
+  res.setHeader("Content-Length", String(last - start + 1));
+  createReadStream(file, { start, end: last }).on("error", () => res.destroy()).pipe(res);
+}
