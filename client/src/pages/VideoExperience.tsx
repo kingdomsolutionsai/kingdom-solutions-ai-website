@@ -23,11 +23,11 @@ export default function VideoExperience() {
   return <div className="min-h-screen bg-[#101012] text-[#f6f2e9]">
     <section className="mx-auto grid max-w-6xl gap-12 px-6 pb-24 pt-36 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:pt-44">
       <div>
-        <p className="mb-5 text-xs uppercase tracking-[0.22em] text-[#c9a358]">Kingdom Solutions AI™ · Complimentary teaching</p>
+        <p className="mb-5 text-xs uppercase tracking-[0.22em] text-[#c9a358]">Kingdom Solutions AI™ · A sneak peek inside the Right-Order Method™</p>
         <div className="mb-8 h-px w-20 bg-[#c9a358]" />
         <h1 className="font-display text-5xl leading-tight sm:text-6xl">You've been building your business. <em className="text-[#c9a358]">But have you been building it in the right order?</em></h1>
         <p className="mt-7 max-w-xl text-lg leading-relaxed text-[#dad2c4]">More effort, more platforms, and more tools won't always solve the problem that matters most. Discover how to identify where to begin, with clarity and human authority intact.</p>
-        <p className="mt-7 text-sm leading-relaxed text-[#bdaf95]">A selected, approximately 18-minute educational experience from the October 20 webinar with Tabitha Rector. Includes an exercise you can apply to your own business.</p>
+        <p className="mt-7 text-sm leading-relaxed text-[#bdaf95]">An approximately nine-minute preview from Tabitha Rector's October 20 webinar: the four business gaps, why the order matters, and an introduction to the eight systems. The full diagnosis and scoring exercise are reserved for deeper teaching.</p>
         <p className="mt-8 text-sm font-medium tracking-wide text-[#c9a358]">Clarity before complexity. Capacity before scale. Human authority throughout.</p>
       </div>
       <div className="border border-[#b18b46]/50 bg-[#1b1b1d] p-7 shadow-2xl sm:p-10">
@@ -38,7 +38,7 @@ export default function VideoExperience() {
           <p className="mt-5 text-sm text-[#bdb4a7]">If you don't see it, check your spam or promotions folder.</p>
         </div> : <>
           <LockKeyhole className="mb-5 text-[#c9a358]" size={28}/>
-          <h2 className="font-display text-3xl">Watch the free experience</h2>
+          <h2 className="font-display text-3xl">Watch the free preview</h2>
           <p className="mb-7 mt-3 text-sm leading-relaxed text-[#d9d2c7]">Enter your first name and email. We'll send a verification link so you can watch.</p>
           <form onSubmit={e => { e.preventDefault(); mutation.mutate({ ...form, source }); }} className="space-y-5">
             <label className="block text-sm">First name
@@ -66,7 +66,7 @@ export default function VideoExperience() {
           {[
             ["01","See the gaps","Understand what can keep a capable entrepreneur working hard without seeing progress."],
             ["02","Identify your first fix","Explore eight business systems and rate what's strongest and weakest today."],
-            ["03","Build in the right order","Learn how Diagnose → Clarify → Build → Activate creates a more focused next step."],
+            ["03","Build in the right order","Discover why the order of the work changes the outcome, before you choose your own next step."],
           ].map(([number,title,body])=><div key={number} className="border-t border-[#c9a358]/50 pt-6"><p className="text-xs text-[#c9a358]">{number}</p><h3 className="mt-3 font-display text-2xl">{title}</h3><p className="mt-3 text-sm leading-relaxed text-[#d2c9b9]">{body}</p></div>)}
         </div>
       </div>
@@ -118,7 +118,7 @@ export function VideoExperienceWatch() {
           <div className="rounded-sm border border-[#c9a358]/50 bg-[#1b1b1d] p-8">
             <PlayCircle size={38} className="text-[#c9a358]"/>
             <h2 className="mt-4 font-display text-3xl">Your access is confirmed.</h2>
-            <p className="mt-4 max-w-2xl leading-relaxed text-[#d8cdbb]">The curated video is being prepared. Your registration is separate from the live webinar. We'll post the final reviewed experience here as soon as the video is ready.</p>
+            <p className="mt-4 max-w-2xl leading-relaxed text-[#d8cdbb]">The short preview is being prepared. Your registration is separate from the live webinar. We'll post the final reviewed experience here as soon as the video is ready.</p>
           </div>}
         <div className="mt-12 border-t border-[#c9a358]/30 pt-9">
           <p className="text-xs uppercase tracking-[0.16em] text-[#c9a358]">Your next right step</p>
