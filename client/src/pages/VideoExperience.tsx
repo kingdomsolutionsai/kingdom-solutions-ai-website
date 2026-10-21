@@ -11,6 +11,7 @@ export default function VideoExperience() {
     title: "Build in the Right Order™ | Free Video Experience | Kingdom Solutions AI",
     description: "Watch a selected educational experience from Tabitha Rector's webinar and learn how to identify your business's next right step.",
     canonicalUrl: "https://www.kingdomsolutionsai.com/video-experience",
+    ogImage: "https://www.kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
   const [form, setForm] = useState({ firstName: "", email: "", marketingConsent: false, companyUrl: "" });
   const [sent, setSent] = useState(false);
@@ -83,10 +84,17 @@ export function VideoExperienceWatch() {
     title: "Your Private Viewing | Build in the Right Order™",
     description: "Your private Kingdom Solutions AI video experience.",
     canonicalUrl: "https://www.kingdomsolutionsai.com/video-experience/watch",
-    robots: "noindex, nofollow",
+    ogImage: "https://www.kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
   const ticket = new URLSearchParams(window.location.search).get("ticket") || "";
   const mutation = trpc.videoExperience.redeemAccess.useMutation();
+  useEffect(() => {
+    const robots = document.createElement("meta");
+    robots.setAttribute("name", "robots");
+    robots.setAttribute("content", "noindex,nofollow");
+    document.head.appendChild(robots);
+    return () => robots.remove();
+  }, []);
   useEffect(() => {
     if (ticket) mutation.mutate({ticket});
     // Only redeem on initial navigation, not upon mutation state updates.
