@@ -1,2 +1,6 @@
 node_modules/
 dist/
+
+# Never commit customer-access media files
+server/private_media/*.mp4
+dist/private_media/
