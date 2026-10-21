@@ -13,6 +13,7 @@ type NavGroup = { id: string; label: string; links: NavLink[] };
 // build the business, add human-authorized AI support once the foundation is
 // ready, or pursue Christ-centered leadership formation.
 const entrepreneurLinks: NavLink[] = [
+  { href: "/video-experience", label: "Free Video Experience", note: "Build in the Right Order™" },
   { href: "/entrepreneur-assessment", label: "Find Your Starting Point", note: "Entrepreneur Assessment" },
   ...(siteCta.webinarDate
     ? [{ href: WEBINAR_URL, label: "The Webinar", note: `Next live session: ${siteCta.webinarDate}`, external: true }]
