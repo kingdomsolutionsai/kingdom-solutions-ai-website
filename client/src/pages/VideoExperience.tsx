@@ -17,6 +17,8 @@ export default function VideoExperience() {
   const [sent, setSent] = useState(false);
   const params = useMemo(() => new URLSearchParams(window.location.search), []);
   const source = (params.get("utm_source") || params.get("source") || "website").slice(0, 60);
+  const availability = trpc.videoExperience.availability.useQuery();
+  const canRegister = availability.data?.ready === true;
   const mutation = trpc.videoExperience.requestAccess.useMutation({
     onSuccess: () => setSent(true),
   });
@@ -27,7 +29,7 @@ export default function VideoExperience() {
         <div className="mb-8 h-px w-20 bg-[#c9a358]" />
         <h1 className="font-display text-5xl leading-tight sm:text-6xl">You've been building your business. <em className="text-[#c9a358]">But have you been building it in the right order?</em></h1>
         <p className="mt-7 max-w-xl text-lg leading-relaxed text-[#dad2c4]">More effort, more platforms, and more tools won't always solve the problem that matters most. Discover how to identify where to begin, with clarity and human authority intact.</p>
-        <p className="mt-7 text-sm leading-relaxed text-[#bdaf95]">An approximately nine-minute preview from Tabitha Rector's October 20 webinar: the four business gaps, why the order matters, and an introduction to the eight systems. The full diagnosis and scoring exercise are reserved for deeper teaching.</p>
+        <p className="mt-7 text-sm leading-relaxed text-[#bdaf95]">A 13-minute, 46-second preview from Tabitha Rector's October 20 webinar: the four business gaps, why the order matters, and an introduction to the eight systems. The full diagnosis and scoring exercise are reserved for deeper teaching.</p>
         <p className="mt-8 text-sm font-medium tracking-wide text-[#c9a358]">Clarity before complexity. Capacity before scale. Human authority throughout.</p>
       </div>
       <div className="border border-[#b18b46]/50 bg-[#1b1b1d] p-7 shadow-2xl sm:p-10">
@@ -40,7 +42,8 @@ export default function VideoExperience() {
           <LockKeyhole className="mb-5 text-[#c9a358]" size={28}/>
           <h2 className="font-display text-3xl">Watch the free preview</h2>
           <p className="mb-7 mt-3 text-sm leading-relaxed text-[#d9d2c7]">Enter your first name and email. We'll send a verification link so you can watch.</p>
-          <form onSubmit={e => { e.preventDefault(); mutation.mutate({ ...form, source }); }} className="space-y-5">
+          {!canRegister && <p role="status" className="mb-5 border border-[#c9a358]/50 bg-[#28241a] p-4 text-sm leading-relaxed text-[#e0d1b4]">The approved preview is not yet connected to secure playback. Registration will open once video access is ready.</p>}
+          <form onSubmit={e => { e.preventDefault(); if (canRegister) mutation.mutate({ ...form, source }); }} className="space-y-5">
             <label className="block text-sm">First name
               <input autoComplete="given-name" required maxLength={80} value={form.firstName} onChange={e=>setForm({...form,firstName:e.target.value})} className="mt-2 w-full border border-[#706348] bg-[#101012] p-3 text-[#fff] focus:outline-[#c9a358]" />
             </label>
@@ -52,7 +55,7 @@ export default function VideoExperience() {
               <input type="checkbox" checked={form.marketingConsent} onChange={e=>setForm({...form,marketingConsent:e.target.checked})} className="mt-1 accent-[#c9a358]"/>
               <span>I'd also like occasional business-building insights and invitations from Kingdom Solutions AI. <strong>Optional.</strong></span>
             </label>
-            <button type="submit" disabled={mutation.isPending} className={mainButton}>{mutation.isPending ? "Sending your link…" : "Send my viewing link"} <ArrowRight size={16}/></button>
+            <button type="submit" disabled={mutation.isPending || !canRegister} className={mainButton}>{mutation.isPending ? "Sending your link…" : !canRegister ? "Viewing opens soon" : "Send my viewing link"} <ArrowRight size={16}/></button>
             {mutation.error && <p role="alert" className="text-sm text-rose-300">{mutation.error.message}</p>}
           </form>
           <p className="mt-6 text-xs leading-relaxed text-[#bdb4a7]">Your viewing link is sent only to verify your email and grant access. Optional updates are not required. <Link href="/privacy" className="underline hover:text-[#c9a358]">Privacy policy</Link>.</p>
@@ -65,7 +68,7 @@ export default function VideoExperience() {
         <div className="mt-7 grid gap-6 md:grid-cols-3">
           {[
             ["01","See the gaps","Understand what can keep a capable entrepreneur working hard without seeing progress."],
-            ["02","Identify your first fix","Explore eight business systems and rate what's strongest and weakest today."],
+            ["02","Identify your first fix","Get an introduction to the eight business systems, without the full scoring exercise."],
             ["03","Build in the right order","Discover why the order of the work changes the outcome, before you choose your own next step."],
           ].map(([number,title,body])=><div key={number} className="border-t border-[#c9a358]/50 pt-6"><p className="text-xs text-[#c9a358]">{number}</p><h3 className="mt-3 font-display text-2xl">{title}</h3><p className="mt-3 text-sm leading-relaxed text-[#d2c9b9]">{body}</p></div>)}
         </div>
