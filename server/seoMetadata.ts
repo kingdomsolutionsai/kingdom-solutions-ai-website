@@ -44,6 +44,34 @@ function cleanPath(urlPath: string): string {
 }
 
 const ROUTE_METADATA: Record<string, PageMeta> = {
+  "/video-experience": {
+    title: "Build in the Right Order™ | Sneak Peek | Kingdom Solutions AI",
+    description: "A 13-minute, 46-second sneak peek into the four business gaps, building in the right order, and the eight foundational business systems with Tabitha Rector.",
+    canonicalUrl: `${BASE_URL}/video-experience`,
+    ogTitle: "Build in the Right Order™ — A Sneak Peek",
+    ogDescription: "Discover why the order of building matters with Tabitha Rector, Kingdom Solutions AI™.",
+    ogUrl: `${BASE_URL}/video-experience`,
+    ogType: "website",
+    ogImage: `${BASE_URL}/assets/ksai-logo-transparent-400_82fa1f46.png`,
+    twitterCard: "summary_large_image",
+    twitterTitle: "Build in the Right Order™ — A Sneak Peek",
+    twitterDescription: "A free preview of the four business gaps, the right order, and eight foundational systems.",
+    twitterImage: `${BASE_URL}/assets/ksai-logo-transparent-400_82fa1f46.png`,
+  },
+  "/video-experience/watch": {
+    title: "Private Video Viewing | Build in the Right Order™",
+    description: "Your verified private video viewing page.",
+    canonicalUrl: `${BASE_URL}/video-experience/watch`,
+    ogTitle: "Private Video Viewing | Kingdom Solutions AI™",
+    ogDescription: "Verified access required.",
+    ogUrl: `${BASE_URL}/video-experience/watch`,
+    ogType: "website",
+    ogImage: `${BASE_URL}/assets/ksai-logo-transparent-400_82fa1f46.png`,
+    twitterCard: "summary",
+    twitterTitle: "Private Video Viewing",
+    twitterDescription: "Verified access required.",
+    twitterImage: `${BASE_URL}/assets/ksai-logo-transparent-400_82fa1f46.png`,
+  },
   "/": {
     title: "Kingdom Solutions AI™ by Tabitha Rector | Build Your Business in the Right Order",
     description: "Kingdom Solutions AI™ by Tabitha Rector helps experienced women turn their expertise into a clear business, build it in the right order, and grow with human-authorized AI support.",
