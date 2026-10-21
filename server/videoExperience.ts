@@ -29,6 +29,35 @@ function videoPath(): string {
 }
 const lastRequest = new Map<string, number>();
 
+/**
+ * Bunny Stream's own player supplies adaptive playback; the signing key stays
+ * exclusively on the server. All three environment values are required.
+ * These are two non-secret IDs plus the private library Security token key.
+ */
+function bunnyConfig(): { libraryId: string; videoId: string; tokenKey: string } | null {
+  const libraryId = process.env.BUNNY_STREAM_LIBRARY_ID?.trim() || "";
+  const videoId = process.env.BUNNY_STREAM_VIDEO_ID?.trim() || "";
+  const tokenKey = process.env.BUNNY_STREAM_TOKEN_KEY?.trim() || "";
+  if (!/^\d+$/.test(libraryId) || !/^[a-f0-9-]{36}$/i.test(videoId) || !tokenKey) return null;
+  return { libraryId, videoId, tokenKey };
+}
+
+function readyToWatch(): boolean {
+  return Boolean(bunnyConfig()) || existsSync(videoPath());
+}
+
+function signedBunnyEmbed(config: NonNullable<ReturnType<typeof bunnyConfig>>): string {
+  const expires = Math.floor(Date.now() / 1000) + 3600;
+  // Bunny Stream embedded-view auth: SHA256(token-security-key + video-ID + expiration).
+  const token = createHash("sha256")
+    .update(config.tokenKey + config.videoId + String(expires)).digest("hex");
+  const url = new URL(`https://player.mediadelivery.net/embed/${config.libraryId}/${config.videoId}`);
+  url.searchParams.set("token", token);
+  url.searchParams.set("expires", String(expires));
+  return url.toString();
+}
+
+
 type TicketData = {
   v: 1; firstName: string; email: string; source: string;
   marketingConsent: boolean; expiresAt: number;
@@ -151,9 +180,9 @@ const inputSchema = z.object({
 }).strict();
 
 export const videoExperienceRouter = router({
-  availability: publicProcedure.query(() => ({ ready: existsSync(videoPath()) })),
+  availability: publicProcedure.query(() => ({ ready: readyToWatch() })),
   requestAccess: publicProcedure.input(inputSchema).mutation(async ({ input }) => {
-    if (!existsSync(videoPath())) {
+    if (!readyToWatch()) {
       throw new TRPCError({ code: "PRECONDITION_FAILED", message: "The video is not yet available. Please check back soon." });
     }
     if (input.companyUrl) return { success: true };
@@ -201,10 +230,15 @@ export const videoExperienceRouter = router({
       // Email verification succeeded. Do not lock people out if Brevo is down.
       console.error("[Video experience] Verified access could not sync to Brevo:", error);
     }
-    const ready = existsSync(videoPath());
+    const bunny = bunnyConfig();
+    const localFile = existsSync(videoPath());
+    const ready = Boolean(bunny) || localFile;
+    const playerType = bunny ? "bunny" : localFile ? "mp4" : "none";
+    const videoUrl = bunny ? signedBunnyEmbed(bunny) : localFile
+      ? `/api/video-experience/stream?ticket=${encodeURIComponent(input.ticket)}`
+      : "";
     return {
-      firstName: data.firstName, ready,
-      videoUrl: ready ? `/api/video-experience/stream?ticket=${encodeURIComponent(input.ticket)}` : "",
+      firstName: data.firstName, ready, playerType, videoUrl,
       marketingConsent: data.marketingConsent,
     };
   }),

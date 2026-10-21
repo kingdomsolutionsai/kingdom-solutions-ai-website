@@ -116,7 +116,9 @@ export function VideoExperienceWatch() {
         <p className="mb-6 text-lg text-[#d8cdbb]">Welcome, {mutation.data.firstName}. Your email is confirmed.</p>
         {mutation.data.ready ?
           <div className="overflow-hidden border border-[#c9a358]/50 bg-black">
-            <video className="w-full" controls playsInline preload="metadata" controlsList="nodownload" src={mutation.data.videoUrl}>Your browser doesn't support HTML5 video.</video>
+            {mutation.data.playerType === "bunny" ?
+              <iframe title="Build in the Right Order video sneak peek" src={mutation.data.videoUrl} allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowFullScreen referrerPolicy="strict-origin-when-cross-origin" className="aspect-video w-full border-0" /> :
+              <video className="w-full" controls playsInline preload="metadata" controlsList="nodownload" src={mutation.data.videoUrl}>Your browser doesn't support HTML5 video.</video>}
           </div> :
           <div className="rounded-sm border border-[#c9a358]/50 bg-[#1b1b1d] p-8">
             <PlayCircle size={38} className="text-[#c9a358]"/>
