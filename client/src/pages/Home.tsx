@@ -90,15 +90,16 @@ export default function Home() {
               <div>
                 <p className="editorial-label mb-3">Free live webinar · Tuesday, November 17 · 11 AM Eastern</p>
                 <h2 className="font-display text-2xl sm:text-3xl font-medium leading-tight text-charcoal">
-                  What Entrepreneurs Need to Know
-                  <span className="block mt-1 text-gold">How to Build in the Right Order</span>
+                  Finding the Gap
+                  <span className="block mt-1 text-gold">What's Keeping Your Business From Moving Forward?</span>
                 </h2>
                 <p className="font-body text-sm sm:text-base text-charcoal-light leading-relaxed mt-3 max-w-2xl">
-                  Still building, but not getting the response you expected? Discover the eight
-                  business systems, find the gap to address first, and choose one practical next step.
+                  You've worked hard and have gifts worth using well. If your business is not moving
+                  the way you hoped, join this faith-rooted workshop for Christian women entrepreneurs
+                  to find the gap that deserves attention first and choose one wise next step.
                 </p>
                 <p className="font-body text-[0.72rem] tracking-[0.12em] uppercase text-charcoal/65 mt-4">
-                  GET 2027 READY! · With Tabitha Rector
+                  GET 2027 READY! · With Tabitha Rector · Kingdom Solutions AI™ by Revived Spirit
                 </p>
               </div>
               <a href={WEBINAR_URL}
