@@ -5,8 +5,8 @@ import { ArrowRight } from "lucide-react";
 
 export default function About() {
   usePageMeta({
-    title: "About Tabitha Rector — Kingdom Solutions Business & AI™",
-    description: "Tabitha Rector, Professional Certified Coach (PCC), helps experienced women entrepreneurs turn their expertise into a clear offer and build their business in the right order through the 30-Day Business Fast Track™.",
+    title: "Tabitha Rector | Business & Entrepreneurship Strategist",
+    description: "Meet Tabitha Rector, PCC: 30+ years in banking, sales, leadership, and business advisory. Helping experienced women build expertise-based businesses in the right order.",
     canonicalUrl: "https://www.kingdomsolutionsai.com/about",
     ogImage: "https://www.kingdomsolutionsai.com/assets/tabitha-headshot_fea7ebce.webp",
   });
