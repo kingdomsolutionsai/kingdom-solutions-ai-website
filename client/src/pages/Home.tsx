@@ -31,9 +31,9 @@ const secondaryLink =
 
 export default function Home() {
   usePageMeta({
-    title: "Kingdom Solutions Business & AI™ by Tabitha Rector | Build Your Business in the Right Order",
+    title: "Business Strategy for Experienced Women | Kingdom Solutions Business & AI",
     description:
-      "Kingdom Solutions Business & AI™ helps experienced women turn professional expertise into a clear offer and a business built in the right order, with practical AI to increase capacity.",
+      "Turn your professional expertise into a consulting or service business built in the right order. Business strategy first, with practical AI to increase capacity.",
     canonicalUrl: "https://www.kingdomsolutionsai.com/",
     ogImage: "https://www.kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
@@ -60,7 +60,7 @@ export default function Home() {
                 Turn your expertise into a clear business, built in the right order.
               </h1>
               <p className="font-body text-lg lg:text-xl text-charcoal-light leading-[1.7] max-w-2xl mb-12 fade-up">
-                Your experience deserves to become a business people can understand, trust, and buy from. The 30-Day Business Fast Track™ helps you clarify your offer, message, and path to clients. Practical AI can increase your capacity as you build. You stay in charge.
+                Whether you are moving from a corporate career into consulting or refining a service business, your experience deserves an offer people understand, trust, and buy from. The 30-Day Business Fast Track™ helps you clarify your offer, message, and path to clients. Practical AI increases your capacity while you stay in charge.
               </p>
               <div className="flex flex-col sm:flex-row items-start gap-5 fade-up">
                 <Link href="/business-fast-track" className={primaryBtn}>
