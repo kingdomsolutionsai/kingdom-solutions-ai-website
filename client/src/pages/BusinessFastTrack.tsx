@@ -77,7 +77,7 @@ const FAQS = [
   { q: "Will I have a complete business in thirty days?", a: "You will have the essential decisions, offer, message, revenue path, and 90-day implementation plan your business needs. You will not be promised that every website, funnel, legal, operational, or automation component will be completed in thirty days." },
   { q: "How much time should I plan to protect each week?", a: "Plan for the weekly session plus focused implementation time. The work is intentionally prioritized so you can complete the right pieces without trying to build the entire business at once." },
   { q: "Is AI used in the program?", a: "Yes, where it genuinely supports clarity, research, drafting, and implementation. AI will not be positioned as the authority over your offer, values, client commitments, or business decisions. You remain the leader throughout." },
-  { q: "Is this a faith-rooted program?", a: "Yes. Kingdom Solutions AI is by Revived Spirit, and I welcome Christian women who view business as a calling to steward wisely. We pair that conviction with practical business decisions and honest implementation. Enrollment is never presented as a measure of faith or a promise of financial results." },
+  { q: "Is this a faith-rooted program?", a: "Yes. Kingdom Solutions Business & AI™ is faith-rooted, and I welcome Christian women who view business as a calling to steward wisely. We pair that conviction with practical business decisions and honest implementation. Enrollment is never presented as a measure of faith or a promise of financial results." },
   { q: "How do I enroll?", a: "Start by booking a 30-minute Business Fast Track Strategy Call. We will look at where your business is today, what you most want settled in the next 30 days, and whether Fast Track is the right next step. If it is a fit, you will receive a private enrollment link and the confirmed cohort schedule before committing. The next cohort is starting soon." },
   { q: "What if week one does not give me clarity?", a: `That is what the Right Order Promise is for. ${RIGHT_ORDER_PROMISE} It is a service commitment, not a refund or money-back guarantee.` },
   { q: "Can I pay in more than one payment?", a: "Yes. You can pay in full or choose a payment plan. Your payment options are shared after your Strategy Call. A payment plan is a commitment to the full program price, as described in our Refund Policy." },
@@ -87,7 +87,7 @@ const FAQS = [
 
 export default function BusinessFastTrack() {
   usePageMeta({
-    title: "30-Day Business Fast Track™ | Kingdom Solutions AI™",
+    title: "30-Day Business Fast Track™ | Kingdom Solutions Business & AI™",
     description:
       "A guided 30-day implementation experience for experienced women ready to turn their expertise into a clear, credible, buyer-ready business, built in the right order.",
     canonicalUrl: "https://kingdomsolutionsai.com/business-fast-track",
@@ -290,7 +290,7 @@ export default function BusinessFastTrack() {
       <section>
         <div className="shell founder">
           <div className="portrait">
-            <img src="/assets/tabitha-headshot_fea7ebce.webp" alt="Tabitha Rector, founder of Kingdom Solutions AI" />
+            <img src="/assets/tabitha-headshot_fea7ebce.webp" alt="Tabitha Rector, founder of Kingdom Solutions Business & AI" />
           </div>
           <div>
             <div className="kicker">Your strategist</div>
