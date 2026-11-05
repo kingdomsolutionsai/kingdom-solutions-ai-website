@@ -184,7 +184,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Link href="/" className="flex items-center gap-4 group shrink-0 mr-6 lg:mr-10">
             <img
               src="/assets/ksai-logo-transparent-400_82fa1f46.png"
-              alt="Kingdom Solutions AI™"
+              alt="Kingdom Solutions Business & AI™"
               className="w-16 h-16 lg:w-[90px] lg:h-[90px] transition-transform duration-300 group-hover:scale-105"
             />
             <div className="hidden sm:flex flex-col">
@@ -192,7 +192,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 Kingdom Solutions
               </span>
               <span className="font-body text-base lg:text-lg font-bold tracking-[0.08em] uppercase text-gold leading-tight">
-                AI™
+                Business &amp; AI™
               </span>
             </div>
           </Link>
@@ -298,7 +298,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <div className="w-[80px] h-[80px] rounded-full bg-cream flex items-center justify-center shrink-0">
                   <img
                     src="/assets/ksai-logo-transparent-400_82fa1f46.png"
-                    alt="Kingdom Solutions AI™"
+                    alt="Kingdom Solutions Business & AI™"
                     className="w-[68px] h-[68px]"
                   />
                 </div>
@@ -307,12 +307,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     Kingdom Solutions
                   </span>
                   <span className="font-body text-[0.75rem] font-semibold tracking-[0.13em] uppercase text-gold leading-tight">
-                    AI™
+                    Business &amp; AI™
                   </span>
                 </div>
               </div>
               <p className="font-body text-sm text-warm-gray leading-relaxed max-w-xs">
-                Helping experienced women turn their expertise into a clear business, build it in the right order, and grow with human-authorized AI support that keeps you in charge.
+                Business and entrepreneurship strategy for experienced women turning their expertise into a clear offer and a business built in the right order. Practical, human-authorized AI adds capacity while you remain in charge.
               </p>
             </div>
             {/* Build Your Business + Faith & Leadership */}
@@ -423,10 +423,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           {/* Bottom Bar */}
           <div className="mt-20 pt-8 border-t border-white/8 flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="font-body text-xs text-warm-gray/70">
-              © 2026 Kingdom Solutions AI™. All rights reserved.
+              © 2026 Kingdom Solutions Business & AI™. All rights reserved.
             </p>
             <p className="font-body text-xs text-warm-gray/70">
-              Kingdom Solutions AI™ by Tabitha Rector · Business &amp; Entrepreneurship Strategist
+              Kingdom Solutions Business & AI™ by Tabitha Rector · Business &amp; Entrepreneurship Strategist
             </p>
           </div>
         </div>

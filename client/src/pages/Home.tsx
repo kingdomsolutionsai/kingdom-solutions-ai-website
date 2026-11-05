@@ -31,9 +31,9 @@ const secondaryLink =
 
 export default function Home() {
   usePageMeta({
-    title: "Kingdom Solutions AI™ by Tabitha Rector | Build Your Business in the Right Order",
+    title: "Kingdom Solutions Business & AI™ by Tabitha Rector | Build Your Business in the Right Order",
     description:
-      "Kingdom Solutions AI™ by Tabitha Rector helps experienced women turn their expertise into a clear business, build it in the right order, and grow with human-authorized AI support.",
+      "Kingdom Solutions Business & AI™ helps experienced women turn professional expertise into a clear offer and a business built in the right order, with practical AI to increase capacity.",
     canonicalUrl: "https://www.kingdomsolutionsai.com/",
     ogImage: "https://www.kingdomsolutionsai.com/assets/ksai-logo-transparent-400_82fa1f46.png",
   });
@@ -60,7 +60,7 @@ export default function Home() {
                 Turn your expertise into a clear business, built in the right order.
               </h1>
               <p className="font-body text-lg lg:text-xl text-charcoal-light leading-[1.7] max-w-2xl mb-12 fade-up">
-                The 30-Day Business Fast Track™ helps you shape a clear offer, say what you do in a way the right people understand, and build a practical path to clients—without trying to do everything at once. AI can support the work where useful. You stay in charge.
+                Your experience deserves to become a business people can understand, trust, and buy from. The 30-Day Business Fast Track™ helps you clarify your offer, message, and path to clients. Practical AI can increase your capacity as you build. You stay in charge.
               </p>
               <div className="flex flex-col sm:flex-row items-start gap-5 fade-up">
                 <Link href="/business-fast-track" className={primaryBtn}>
@@ -99,7 +99,7 @@ export default function Home() {
                   to find the gap that deserves attention first and choose one wise next step.
                 </p>
                 <p className="font-body text-[0.72rem] tracking-[0.12em] uppercase text-charcoal/65 mt-4">
-                  GET 2027 READY! · With Tabitha Rector · Kingdom Solutions AI™ by Revived Spirit
+                  GET 2027 READY! · With Tabitha Rector · Kingdom Solutions Business & AI™ by Revived Spirit
                 </p>
               </div>
               <a href={WEBINAR_URL}
@@ -416,7 +416,7 @@ export default function Home() {
             <div className="lg:col-span-4 lg:col-start-2 fade-up">
               <img
                 src="/assets/tabitha-headshot_fea7ebce.webp"
-                alt="Tabitha Rector, Founder, Kingdom Solutions AI™"
+                alt="Tabitha Rector, Founder, Kingdom Solutions Business & AI™"
                 className="w-full max-w-[320px] mx-auto lg:mx-0"
               />
             </div>

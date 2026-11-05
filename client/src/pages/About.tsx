@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function About() {
   usePageMeta({
-    title: "About Tabitha Rector — Kingdom Solutions AI™",
+    title: "About Tabitha Rector — Kingdom Solutions Business & AI™",
     description: "Tabitha Rector, Professional Certified Coach (PCC), helps experienced women entrepreneurs turn their expertise into a clear offer and build their business in the right order through the 30-Day Business Fast Track™.",
     canonicalUrl: "https://www.kingdomsolutionsai.com/about",
     ogImage: "https://www.kingdomsolutionsai.com/assets/tabitha-headshot_fea7ebce.webp",
@@ -28,14 +28,14 @@ export default function About() {
                 Business &amp; Entrepreneurship Strategist · Professional Certified Coach (PCC)
               </p>
               <p className="font-body text-base text-charcoal-light leading-relaxed">
-                Founder of Kingdom Solutions AI™ · Human-authorized AI systems that protect the leader
+                Founder of Kingdom Solutions Business & AI™ · Business strategy first. Practical AI to increase your capacity
               </p>
             </div>
             <div className="lg:col-span-5 lg:col-start-8 fade-up">
               <div className="aspect-[3/4] overflow-hidden">
                 <img
                   src="/assets/tabitha-headshot_fea7ebce.webp"
-                  alt="Tabitha Rector, founder of Kingdom Solutions AI"
+                  alt="Tabitha Rector, founder of Kingdom Solutions Business & AI"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -78,7 +78,7 @@ export default function About() {
             <div className="lg:col-span-3 lg:col-start-2">
               <p className="editorial-label mb-4">Philosophy</p>
               <h2 className="font-display text-3xl sm:text-4xl font-medium text-charcoal leading-snug">
-                The Kingdom Solutions AI™ Philosophy
+                The Kingdom Solutions Business & AI™ Philosophy
               </h2>
             </div>
             <div className="lg:col-span-6 lg:col-start-6 space-y-6 font-body text-base text-charcoal-light leading-relaxed">
