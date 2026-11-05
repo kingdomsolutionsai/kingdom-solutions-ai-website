@@ -405,10 +405,11 @@ export function injectSeoMetadata(html: string, requestUrl: string): string {
     `<meta name="twitter:description" content="${twDesc}" />\n    <meta name="twitter:image" content="${twImage}" />`
   );
 
-  // Add canonical link (inject before </head>)
+  // Replace the homepage canonical from the shared template, rather than
+  // emitting two canonical tags on inner pages.
   html = html.replace(
-    /<\/head>/,
-    `    <link rel="canonical" href="${canonical}" />\n  </head>`
+    /<link rel="canonical" href="[^"]*"\s*\/>/,
+    `<link rel="canonical" href="${canonical}" />`
   );
 
   // Keep private, token-gated viewing pages out of search results.
