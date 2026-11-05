@@ -87,9 +87,9 @@ const FAQS = [
 
 export default function BusinessFastTrack() {
   usePageMeta({
-    title: "30-Day Business Fast Track™ | Kingdom Solutions Business & AI™",
+    title: "30-Day Business Fast Track™ | Build a Clear Offer & Client Path",
     description:
-      "A guided 30-day implementation experience for experienced women ready to turn their expertise into a clear, credible, buyer-ready business, built in the right order.",
+      "Business strategy for experienced women starting or refining a consulting or service business. Clarify your offer, message, and practical path to clients in 30 days.",
     canonicalUrl: "https://kingdomsolutionsai.com/business-fast-track",
     ogTitle: "30-Day Business Fast Track™ | Build Your Business in the Right Order",
     ogUrl: "https://kingdomsolutionsai.com/business-fast-track",
