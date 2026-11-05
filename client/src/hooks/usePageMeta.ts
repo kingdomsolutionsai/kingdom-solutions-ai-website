@@ -38,6 +38,10 @@ export function usePageMeta({
     // Track elements we create so we can remove them on cleanup
     const createdElements: HTMLElement[] = [];
 
+    // Keep browser navigation consistent with the preferred canonical hostname.
+    const preferredUrl = (url: string) =>
+      url.replace(/^https:\/\/kingdomsolutionsai\.com(?=\/|$)/, "https://www.kingdomsolutionsai.com");
+
     // Title
     document.title = title;
 
@@ -65,15 +69,15 @@ export function usePageMeta({
       document.head.appendChild(canonical);
       createdElements.push(canonical);
     }
-    canonical.setAttribute("href", canonicalUrl);
+    canonical.setAttribute("href", preferredUrl(canonicalUrl));
 
     // Open Graph tags
     const ogTags: Record<string, string> = {
       "og:title": ogTitle || title,
       "og:description": ogDescription || description,
-      "og:url": ogUrl || canonicalUrl,
+      "og:url": preferredUrl(ogUrl || canonicalUrl),
       "og:type": ogType,
-      "og:image": ogImage,
+      "og:image": preferredUrl(ogImage),
     };
 
     Object.entries(ogTags).forEach(([property, content]) => {
@@ -96,7 +100,7 @@ export function usePageMeta({
       "twitter:card": twitterCard,
       "twitter:title": twitterTitle || ogTitle || title,
       "twitter:description": twitterDescription || ogDescription || description,
-      "twitter:image": twitterImage || ogImage,
+      "twitter:image": preferredUrl(twitterImage || ogImage),
     };
 
     Object.entries(twitterTags).forEach(([name, content]) => {
