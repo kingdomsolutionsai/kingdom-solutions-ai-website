@@ -1,8 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { getSiteCta, WEBINAR_URL } from "@/lib/ctaSchedule";
-// The header button and webinar links follow the date schedule in ctaSchedule.ts.
+import { getSiteCta } from "@/lib/ctaSchedule";
 const siteCta = getSiteCta();
 const ACADEMY_PATH = "/victors-circle-leadership-academy";
 
@@ -13,11 +12,7 @@ type NavGroup = { id: string; label: string; links: NavLink[] };
 // build the business, add human-authorized AI support once the foundation is
 // ready, or pursue Christ-centered leadership formation.
 const entrepreneurLinks: NavLink[] = [
-  { href: "/video-experience", label: "Free Video Experience", note: "Build in the Right Order™" },
   { href: "/entrepreneur-assessment", label: "Find Your Starting Point", note: "Entrepreneur Assessment" },
-  ...(siteCta.webinarDate
-    ? [{ href: WEBINAR_URL, label: "The Webinar", note: `Next live session: ${siteCta.webinarDate}`, external: true }]
-    : []),
   { href: "/business-fast-track", label: "30-Day Business Fast Track™" },
   { href: "/clarity-pro", label: "Clarity Pro™" },
   { href: "/handbook", label: "Free Right-Order Handbook" },
@@ -324,11 +319,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <Link href="/entrepreneur-assessment" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
                   Find Your Starting Point
                 </Link>
-                {siteCta.webinarDate && (
-                  <a href={WEBINAR_URL} target="_blank" rel="noopener noreferrer" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
-                    The Webinar ({siteCta.webinarDate})
-                  </a>
-                )}
                 <Link href="/business-fast-track" className="font-body text-sm text-warm-gray hover:text-cream-dark transition-colors duration-300">
                   30-Day Business Fast Track™
                 </Link>

@@ -74,11 +74,6 @@ export default function VideoExperience() {
         </div>
       </div>
     </section>
-    <section className="mx-auto max-w-5xl px-6 py-16 text-center">
-      <h2 className="font-display text-3xl">Prefer a live experience?</h2>
-      <p className="mx-auto mt-4 max-w-2xl text-[#d0c7b8]">Our live webinar registration is separate from this on-demand experience, so you can choose the format that suits you.</p>
-      <a href="https://whatentrepreneursneedtoknow.com" className="mt-7 inline-flex items-center gap-2 text-[#c9a358] underline">Explore the upcoming live webinar <ArrowRight size={16}/></a>
-    </section>
   </div>;
 }
 
@@ -123,7 +118,7 @@ export function VideoExperienceWatch() {
           <div className="rounded-sm border border-[#c9a358]/50 bg-[#1b1b1d] p-8">
             <PlayCircle size={38} className="text-[#c9a358]"/>
             <h2 className="mt-4 font-display text-3xl">Your access is confirmed.</h2>
-            <p className="mt-4 max-w-2xl leading-relaxed text-[#d8cdbb]">The short preview is being prepared. Your registration is separate from the live webinar. We'll post the final reviewed experience here as soon as the video is ready.</p>
+            <p className="mt-4 max-w-2xl leading-relaxed text-[#d8cdbb]">The short preview is being prepared. We'll post the final reviewed experience here as soon as the video is ready.</p>
           </div>}
         <div className="mt-12 border-t border-[#c9a358]/30 pt-9">
           <p className="text-xs uppercase tracking-[0.16em] text-[#c9a358]">Your next right step</p>
