@@ -6,7 +6,6 @@ import { useState } from "react";
 import { trpc } from "@/lib/trpc";
 
 const HANDBOOK_PDF = "/assets/handbook.pdf";
-const WEBINAR_URL = "https://whatentrepreneursneedtoknow.com";
 
 export default function Handbook() {
   usePageMeta({
@@ -209,27 +208,7 @@ export default function Handbook() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto fade-up">
-            {/* Webinar — live */}
-            <a
-              href={WEBINAR_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group border border-gold/25 rounded-sm p-8 hover:border-gold/60 transition-colors"
-            >
-              <p className="font-body text-[0.7rem] tracking-[0.16em] uppercase text-gold mb-4">Live Event</p>
-              <h3 className="font-display text-2xl font-medium text-cream-dark mb-3">
-                Join the Webinar
-              </h3>
-              <p className="font-body text-sm text-warm-gray leading-relaxed mb-6">
-                Go deeper on the eight-systems framework, live. See the ideas in
-                the Handbook put to work.
-              </p>
-              <span className="font-body text-sm text-gold inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-                Register <ArrowRight size={15} />
-              </span>
-            </a>
-
+          <div className="grid max-w-xl mx-auto fade-up">
             <Link
               href="/entrepreneur-assessment"
               className="group border border-gold/25 rounded-sm p-8 hover:border-gold/60 transition-colors"

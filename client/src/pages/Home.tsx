@@ -6,7 +6,6 @@ import { GAPS, GAP_DESCRIPTIONS, type Gap } from "@shared/entrepreneurAssessment
 import { RIGHT_ORDER_PROMISE, nextQuarterLabel } from "@shared/const";
 import { CLIENT_STORIES } from "@/lib/clientStories";
 import WarmConversationBundle from "@/components/WarmConversationBundle";
-import { WEBINAR_URL } from "@/lib/ctaSchedule";
 
 /*
  * Home page, organized around the Four Gaps framework:
@@ -41,7 +40,6 @@ export default function Home() {
   const quarter = nextQuarterLabel();
   // Show a secondary workshop invitation without displacing the Fast Track CTA.
   // Automatically retire the November card when the live session begins.
-  const showNovemberWebinar = Date.now() < Date.parse("2026-11-17T16:00:00Z");
   return (
     <div ref={revealRef}>
       {/* Hero */}
@@ -81,47 +79,6 @@ export default function Home() {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <div className="gold-hairline" />
       </div>
-
-      {/* Secondary webinar invitation. Fast Track remains the homepage's main offer. */}
-      {showNovemberWebinar && (
-        <section aria-label="Upcoming free business webinar" className="bg-cream py-8 sm:py-11">
-          <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-            <div className="grid items-center gap-6 border border-gold/35 bg-cream-dark/30 px-7 py-8 sm:px-10 lg:grid-cols-[1fr_auto] lg:gap-10">
-              <div>
-                <p className="editorial-label mb-3">Free live webinar · Tuesday, November 17 · 11 AM Eastern</p>
-                <h2 className="font-display text-2xl sm:text-3xl font-medium leading-tight text-charcoal">
-                  Finding the Gap
-                  <span className="block mt-1 text-gold">What's Keeping Your Business From Moving Forward?</span>
-                </h2>
-                <p className="font-body text-sm sm:text-base text-charcoal-light leading-relaxed mt-3 max-w-2xl">
-                  You've worked hard and have gifts worth using well. If your business is not moving
-                  the way you hoped, join this faith-rooted workshop for Christian women entrepreneurs
-                  to find the gap that deserves attention first and choose one wise next step.
-                </p>
-                <p className="font-body text-[0.72rem] tracking-[0.12em] uppercase text-charcoal/65 mt-4">
-                  GET 2027 READY! · With Tabitha Rector · Kingdom Solutions Business & AI™ by Revived Spirit
-                </p>
-              </div>
-              <a href={WEBINAR_URL}
-                className="bg-charcoal text-cream-dark font-body text-[0.78rem] font-medium tracking-[0.08em] uppercase px-7 py-4 inline-flex items-center justify-center gap-3 hover:bg-charcoal/90 transition-colors duration-300">
-                Reserve a free seat <ArrowRight size={15} />
-              </a>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Quiet invitation: on-demand learning remains distinct from Nov 17 live signup. */}
-      <section aria-label="Build in the Right Order video experience" className="bg-[#151517] py-14 sm:py-20">
-        <div className="mx-auto grid max-w-[1400px] gap-7 px-6 lg:grid-cols-[1fr_auto] lg:items-center lg:px-10">
-          <div>
-            <p className="mb-3 text-[0.72rem] uppercase tracking-[0.18em] text-[#c9a358]">Complimentary on-demand learning</p>
-            <h2 className="font-display text-3xl font-medium leading-tight text-[#f6f2e9] sm:text-4xl">Build in the Right Order™</h2>
-            <p className="mt-3 max-w-2xl font-body text-base leading-relaxed text-[#ddd1be]">What if the next step isn't building more? Experience practical teaching from Tabitha Rector's October webinar and identify what your business needs first.</p>
-          </div>
-          <Link href="/video-experience" className="inline-flex items-center justify-center gap-3 border border-[#c9a358] px-7 py-4 font-body text-xs font-medium uppercase tracking-wider text-[#f6f2e9] transition hover:bg-[#c9a358] hover:text-[#151517]">Watch the free experience <ArrowRight size={15}/></Link>
-        </div>
-      </section>
 
       {/* Context line */}
       <section className="py-24 lg:py-32 bg-cream">
