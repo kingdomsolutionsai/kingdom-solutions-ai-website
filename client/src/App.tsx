@@ -13,6 +13,7 @@ import Handbook from "@/pages/Handbook";
 import VictorsCircleLeadershipAcademy from "@/pages/VictorsCircleLeadershipAcademy";
 import EntrepreneurAssessment from "@/pages/EntrepreneurAssessment";
 import BusinessFastTrack from "@/pages/BusinessFastTrack";
+import Q1Ready from "@/pages/Q1Ready";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import StrategyCall from "./pages/StrategyCall";
@@ -35,6 +36,7 @@ function Router() {
         <Route path="/victors-circle-leadership-academy" component={VictorsCircleLeadershipAcademy} />
         <Route path="/entrepreneur-assessment" component={EntrepreneurAssessment} />
         <Route path="/business-fast-track" component={BusinessFastTrack} />
+        <Route path="/q1-ready" component={Q1Ready} />
         <Route path="/video-experience/watch" component={VideoExperienceWatch} />
         <Route path="/video-experience" component={VideoExperience} />
         <Route path="/about" component={About} />
