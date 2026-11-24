@@ -1,3 +1,4 @@
+import Q1WorkshopInvitation from "@/components/Q1WorkshopInvitation";
 import { Link } from "wouter";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { usePageMeta } from "@/hooks/usePageMeta";
@@ -79,6 +80,8 @@ export default function Home() {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <div className="gold-hairline" />
       </div>
+
+      <Q1WorkshopInvitation />
 
       {/* Context line */}
       <section className="py-24 lg:py-32 bg-cream">
