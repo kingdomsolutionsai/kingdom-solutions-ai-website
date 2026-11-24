@@ -1,3 +1,4 @@
+import Q1WorkshopInvitation from "@/components/Q1WorkshopInvitation";
 import { RIGHT_ORDER_PROMISE } from "@shared/const";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import "@/styles/business-fast-track.css";
@@ -137,6 +138,8 @@ export default function BusinessFastTrack() {
           </aside>
         </div>
       </header>
+
+      <Q1WorkshopInvitation compact />
 
       <section className="section-cream">
         <div className="shell recognition">
